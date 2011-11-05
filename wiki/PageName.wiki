@@ -7,3 +7,14 @@ Wiki projektu qap. Wszystkie większe zmiany najlepiej tu zapisujcie.
 
 = Details =
 
+Zajmiemy się problemem kwadratowego przydziału za pomocą algorytmów:
+
+-_świetlikowego_
+
+http://www.mathworks.com/matlabcentral/fileexchange/29693-firefly-algorithm
+
+- _pszczelego_ 
+
+http://www.bees-algorithm.com/modules/3/0.php
+
+-_mrówkowego_
