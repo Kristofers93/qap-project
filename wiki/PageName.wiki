@@ -1,0 +1,9 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Wiki projektu qap. Wszystkie większe zmiany najlepiej tu zapisujcie.
+
+
+= Details =
+
