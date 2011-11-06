@@ -18,3 +18,5 @@ http://www.mathworks.com/matlabcentral/fileexchange/29693-firefly-algorithm
 http://www.bees-algorithm.com/modules/3/0.php
 
 -_mrówkowego_
+
+http://www.ugosweb.com/Documents/jacs.aspx
