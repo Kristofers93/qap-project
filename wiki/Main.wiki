@@ -7,6 +7,12 @@ Wiki projektu qap. Wszystkie większe zmiany najlepiej tu zapisujcie.
 
 = Details =
 
+Dobrze by było jakby wszyscy się zapoznali z tym pdf:
+
+[http://hawro.com/pdf/QAP-PawelHawro.pdf] 
+
+a szczególnie Ci, którzy zajmują się algorytmami
+
 Zajmiemy się problemem kwadratowego przydziału za pomocą algorytmów:
 
 -_świetlikowego_
