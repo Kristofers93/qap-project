@@ -22,10 +22,9 @@ http://www.bees-algorithm.com/modules/3/0.php
 http://www.ugosweb.com/Documents/jacs.aspx
 
 Strony dotyczące poszczególnych części projektu:
-
-* GUI
-* Pszczeli
-* Świetlikowy
-* Mrówkowy
+ * GUI
+ * Pszczeli
+ * Świetlikowy
+ * Mrówkowy
 
 <g:plusone size="medium"></g:plusone>
