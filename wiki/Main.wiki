@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Wiki projektu qap. Wszystkie większe zmiany najlepiej tu zapisujcie.
+Wiki projektu qap. 
 
 
 = Details =
