@@ -26,3 +26,7 @@ Strony dotyczące poszczególnych części projektu:
  * [Pszczeli]
  * [Swietlikowy]
  * [Mrowkowy]
+
+Wszystkie informacje o modelu, którym się zajmujemy znajdują się na stronie:
+
+[http://www.opt.math.tugraz.at/qaplib/]
