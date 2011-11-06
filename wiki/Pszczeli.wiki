@@ -1,0 +1,7 @@
+#summary Algorytm pszczeli
+= Introduction =
+
+O algorytmie pszczelim, głównie dla Kuby, Marcina, Piotra P.
+
+
+= Details =
