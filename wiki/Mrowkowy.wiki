@@ -6,3 +6,7 @@ Dla algorytmu mrówkowego, czyli głównie dla Mikołaja, Bartka
 
 
 = Details =
+
+Zapoznajcie się z tym algorytmem i przede wszystkim przedstawcie jakie można użyć parametry do modelowania rozwiązania.
+
+Przydałoby się przyjąć jakiś stały interfejs, żeby dorobienie do tego GUI było prostsze. 
