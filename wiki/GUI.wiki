@@ -9,10 +9,10 @@ GUI - zasadniczo dotyczy Szymona, Maćka
 
 Gui powinno umożliwiać przede wszystkim :
 
-- wybranie rozwiązania problemu (jakieś taby np)
-- załadowanie testu (obczajcie obsługę plików)
-- dla każdego algorytmu rozmaite dane do wyboru gotowe jak i możliwość wprowadzenia ręcznie
-- przycisk startu
+ - wybranie rozwiązania problemu (jakieś taby np)
+ - załadowanie testu (obczajcie obsługę plików)
+ - dla każdego algorytmu rozmaite dane do wyboru gotowe jak i możliwość wprowadzenia ręcznie
+ - przycisk startu
 
 Najlepiej zacznijcie jakoś modelować ten interfejs, zróbcie jakiś projekt.
 Jeśli macie wiecej pomysłów to dopiszcie.
