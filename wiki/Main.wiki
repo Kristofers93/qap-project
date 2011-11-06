@@ -21,6 +21,8 @@ http://www.bees-algorithm.com/modules/3/0.php
 
 http://www.ugosweb.com/Documents/jacs.aspx
 
+Na stronie dotyczącej swojego obszaru piszcie wszystkie niezbędne informacje, które mogą się przydać innym. Np. ktoś zajmujący się GUI musi wiedzieć ile możliwych parametrów dla danego algorytmu może przyjąć.
+
 Strony dotyczące poszczególnych części projektu:
  * [GUI]
  * [Pszczeli]
