@@ -1,0 +1,8 @@
+#summary O algorytmie mrówkowym
+
+= Introduction =
+
+Dla algorytmu mrówkowego, czyli głównie dla Mikołaja, Bartka
+
+
+= Details =
