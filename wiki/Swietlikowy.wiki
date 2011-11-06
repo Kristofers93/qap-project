@@ -1,0 +1,8 @@
+#summary O algorytmie świetlikowym
+
+= Introduction =
+
+Dla algorytmu świetlikowego - głównie dla Bogny, Piotra A.
+
+
+= Details =
