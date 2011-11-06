@@ -23,6 +23,6 @@ http://www.ugosweb.com/Documents/jacs.aspx
 
 Strony dotyczące poszczególnych części projektu:
  * [GUI]
- * Pszczeli
+ * [Pszczeli]
  * Świetlikowy
  * Mrówkowy
