@@ -1,8 +1,11 @@
 ﻿<Window x:Class="GUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="qap-project" Height="350" Width="525">
+    <DockPanel>
+        <Button Name="loadData" Content="Wczytaj dane" DockPanel.Dock="Top"/>
+        <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom"/>
+        <Label Name="loadedData" Content="Nie wczytano danych"/>
+
+    </DockPanel>
 </Window>
