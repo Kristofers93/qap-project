@@ -9,13 +9,19 @@
             <Label Name="loadedData" Content="Nie wczytano danych"/>
             <TabControl>
                 <TabItem Header="Mrówkowy">
-                    <Label Content="Tu będą parametry algorytmu mrówkowego"/>
+                    <StackPanel Name="mrowkowyParameters">
+                        <Label Content="Tu będą parametry algorytmu mrówkowego"/>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Pszczeli">
-                    <Label Content="Tu będą parametry algorytmu pszczelego"/>
+                    <StackPanel Name="PszczeliParameters">
+                        <Label Content="Tu będą parametry algorytmu pszczelego"/>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Świetlikowy">
-                    <Label Content="Tu będą parametry algorytmu świetlikowego"/>
+                    <StackPanel Name="SwietlikowyParameters">
+                        <Label Content="Tu będą parametry algorytmu świetlikowego"/>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>

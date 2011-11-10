@@ -92,6 +92,24 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mrowkowy\Mrowkowy.csproj">
+      <Project>{87441ACC-6EDE-4F2C-BC24-FC8CB153E236}</Project>
+      <Name>Mrowkowy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pszczeli\Pszczeli.csproj">
+      <Project>{E53E697C-D68F-425D-ACE9-8B99AA3726F0}</Project>
+      <Name>Pszczeli</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Structures\Structures.csproj">
+      <Project>{18AD82B9-A30A-4647-89D0-01FBEB3843E3}</Project>
+      <Name>Structures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Swietlikowy\Swietlikowy.csproj">
+      <Project>{DDA8ECD8-9F97-48D0-946F-C066DC9BCFDD}</Project>
+      <Name>Swietlikowy</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
