@@ -51,13 +51,13 @@ namespace GUI
             switch (SelectedTab)
             {
                 case 0:
-                    new Result(MrowkowyParameters, A, B).Show();
+                    new Result(MrowkowyParameters.Clone(), A, B).Show();
                     break;
                 case 1:
-                    new Result(PszczeliParameters, A, B).Show();
+                    new Result(PszczeliParameters.Clone(), A, B).Show();
                     break;
                 case 2:
-                    new Result(SwietlikowyParameters, A, B).Show();
+                    new Result(SwietlikowyParameters.Clone(), A, B).Show();
                     break;
             }
         }

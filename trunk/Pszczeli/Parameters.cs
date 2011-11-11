@@ -23,5 +23,10 @@ namespace Pszczeli
             sites = 100;
             beesRecruitedForBestSites = 500;
         }
+
+        public Parameters Clone()
+        {
+            return (Parameters)this.MemberwiseClone();
+        }
     }
 }

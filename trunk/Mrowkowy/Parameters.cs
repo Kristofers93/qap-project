@@ -18,5 +18,9 @@ namespace Mrowkowy
             iterations = 1000;
             reportEveryIterations = 10;
         }
+
+        public Parameters Clone(){
+            return (Parameters)this.MemberwiseClone();
+        }
     }
 }

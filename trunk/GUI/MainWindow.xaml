@@ -48,7 +48,7 @@
                             <Label Content="Pszczoły" Grid.Column="0" Grid.Row="1"/>
                             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PszczeliParameters.insects}"/>
                             <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MrowkowyParameters.reportEveryIterations}"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PszczeliParameters.reportEveryIterations}"/>
                             <Label Content="Miejsca" Grid.Column="0" Grid.Row="3"/>
                             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding PszczeliParameters.sites}"/>
                             <Label Content="Pszczoły wysyłane do najlepszych miejsc" Grid.Column="0" Grid.Row="4"/>
