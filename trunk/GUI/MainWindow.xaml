@@ -7,20 +7,74 @@
         <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom" Command="{Binding RunCommand, Mode=OneWay}" />
         <StackPanel>
             <Label Name="loadedData" Content="Nie wczytano danych"/>
-            <TabControl>
+            <TabControl SelectedIndex="{Binding SelectedTab}" >
                 <TabItem Header="Mrówkowy">
-                    <StackPanel Name="mrowkowyParameters">
-                        <Label Content="Tu będą parametry algorytmu mrówkowego"/>
+                    <StackPanel Name="MrowkowyParameters">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Iteracje" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding MrowkowyParameters.iterations}" />
+                            <Label Content="Mrówki" Grid.Column="0" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding MrowkowyParameters.insects}"/>
+                            <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MrowkowyParameters.reportEveryIterations}"/>
+                        </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Pszczeli">
                     <StackPanel Name="PszczeliParameters">
-                        <Label Content="Tu będą parametry algorytmu pszczelego"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Iteracje" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PszczeliParameters.iterations}" />
+                            <Label Content="Pszczoły" Grid.Column="0" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PszczeliParameters.insects}"/>
+                            <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MrowkowyParameters.reportEveryIterations}"/>
+                            <Label Content="Miejsca" Grid.Column="0" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding PszczeliParameters.sites}"/>
+                            <Label Content="Pszczoły wysyłane do najlepszych miejsc" Grid.Column="0" Grid.Row="4"/>
+                            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding PszczeliParameters.beesRecruitedForBestSites}"/>
+                        </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Świetlikowy">
                     <StackPanel Name="SwietlikowyParameters">
-                        <Label Content="Tu będą parametry algorytmu świetlikowego"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Iteracje" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SwietlikowyParameters.iterations}" />
+                            <Label Content="Świetliki" Grid.Column="0" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SwietlikowyParameters.insects}"/>
+                            <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SwietlikowyParameters.reportEveryIterations}"/>
+                        </Grid>
                     </StackPanel>
                 </TabItem>
             </TabControl>

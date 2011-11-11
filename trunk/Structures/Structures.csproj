@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="IntMatrix2D.cs" />
     <Compile Include="IParameters.cs" />
+    <Compile Include="IResultViewModel.cs" />
+    <Compile Include="IntVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

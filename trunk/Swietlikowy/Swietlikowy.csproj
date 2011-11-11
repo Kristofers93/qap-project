@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwietlikowyParameters.cs" />
+    <Compile Include="Parameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Structures\Structures.csproj">
