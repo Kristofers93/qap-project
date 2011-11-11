@@ -17,7 +17,7 @@ namespace GUI
         public void Run()
         {
             //TODO
-            System.Windows.MessageBox.Show("Nie zaimplementowano :P");
+            new Result().Show();
         }
 
         public ICommand LoadDataCommand

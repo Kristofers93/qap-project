@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for Results.xaml
+    /// Interaction logic for Result.xaml
     /// </summary>
-    public partial class Results : Window
+    public partial class Result : Window
     {
-        public Results()
+        public Result()
         {
             InitializeComponent();
         }
