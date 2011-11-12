@@ -26,6 +26,13 @@ namespace Model
 
         //ustawianie niedomyślnych parametrów, klucz - nazwa,
         public void SetParameters(Dictionary<string, double> parameters);
+
+
+        //ustawianie niedomyślnych parametrów, klucz - nazwa,
+        public void SetTestData(int[,] A, int[,] B, int numberOfInstances);
+
+        //uruchomienie obliczen, zwraca 0 w przypadku konca obliczen?
+        public int runAlgorithm();
     }
 
 }
