@@ -9,19 +9,23 @@ namespace Model
 {
     interface IAlgorithm
     {
-        //lista rozwiazan, czyli najbardziej optymalne rozwiazanie
-        public List<int> ReturnOptimalResult();
+        //lista reprezentujaca najbardziej optymalne rozwiazanie
+        public List<int> ReturnMinimalResult();
 
         //najmniejszy zwracany koszt
-        public int getMinimalCost();
+        public int GetMinimalCost();
 
         //koszt dla danej iteracji
-        public int getCurrentCost(int iterationNumber);
+        public int GetCurrentCost(int iterationNumber);
 
-        //zwraca liste parametrów
-        public List<string> getParameterNames();
+        //zwraca liste parametrow
+        public List<string> GetParameterNames();
 
         //zwraca słownik zawierający wszystkie wartości domyślne parametrów
-        public Dictionary<string, double> getParameterValues();
+        public Dictionary<string, double> GetParameterValues();
+
+        //ustawianie niedomyślnych parametrów, klucz - nazwa,
+        public void SetParameters(Dictionary<string, double> parameters);
     }
+
 }
