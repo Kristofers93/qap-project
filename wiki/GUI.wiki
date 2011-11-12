@@ -2,7 +2,7 @@
 
 = Introduction =
 
-GUI - zasadniczo dotyczy Szymona, Maćka
+GUI - zasadniczo dotyczy Szymona, Maćka, Witka.
 
 
 = Details =
