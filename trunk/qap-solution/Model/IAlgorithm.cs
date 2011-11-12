@@ -19,10 +19,10 @@ namespace Model
         public int GetCurrentCost(int iterationNumber);
 
         //zwraca liste parametrow
-        public List<string> GetParameterNames();
+        public static List<string> GetParameterNames();
 
         //zwraca słownik zawierający wszystkie wartości domyślne parametrów
-        public Dictionary<string, double> GetParameterValues();
+        public static Dictionary<string, double> GetParameterValues();
 
         //ustawianie niedomyślnych parametrów, klucz - nazwa,
         public void SetParameters(Dictionary<string, double> parameters);
