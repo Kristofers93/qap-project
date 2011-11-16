@@ -11,7 +11,7 @@ Zapoznajcie się z tym algorytmem i przede wszystkim przedstawcie jakie można u
 Przydałoby się przyjąć jakiś stały interfejs, żeby dorobienie do tego GUI było prostsze.
 
 
-= Piotr Popowicz mówi: :D =
+== Piotr Popowicz mówi: :D ==
 
 Żeby nie było, że nic nie robię.
 
@@ -22,13 +22,13 @@ Bardzo wartościowa prezentacja, dobrze tłumacząca zasadę algorytmu.
 
 Dla potomności: (ogólnej wiedzy) (projektantów GUI)
 Parametry jakie przyjmuje algorytm:
-1. Liczba pszczół zwiadowców (*n* > 1)
-2. Liczba wybranych miejsc (*m* ε <1, n>)
-3. Liczba lepszych miejsc (*e* ε <1, m>)
-4. Liczba pszczół wysyłanych do lepszych miejsc (*nep* < n)
-5. Liczba pszczół wysłanych do pozostałych wybranych miejsc (*nsp* < nep)
-6. Rozmiar sąsiedztwa (jeśli dobrze rozumiem jest to stopień zmniejszania się sąsiedztwa w każdej kolejnej iteracji) (*ngh* ε <0, 1>)
-7. Maksymalna liczba iteracji (*imax*)
+# Liczba pszczół zwiadowców (*n* > 1)
+# Liczba wybranych miejsc (*m* ε <1, n>)
+# Liczba lepszych miejsc (*e* ε <1, m>)
+# Liczba pszczół wysyłanych do lepszych miejsc (*nep* < n)
+# Liczba pszczół wysłanych do pozostałych wybranych miejsc (*nsp* < nep)
+# Rozmiar sąsiedztwa (jeśli dobrze rozumiem jest to stopień zmniejszania się sąsiedztwa w każdej kolejnej iteracji) (*ngh* ε <0, 1>)
+# Maksymalna liczba iteracji (*imax*)
 
 Nazwy (takie najczęściej występują) parametrów podałem boldem w nawiasach wraz z przedziałami ich wartości.
 
