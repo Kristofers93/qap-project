@@ -9,3 +9,27 @@ O algorytmie pszczelim, głównie dla Kuby, Marcina, Piotra P.
 Zapoznajcie się z tym algorytmem i przede wszystkim przedstawcie jakie można użyć parametry do modelowania rozwiązania.
 
 Przydałoby się przyjąć jakiś stały interfejs, żeby dorobienie do tego GUI było prostsze.
+
+
+= Piotr Popowicz mówi: :D =
+
+Żeby nie było, że nic nie robię.
+
+Dla ludzi, którzy chcą coś wiedzieć o algorytmie pszczelim:
+http://www.fi.muni.cz/usr/popelinsky/lectures/kdd/Bees%20algorithm.ppt
+
+Bardzo wartościowa prezentacja, dobrze tłumacząca zasadę algorytmu.
+
+Dla potomności: (ogólnej wiedzy) (projektantów GUI)
+Parametry jakie przyjmuje algorytm:
+1. Liczba pszczół zwiadowców (*n* > 1)
+2. Liczba wybranych miejsc (*m* ε <1, n>)
+3. Liczba lepszych miejsc (*e* ε <1, m>)
+4. Liczba pszczół wysyłanych do lepszych miejsc (*nep* < n)
+5. Liczba pszczół wysłanych do pozostałych wybranych miejsc (*nsp* < nep)
+6. Rozmiar sąsiedztwa (jeśli dobrze rozumiem jest to stopień zmniejszania się sąsiedztwa w każdej kolejnej iteracji) (*ngh* ε <0, 1>)
+7. Maksymalna liczba iteracji (*imax*)
+
+Nazwy (takie najczęściej występują) parametrów podałem boldem w nawiasach wraz z przedziałami ich wartości.
+
+Tyle na dzisiaj. Dziękuję za uwagę. Do zobaczenia wkrótce.
