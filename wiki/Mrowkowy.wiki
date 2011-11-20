@@ -5,8 +5,14 @@
 Dla algorytmu mrówkowego, czyli głównie dla Mikołaja, Bartka
 
 
-= Details =
+= Parametry =
 
-Zapoznajcie się z tym algorytmem i przede wszystkim przedstawcie jakie można użyć parametry do modelowania rozwiązania.
+float: 
+- alfa - współczynnik wpływu feromonów
+- beta - współczynnik wpływu odległości
+- q0 - stężenie feromonów, powyżej którego mrówki działają zachłannie
+- ro - współczynnik parowania feromonów
+- Q - licznik we współczynniku odległości
 
-Przydałoby się przyjąć jakiś stały interfejs, żeby dorobienie do tego GUI było prostsze. 
+int: 
+- m - liczba mrówek
