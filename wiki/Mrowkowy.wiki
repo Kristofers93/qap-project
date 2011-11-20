@@ -23,4 +23,5 @@ float:
 int: 
 
 - m - liczba mrówek (0,10000?)
+
 - n - liczba iteracji (0,10000?)
