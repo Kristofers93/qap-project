@@ -5,8 +5,14 @@
 Dla algorytmu świetlikowego - głównie dla Bogny, Piotra A.
 
 
-= Details =
+= Parametry  wersja jeszcze-nie-ostatnia-na-dziś=
 
-Zapoznajcie się z tym algorytmem i przede wszystkim przedstawcie jakie można użyć parametry do modelowania rozwiązania.
+- beta0 - maksymalna wartość atrakcyjności świetlika, <0, 1>
 
-Przydałoby się przyjąć jakiś stały interfejs, żeby dorobienie do tego GUI było prostsze. 
+- gamma - współczynnik absorpcji, <0, 10>
+
+- alfa - parametr określający wagę losowego ruchu świetlika, <0, 1>
+
+- imax - liczba iteracji algorytmu
+
+- m - liczba świetlików
