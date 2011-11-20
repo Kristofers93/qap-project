@@ -5,7 +5,7 @@
 Dla algorytmu świetlikowego - głównie dla Bogny, Piotra A.
 
 
-= Parametry  wersja jeszcze-nie-ostatnia-na-dziś=
+= Parametry  ~~wersja jeszcze-nie-ostatnia-na-dziś~~=
 
 - beta0 - maksymalna wartość atrakcyjności świetlika, <0, 1>
 
