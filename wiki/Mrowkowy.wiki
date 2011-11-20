@@ -8,11 +8,18 @@ Dla algorytmu mrówkowego, czyli głównie dla Mikołaja, Bartka
 = Parametry =
 
 float: 
-- alfa - współczynnik wpływu feromonów
-- beta - współczynnik wpływu odległości
-- q0 - stężenie feromonów, powyżej którego mrówki działają zachłannie
-- ro - współczynnik parowania feromonów
-- Q - licznik we współczynniku odległości
+
+- alfa - współczynnik wpływu feromonów (0,)
+
+- beta - współczynnik wpływu odległości (0,7)
+
+- q0 - stężenie feromonów, powyżej którego mrówki działają zachłannie <0,1>
+
+- ro - współczynnik parowania feromonów (0,1)
+
+- Q - licznik we współczynniku odległości (1,100)
+
 
 int: 
-- m - liczba mrówek
+
+- m - liczba mrówek (0,10000?)
