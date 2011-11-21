@@ -16,7 +16,7 @@ namespace Model
         int GetMinimalCost();
 
         //koszt dla pierwszych n(numberOfIterations) iteracji
-        int[] GetCosts(int numberOfIterations);
+        List<int> GetCosts(int numberOfIterations);
 
         //zwraca liste parametrow
         List<string> GetParameterNames();
