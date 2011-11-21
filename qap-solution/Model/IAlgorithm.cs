@@ -10,29 +10,29 @@ namespace Model
     interface IAlgorithm
     {
         //lista reprezentujaca najbardziej optymalne rozwiazanie
-        public List<int> ReturnMinimalResult();
+        List<int> ReturnMinimalResult();
 
         //najmniejszy zwracany koszt
-        public int GetMinimalCost();
+        int GetMinimalCost();
 
         //koszt dla danej iteracji
-        public int GetCurrentCost(int iterationNumber);
+        int GetCurrentCost(int iterationNumber);
 
         //zwraca liste parametrow
-        public static List<string> GetParameterNames();
+        List<string> GetParameterNames();
 
         //zwraca słownik zawierający wszystkie wartości domyślne parametrów
-        public static Dictionary<string, double> GetParameterValues();
+        Dictionary<string, double> GetParameterValues();
 
         //ustawianie niedomyślnych parametrów, klucz - nazwa,
-        public void SetParameters(Dictionary<string, double> parameters);
+        void SetParameters(Dictionary<string, double> parameters);
 
 
         //ustawianie danych, macierze A i B z modelu i ich rozmiar,
-        public void SetTestData(int[,] A, int[,] B, int numberOfInstances);
+        void SetTestData(int[,] A, int[,] B, int numberOfInstances);
 
         //uruchomienie obliczen, zwraca 0 w przypadku konca obliczen?
-        public int runAlgorithm();
+        int runAlgorithm();
     }
 
 }
