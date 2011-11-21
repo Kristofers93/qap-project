@@ -15,8 +15,8 @@ namespace Model
         //najmniejszy zwracany koszt
         int GetMinimalCost();
 
-        //koszt dla danej iteracji
-        int GetCurrentCost(int iterationNumber);
+        //koszt dla pierwszych n(numberOfIterations) iteracji
+        int[] GetCosts(int numberOfIterations);
 
         //zwraca liste parametrow
         List<string> GetParameterNames();
@@ -31,8 +31,8 @@ namespace Model
         //ustawianie danych, macierze A i B z modelu i ich rozmiar,
         void SetTestData(int[,] A, int[,] B, int numberOfInstances);
 
-        //uruchomienie obliczen, zwraca 0 w przypadku konca obliczen?
-        int runAlgorithm();
+        //uruchomienie obliczen
+        void runAlgorithm();
     }
 
 }
