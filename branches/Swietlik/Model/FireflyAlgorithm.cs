@@ -7,6 +7,23 @@ namespace Model
 {
     public class FireflyAlgorithm : IAlgorithm
     {
+        
+        /*imax - liczba iteracji, m - liczba swietlikow, gamma - wspolcz. absorpcji, alfa - random step weight*/
+        //parametry - jako autoproperties?
+        public int imax;
+        public int m;
+        public double gamma; // >= 0
+        public int alfa; //{0,1, ..., n-1} albo {1,2,...,n} ??
+        public int[,] A;  /*nxn, przeplyw miedzy osrodkami*/
+        public int[,] B;  /*nxn, odleglosc miedzy osrodkami*/
+        public int n;      /*liczba osrodkow*/
+        private Random rand; //Sys.Security.Cryptography!
+
+        public FireflyAlgorithm()
+        {
+            rand = new Random();
+        }
+
         //lista reprezentujaca najbardziej optymalne rozwiazanie
         public IList<int> ReturnMinimalResult()
         {
@@ -44,9 +61,11 @@ namespace Model
         }
 
         //ustawianie danych, macierze A i B z modelu i ich rozmiar,
-        public void SetTestData(int[,] A, int[,] B, int numberOfInstances)
+        public void SetTestData(int[,] _A, int[,] _B, int numberOfInstances)
         {
-            throw new NotImplementedException();
+            this.A = _A;
+            this.B = _B;
+            this.n = numberOfInstances;
         }
 
         //uruchomienie obliczen, zwraca 0 w przypadku konca obliczen?
@@ -58,13 +77,14 @@ namespace Model
         // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, 
         // alfa - random step weight
         // void - wypiszmy wynik na ekran
-        public void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[][] A, int[][] B)
+        public void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[,] A, int[,] B)
         {
             int n = A.Length; //wymiar macierzy, dlugosc permutacji
             Random rand = new Random();
             int currentIter = 0;
             int min = 0;
             int[][] x = new int[m][]; //
+//            int[,] x = new int[m,n]; //
 
             // losowanie wejsciowych permutacji
             for (int i = 0; i < m; i++)
@@ -243,7 +263,7 @@ namespace Model
             return d;
         }
 
-        private int Reward(int[] solut, int[][] A, int[][] B)
+        private int Reward(int[] solut, int[,] A, int[,] B)
         {
             int sum = 0;
             int n = A.Length;
@@ -252,7 +272,7 @@ namespace Model
             {
                 for (int j = 0; j < n; j++)
                 {
-                    sum += A[i][j]*B[solut[i]][solut[j]];
+                    sum += A[i,j]*B[solut[i],solut[j]];
                 }
             }
 
