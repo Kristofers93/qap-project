@@ -56,22 +56,36 @@ namespace Model
         }
 
         // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, alfa - random step weight
-        // void- wypiszmy wynik na ekran
-        public void TmpRun(int imax, int m, float beta0, float gamma, float alfa)
+        // void - wypiszmy wynik na ekran
+        public void TmpRun(int imax, int m, double beta0, double gamma, double alfa, int [][]A, int [][]B)
         {
-            int n = 10; //wymiar macierzy, dlugosc permutacji
+            int n = A.Length; //wymiar macierzy, dlugosc permutacji
             Random rand = new Random();
             int currentIter = 0;
             int min = 0;
             int[][] x = new int[m][];
             
-            //init
+            // losowanie wejsciowych permutacji
             for (int i=0; i<m; i++)
             {
                 x[i] = new int[n];
                 for (int j=0; j<n; j++)
                 {
-                    x[i][j] = rand.Next(n);
+                    int tmp;
+                    bool used = true;
+                    tmp = rand.Next(n);
+                    while (used)
+                    {
+                        for (int k=0; k<j; k++)
+                        {
+                            if (x[i][k] == tmp)
+                            {
+                                break;
+                            }
+                        }
+                        used = false;
+                    }
+                    x[i][j] = tmp;
                 }
             }
 
@@ -80,7 +94,7 @@ namespace Model
                 // aktualnie najlepsze rozwiazanie
                 for (int i=0; i<m; i++)
                 {
-                    if (Reward(x[i]) < Reward(x[min]))
+                    if (Reward(x[i],A,B) < Reward(x[min],A,B))
                     {
                         min = i;
                     }
@@ -91,14 +105,14 @@ namespace Model
                 {
                     for (int j=0; j<m; j++)
                     {
-                        if (Reward(x[i])<Reward(x[j]))
+                        if (Reward(x[i],A,B)<Reward(x[j],A,B))
                         {
                             
                             int dist = Distance(x[i], x[j]);
-                            int beta = Attractiveness(beta0, gamma,dist);
+                            double beta = Attractiveness(beta0, gamma, dist);
                             //zbliz swietlika xi do xj
                             x[i] = Approach(beta, x[i], x[j]);
-                            x[i] = PerformRandomFlight(alfa);
+                            x[i] = PerformRandomFlight(x[i], alfa);
 
                         }
                     }
@@ -106,37 +120,128 @@ namespace Model
 
                 // aktualnie najlepsze rozw porusza sie losowo
 
-                x[min] = PerformRandomFlight(alfa);
+                x[min] = PerformRandomFlight(x[min], alfa);
 
             }
 
-            Console.WriteLine(x[min].ToString());
-
+            Console.WriteLine("Najlepsze rozwiazanie:\n (");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(x[min][i] + ", ");
+            }
+            Console.WriteLine(")");
         }
 
-        private int[] PerformRandomFlight(float alfa)
+        private int[] PerformRandomFlight(int[] xi, double alfa)
         {
             throw new NotImplementedException();
         }
 
-        private int[] Approach(int beta, int[] p, int[] p_2)
+        private int[] Approach(double beta, int[] xi, int[] xj)
         {
+            var rand = new Random();
+            var n = xi.Length;
+            var r = new int[n]; //result
+            var valsUsed = new HashSet<int>();
+            var indFree = new List<int>();
+            var indRand = new List<int>();
+
+            // najpierw przepisujemy te miejsca ktore sie zgadzaja
+            // tworzymy zbior wartosci do obsadzenia i miejsc w ktorych mozna obsadzic wartosci
+            for (int i = 0; i < n; i++ )
+            {
+                
+                if (xi[i] == xj[i])
+                {
+                    r[i] = xi[i];
+                    valsUsed.Add(r[i]);
+                }
+                else
+                {
+                    r[i] = -1;
+                    indFree.Add(i);
+                }
+            }
+
+            // wypelniamy te miejsca gdzie nie ma konfliktu uzytych obu propozycji
+            while (indFree.Count > 0)
+            {
+                int tmp = indFree[rand.Next(indFree.Count)];
+                if (!valsUsed.Contains(xi[tmp]) && !valsUsed.Contains(xj[tmp]))
+                {
+                    // wybierz bardziej prawdopodobna 
+                    if (rand.NextDouble() < beta)
+                    {
+                        r[tmp] = xj[tmp];
+                    }
+                    else
+                    {
+                        r[tmp] = xi[tmp];
+                    }
+                    valsUsed.Add(r[tmp]);
+                }
+                else if (valsUsed.Contains(xi[tmp]) && valsUsed.Contains(xj[tmp]))
+                {
+                    indRand.Add(tmp);
+                }
+                else if (valsUsed.Contains(xi[tmp]))
+                {
+                    r[tmp] = xj[tmp];
+                    valsUsed.Add(xj[tmp]);
+                }
+                else if (valsUsed.Contains(xj[tmp]))
+                {
+                    r[tmp] = xi[tmp];
+                    valsUsed.Add(xi[tmp]);
+                }
+                
+                ////
+                /// tu brakuje wypelnienia miejsc gdzie mozliwe wartosci z xi i xj zostaly uzyte
+                /// losowymi wartosciami o indeksach z indRand
+                /// 
+
+
+                indFree.Remove(tmp);
+            }
+
             throw new NotImplementedException();
+
+            return r;
         }
 
-        private int Attractiveness(float beta0, float gamma, int dist)
+        private double Attractiveness(double beta0, double gamma, int dist)
         {
-            throw new NotImplementedException();
+            return beta0*Math.Exp(-gamma*dist*dist);
         }
 
-        private int Distance(int[] p, int[] p_2)
+        private int Distance(int[] xi, int[] xj)
         {
-            throw new NotImplementedException();
+            var n = xi.Length;
+            var d = 0;
+            for (var k=0; k<n; k++)
+            {
+                if (xi[k] != xj[k])
+                {
+                    d += 1;
+                }
+            }
+            return d;
         }
 
-        private int Reward(int[] x)
+        private int Reward(int[] solut, int[][]A, int [][]B)
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            int n = A.Length;
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j=0; j<n; j++)
+                {
+                    sum += A[i][j]*B[solut[i]][solut[j]];
+                }    
+            }
+
+            return sum;
         }
     }
 }
