@@ -58,7 +58,7 @@ namespace Model
         // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, 
         // alfa - random step weight
         // void - wypiszmy wynik na ekran
-        public void TmpRun(int imax, int m, double beta0, double gamma, double alfa, int[][] A, int[][] B)
+        public void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[][] A, int[][] B)
         {
             int n = A.Length; //wymiar macierzy, dlugosc permutacji
             Random rand = new Random();
@@ -109,7 +109,7 @@ namespace Model
                         if (Reward(x[i], A, B) < Reward(x[j], A, B))
                         {
                             int dist = Distance(x[i], x[j]);
-                            double beta = Attractiveness(beta0, gamma, dist);
+                            double beta = Attractiveness(gamma, dist);
                             //zbliz swietlika xi do xj
                             x[i] = Approach(beta, x[i], x[j]);
                             x[i] = PerformRandomFlight(x[i], alfa);
@@ -143,7 +143,6 @@ namespace Model
             int nrOfElementsToShuffle = (int) (alfa*rand.NextDouble());
 
             //choosing elements to be shuffled
-            
             var positionsToShuffle = new List<int>(); 
             var needed = nrOfElementsToShuffle;
             var available = n;
@@ -179,7 +178,6 @@ namespace Model
             var rand = new Random();
             var n = xi.Length;
             var result = new int[n]; //result
-            var valuesUsed = new HashSet<int>(); //valsUsed  //values already used used in result
             HashSet<int> valuesLeft = (HashSet<int>) Enumerable.Range(0, n); // {0, 1, ..., n-1} possible values
             var gaps = new List<int>(); //indFree  //indexes of gaps which still need to be filled
             var gapsToRandomize = new List<int>(); //gaps for which there is no rescue
@@ -191,7 +189,6 @@ namespace Model
                 if (xi[i] == xj[i])
                 {
                     result[i] = xi[i];
-                    valuesUsed.Add(result[i]);
                     valuesLeft.Remove(result[i]);
                 }
                 else
@@ -200,51 +197,22 @@ namespace Model
                     gaps.Add(i);
                 }
             }
-
-            // wypelniamy te miejsca gdzie nie ma konfliktu uzytych obu propozycji
             while (gaps.Count > 0)
             {
                 int tmp = gaps[rand.Next(gaps.Count)];
-
-                if (!valuesUsed.Contains(xi[tmp]) && !valuesUsed.Contains(xj[tmp]))
+                int pickedValue = rand.NextDouble() < beta ? xj[tmp] : xi[tmp];
+                if(valuesLeft.Contains(pickedValue))
                 {
-                    // wybierz bardziej prawdopodobna 
-                    if (rand.NextDouble() < beta)
-                    {
-                        result[tmp] = xj[tmp];
-                    }
-                    else
-                    {
-                        result[tmp] = xi[tmp];
-                    }
-                    valuesUsed.Add(result[tmp]);
+                    result[tmp] = pickedValue;
                     valuesLeft.Remove(result[tmp]);
                 }
-                else if (valuesUsed.Contains(xi[tmp]) && valuesUsed.Contains(xj[tmp]))
+                else
                 {
                     gapsToRandomize.Add(tmp);
                 }
-                else if (valuesUsed.Contains(xi[tmp]))
-                {
-                    result[tmp] = xj[tmp];
-                    valuesUsed.Add(xj[tmp]);
-                    valuesLeft.Remove(xj[tmp]);
-                }
-                else if (valuesUsed.Contains(xj[tmp]))
-                {
-                    result[tmp] = xi[tmp];
-                    valuesUsed.Add(xi[tmp]);
-                    valuesLeft.Remove(xi[tmp]);
-                }
-
-
                 gaps.Remove(tmp);
             }
 
-            // tu brakuje wypelnienia miejsc gdzie mozliwe wartosci z xi i xj zostaly uzyte
-            // losowymi wartosciami o indeksach z indRand
-
-            
             var valuesLeftAsList = valuesLeft.ToList();
             foreach (var gap in gapsToRandomize)
             {
@@ -256,11 +224,9 @@ namespace Model
             return result;
         }
 
-        private double Attractiveness(double beta0, double gamma, int dist)
+        private double Attractiveness(double gamma, int dist)
         {
-            //return 1/(1+ gamma*dist*dist)
-            return beta0*Math.Exp(-gamma*dist*dist);
-
+            return 1/(1 + gamma*dist*dist);
         }
 
         private int Distance(int[] xi, int[] xj)
