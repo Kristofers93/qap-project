@@ -184,17 +184,26 @@ namespace Model
                 {
                     int tmp;
                     bool used = true;
+                    
                     tmp = rand.Next(n);
                     while (used)
                     {
+                        bool again = false;
                         for (int k = 0; k < j; k++)
                         {
                             if (x[i][k] == tmp)
                             {
-                                break;
+                                again = true;
                             }
                         }
-                        used = false;
+                        if (again == true)
+                        {
+                            tmp = rand.Next(n);
+                        }
+                        else
+                        {
+                            used = false;
+                        }
                     }
                     x[i][j] = tmp;
                 }
