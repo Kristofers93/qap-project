@@ -79,7 +79,7 @@ namespace Model
         // void - wypiszmy wynik na ekran
         public void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[,] A, int[,] B)
         {
-            int n = A.Length; //wymiar macierzy, dlugosc permutacji
+            int n = A.GetLength(0); //wymiar macierzy, dlugosc permutacji
             Random rand = new Random();
             int currentIter = 0;
             int min = 0;
@@ -108,6 +108,7 @@ namespace Model
                     }
                     x[i][j] = tmp;
                 }
+                ;
             }
 
             while (currentIter++ < imax)
@@ -266,7 +267,7 @@ namespace Model
         private int Reward(int[] solut, int[,] A, int[,] B)
         {
             int sum = 0;
-            int n = A.Length;
+            int n = A.GetLength(0);
 
             for (int i = 0; i < n; i++)
             {

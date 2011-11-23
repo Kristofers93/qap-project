@@ -21,8 +21,8 @@ namespace Model
 
             var fa = new FireflyAlgorithm();
 
-            fa.TmpRun(10, 10, 1.0, 1.0, 1.0,  A, B);
-
+            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
+            Console.ReadKey();
         }
 
 
