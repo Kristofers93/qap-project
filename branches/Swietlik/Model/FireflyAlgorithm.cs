@@ -289,7 +289,7 @@ namespace Model
             var rand = new Random();
             var n = xi.Length;
             var result = new int[n]; //result
-            HashSet<int> valuesLeft = (HashSet<int>) Enumerable.Range(0, n); // {0, 1, ..., n-1} possible values
+            HashSet<int> valuesLeft = new HashSet<int>(Enumerable.Range(0, n)); // {0, 1, ..., n-1} possible values
             var gaps = new List<int>(); //indFree  //indexes of gaps which still need to be filled
             var gapsToRandomize = new List<int>(); //gaps for which there is no rescue
 
