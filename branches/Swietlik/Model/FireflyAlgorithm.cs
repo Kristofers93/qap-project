@@ -42,22 +42,33 @@ namespace Model
                 x[i] = new int[n];
                 for (int j = 0; j < n; j++)
                 {
+                    int tmp;
                     bool used = true;
-                    int tmp = rand.Next(n);
+
+                    tmp = rand.Next(n);
                     while (used)
                     {
+                        bool again = false;
                         for (int k = 0; k < j; k++)
                         {
                             if (x[i][k] == tmp)
                             {
-                                break;
+                                again = true;
                             }
                         }
-                        used = false;
+                        if (again)
+                        {
+                            tmp = rand.Next(n);
+                        }
+                        else
+                        {
+                            used = false;
+                        }
                     }
                     x[i][j] = tmp;
                 }
             }
+
             IsInitialized = true;
         }
 
@@ -167,7 +178,7 @@ namespace Model
         // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, 
         // alfa - random step weight
         // void - wypiszmy wynik na ekran
-        public void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[,] A, int[,] B)
+        private void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[,] A, int[,] B)
         {
             int n = A.GetLength(0); //wymiar macierzy, dlugosc permutacji
             Random rand = new Random();
@@ -196,7 +207,7 @@ namespace Model
                                 again = true;
                             }
                         }
-                        if (again == true)
+                        if (again)
                         {
                             tmp = rand.Next(n);
                         }
@@ -207,7 +218,6 @@ namespace Model
                     }
                     x[i][j] = tmp;
                 }
-                ;
             }
 
             while (currentIter++ < imax)
@@ -339,7 +349,7 @@ namespace Model
                 result[gap] = valuesLeftAsList.ElementAt(rand.Next(valuesLeftAsList.Count));
                 valuesLeft.Remove(result[gap]);
             }
-            if(!valuesLeftAsList.Any()) throw new Exception("blad : zostaly jakies wartosci");
+            if(valuesLeftAsList.Any()) throw new Exception("blad : zostaly jakies wartosci");
 
             return result;
         }
