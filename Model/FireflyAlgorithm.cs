@@ -12,28 +12,69 @@ namespace Model
         //parametry - jako autoproperties?
         public int imax;
         public int m;
-        public double gamma; // >= 0
-        public int alfa; //{0,1, ..., n-1} albo {1,2,...,n} ??
-        public int[,] A;  /*nxn, przeplyw miedzy osrodkami*/
-        public int[,] B;  /*nxn, odleglosc miedzy osrodkami*/
-        public int n;      /*liczba osrodkow*/
-        private Random rand; //Sys.Security.Cryptography!
+        public double gamma;    // >= 0
+        public int alfa;        //{0,1, ..., n-1} albo {1,2,...,n} ??
+        public int[,] A;        /*nxn, przeplyw miedzy osrodkami*/
+        public int[,] B;        /*nxn, odleglosc miedzy osrodkami*/
+        public int n;           /*liczba osrodkow*/
 
+        public int CurrentIteration { get; private set; }
+        public bool IsInitialized { get; private set; }
+        public bool HasFinished { get; private set; }
+
+        private readonly Random rand;    //Sys.Security.Cryptography!
+        private int[][] x;
+        private int minimum = 0;
         public FireflyAlgorithm()
         {
             rand = new Random();
+
+        }
+
+        
+        public void InitializeAlgorithm()
+        {
+            x = new int[m][];
+
+            /*losowanie wejsciowych permutacji*/
+            for (int i = 0; i < m; i++)
+            {
+                x[i] = new int[n];
+                for (int j = 0; j < n; j++)
+                {
+                    bool used = true;
+                    int tmp = rand.Next(n);
+                    while (used)
+                    {
+                        for (int k = 0; k < j; k++)
+                        {
+                            if (x[i][k] == tmp)
+                            {
+                                break;
+                            }
+                        }
+                        used = false;
+                    }
+                    x[i][j] = tmp;
+                }
+            }
+            IsInitialized = true;
         }
 
         //lista reprezentujaca najbardziej optymalne rozwiazanie
         public IList<int> ReturnMinimalResult()
         {
-            throw new NotImplementedException();
+            if(!HasFinished)
+                throw new Exception("I'm not finished yet!");
+            return x[minimum];
         }
 
         //najmniejszy zwracany koszt
         public int GetMinimalCost()
         {
-            throw new NotImplementedException();
+            if(!HasFinished)
+                throw new Exception("I'm not finished yet!");
+            return minimum;
         }
 
         //koszt dla danej iteracji
@@ -71,7 +112,56 @@ namespace Model
         //uruchomienie obliczen, zwraca 0 w przypadku konca obliczen?
         public int RunAlgorithm()
         {
+            if (!IsInitialized) InitializeAlgorithm();
+
+            CurrentIteration = 0;
+
+            while (CurrentIteration++ < imax)
+            {
+                // aktualnie najlepsze rozwiazanie
+                for (int i = 0; i < m; i++)
+                {
+                    if (Reward(x[i], A, B) < Reward(x[minimum], A, B))
+                    {
+                        minimum = i;
+                    }
+                }
+
+                // zblizanie swietlikow do mocniej swiecacych
+                for (int i = 0; i < m; i++)
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (Reward(x[i], A, B) < Reward(x[j], A, B))
+                        {
+                            int dist = Distance(x[i], x[j]);
+                            double beta = Attractiveness(gamma, dist);
+                            //zbliz swietlika xi do xj
+                            x[i] = Approach(beta, x[i], x[j]);
+                            x[i] = PerformRandomFlight(x[i], alfa);
+                        }
+                    }
+                }
+
+                // aktualnie najlepsze rozw porusza sie losowo
+
+                x[minimum] = PerformRandomFlight(x[minimum], alfa);
+            }
+
+            PlujNaKonsole();
+            HasFinished = true;
+
             return 0;
+        }
+
+        private void PlujNaKonsole()
+        {
+            Console.WriteLine("Najlepsze rozwiazanie:\n (");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(x[minimum][i] + ", ");
+            }
+            Console.WriteLine(")");
         }
 
         // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, 
@@ -84,7 +174,7 @@ namespace Model
             int currentIter = 0;
             int min = 0;
             int[][] x = new int[m][]; //
-//            int[,] x = new int[m,n]; //
+
 
             // losowanie wejsciowych permutacji
             for (int i = 0; i < m; i++)
