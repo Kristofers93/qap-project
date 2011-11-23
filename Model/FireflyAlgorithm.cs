@@ -133,14 +133,43 @@ namespace Model
         private int[] PerformRandomFlight(int[] xi, double alfa)
         {
             int n = xi.Length;
-            var result = new int[n];
+            int[] result = new int[n];
+            xi.CopyTo(result, n);
+            
             if(alfa < 0 || alfa >= n ) throw new Exception("Zla alfa");
             var rand = new Random();
+//            var indexesLeft = Enumerable.Range(0, n).ToList(); // {0, 1, ..., n-1}
             
             int nrOfElementsToShuffle = (int) (alfa*rand.NextDouble());
-            var indexesLeft = Enumerable.Range(0, n).ToList(); // {0, 1, ..., n-1}
+
+            //choosing elements to be shuffled
             
-            throw new NotImplementedException();
+            var positionsToShuffle = new List<int>(); 
+            var needed = nrOfElementsToShuffle;
+            var available = n;
+            
+            while (positionsToShuffle.Count < nrOfElementsToShuffle) {
+               if( rand.NextDouble() < ((double)needed / available) )
+               {
+                  positionsToShuffle.Add(xi[available - 1]);
+                  needed--;
+               }
+               available--;
+            }
+
+            //CHANGEME
+            //shuffling them
+            var valuesLeft = positionsToShuffle.Select(i => xi[i]).ToList();
+
+            int left = nrOfElementsToShuffle;
+            foreach (int i in positionsToShuffle)
+            {
+                result[i] = valuesLeft[rand.Next(left) - 1];
+                valuesLeft.Remove(xi[i]);
+                left--;
+            }
+            
+            if(left != 0) throw new Exception("nie powinnno nic zostac!");
 
             return result;
         }
