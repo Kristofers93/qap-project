@@ -16,12 +16,17 @@ namespace Model
             {
                 Console.WriteLine(i);
             }
-
+            
             int n = 19;
 
-//            var fa = new FireflyAlgorithm();
-
+            var fa = new FireflyAlgorithm();
+            fa.SetTestData(A, B, 10);
+            fa.imax = 10;
+            fa.gamma = 1.0;
+            fa.alfa = 1;
 //            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
+            fa.InitializeAlgorithm();
+            fa.RunAlgorithm();
             Console.ReadKey();
         }
 
