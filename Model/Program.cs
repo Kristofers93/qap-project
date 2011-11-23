@@ -11,7 +11,7 @@ namespace Model
 
         static void Main(string[] args)
         {
-            List<int> l = Enumerable.Range(0, 15).ToList();
+            HashSet<int> l = new HashSet<int>(Enumerable.Range(0, 15));
             foreach (var i in l)
             {
                 Console.WriteLine(i);
@@ -19,9 +19,9 @@ namespace Model
 
             int n = 19;
 
-            var fa = new FireflyAlgorithm();
+//            var fa = new FireflyAlgorithm();
 
-            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
+//            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
             Console.ReadKey();
         }
 
