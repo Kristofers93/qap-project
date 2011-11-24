@@ -20,10 +20,11 @@ namespace Model
             int n = 19;
 
             var fa = new FireflyAlgorithm();
-            fa.SetTestData(A, B, 10);
+            fa.SetTestData(A, B, n);
             fa.imax = 10;
             fa.gamma = 1.0;
             fa.alfa = 3;
+            fa.m = 10;
 
 //            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
             fa.InitializeAlgorithm();
