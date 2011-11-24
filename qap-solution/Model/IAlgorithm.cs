@@ -31,6 +31,8 @@ namespace Model
         //ustawianie danych, macierze A i B z modelu i ich rozmiar,
         void SetTestData(int[,] A, int[,] B, int numberOfInstances);
 
+
+
         //uruchomienie obliczen
         void runAlgorithm();
     }
