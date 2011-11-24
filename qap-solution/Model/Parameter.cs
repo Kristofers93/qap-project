@@ -5,21 +5,27 @@ using System.Text;
 
 namespace Model
 {
-    public abstract class Parameter<T>
+    public abstract class Parameter
     {
-        readonly string name;
-        //readonly Type type;
-        T value;
+
+        public string Name { get; protected set; }
+
+        public abstract bool IsValid();
+
+    }
+
+    public abstract class Parameter<T> : Parameter
+    {
+        public T Value;
 
 
         public Parameter(string _name, T _value)
         {
-            this.name = _name;
-            this.value = _value;
+            this.Name = _name;
+            this.Value = _value;
 
         }
 
-        public abstract bool IsValid();
 
     }
 
