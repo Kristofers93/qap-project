@@ -23,7 +23,8 @@ namespace Model
             fa.SetTestData(A, B, 10);
             fa.imax = 10;
             fa.gamma = 1.0;
-            fa.alfa = 1;
+            fa.alfa = 3;
+
 //            fa.TmpRun(10, 10, 1.0, 1.0, 1,  A, B);
             fa.InitializeAlgorithm();
             fa.RunAlgorithm();

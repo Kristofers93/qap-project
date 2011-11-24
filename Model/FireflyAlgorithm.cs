@@ -264,7 +264,7 @@ namespace Model
         {
             int n = xi.Length;
             int[] result = new int[n];
-            xi.CopyTo(result, n);
+            xi.CopyTo(result, 0);
             
             if(alfa < 0 || alfa >= n ) throw new Exception("Zla alfa");
             var rand = new Random();
