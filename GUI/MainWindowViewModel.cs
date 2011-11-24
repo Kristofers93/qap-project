@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using System.Windows;
+using Microsoft.Win32;
 using Structures;
 
 namespace GUI
@@ -15,8 +17,9 @@ namespace GUI
         private Pszczeli.Parameters pszczeliParameters = new Pszczeli.Parameters();
         private Swietlikowy.Parameters swietlikowyParameters = new Swietlikowy.Parameters();
 
-        private IntMatrix2D A = new IntMatrix2D(10); //TODO Wczytywanie z pliku
-        private IntMatrix2D B = new IntMatrix2D(10); //TODO ^^
+        private int[,] A;
+        private int[,] B;
+        int size = 0;
 
         public int SelectedTab { get; set; }
 
@@ -40,26 +43,101 @@ namespace GUI
 
         public void LoadData()
         {
-            //TODO
-            //A = ...
-            //B = ...
-            System.Windows.MessageBox.Show("Nie zaimplementowano :P");
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            //dlg.FileName = "Dane testowe"; // Default file name
+            dlg.DefaultExt = ".dat"; // Default file extension
+            dlg.Filter = "Dane wejściowe|*.dat"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                
+                // create reader & open file
+                StreamReader tr = new StreamReader(filename);
+
+                // read a line of text
+                A = null;
+                int i = 0;
+                int j = 0;
+                int m = 0;
+                while (!tr.EndOfStream)
+                {
+                    string[] line = tr.ReadLine().Split(' ');
+                    foreach (string s in line)
+                    {
+                        try
+                        {
+                            int a = Int32.Parse(s);
+                             if (A == null)
+                            {
+                                A = new int[a,a];
+                                B = new int[a,a];
+                                size = a;
+                            }
+                            else
+                            {
+                                if (m == 0) A[j, i] = a;
+                                if (m == 1) B[j, i] = a;
+                                ++i;
+                                if (i == size)
+                                {
+                                    i = 0;
+                                    ++j;
+                                    if (j == size)
+                                    {
+                                        i = 0;
+                                        j = 0;
+                                        ++m;
+                                    }
+                                }
+                            }
+
+                        }catch
+                        {
+                            
+                        }
+
+                    }
+                }
+                // close the stream
+                tr.Close();
+                
+            }
+
+           
         }
 
         public void Run()
         {
-            switch (SelectedTab)
+            Model.IAlgorithm algorithm = null; //TODO
+             switch (SelectedTab)
             {
                 case 0:
-                    new Result(MrowkowyParameters.Clone(), A, B).Show();
+                    //algorithm = new Mrowkowy();
                     break;
                 case 1:
-                    new Result(PszczeliParameters.Clone(), A, B).Show();
+                    //algorithm = new Pszczeli();
                     break;
                 case 2:
-                    new Result(SwietlikowyParameters.Clone(), A, B).Show();
+                    //algorithm = new Swietlikowy();
                     break;
+            }          
+            if(algorithm==null)
+            {
+                System.Windows.MessageBox.Show("Nie załadowano algorytmu");
+                return;
             }
+
+            algorithm.SetTestData(A, B, size);
+            //algorithm.SetParameters();
+            new Result(algorithm);
+
         }
 
         public ICommand LoadDataCommand

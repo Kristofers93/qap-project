@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using Model;
 using Structures;
 
 namespace GUI
@@ -20,10 +21,10 @@ namespace GUI
     /// </summary>
     public partial class Result : Window
     {
-        public Result(IParameters parameters, IntMatrix2D A, IntMatrix2D B)
+        public Result(IAlgorithm algorithm)
         {
             InitializeComponent();
-            LayoutRoot.DataContext = new ResultViewModel(parameters, A, B);
+            LayoutRoot.DataContext = new ResultViewModel(algorithm);
         }
     }
 }

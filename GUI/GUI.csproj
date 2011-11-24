@@ -103,6 +103,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{B8A36A77-2D7B-48D0-B121-DD04DE23C322}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mrowkowy\Mrowkowy.csproj">
       <Project>{87441ACC-6EDE-4F2C-BC24-FC8CB153E236}</Project>
       <Name>Mrowkowy</Name>
@@ -119,6 +123,9 @@
       <Project>{DDA8ECD8-9F97-48D0-946F-C066DC9BCFDD}</Project>
       <Name>Swietlikowy</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
