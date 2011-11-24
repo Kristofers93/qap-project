@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireflyAlgorithm", "Model\FireflyAlgorithm.csproj", "{86B8B56B-CE9C-481B-A7FA-8AA06E8AA90C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireflyAlgorithm", "FireflyAlgorithm\FireflyAlgorithm.csproj", "{86B8B56B-CE9C-481B-A7FA-8AA06E8AA90C}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
