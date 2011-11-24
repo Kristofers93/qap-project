@@ -157,17 +157,19 @@ namespace Model
                 // aktualnie najlepsze rozw porusza sie losowo
 
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);
+                if(CurrentIteration % 100 == 0) Console.Write(".");
             }
-
-            PlujNaKonsole();
             HasFinished = true;
+            Console.WriteLine();
+            PlujNaKonsole();
+           
 
             return 0;
         }
 
         private void PlujNaKonsole()
         {
-            Console.WriteLine("Minimalny koszt:\n (" + GetMinimalCost());
+            Console.WriteLine("Minimalny koszt:\n " + GetMinimalCost());
 
             Console.WriteLine("Najlepsze rozwiazanie:\n (");
             for (int i = 0; i < n; i++)
@@ -296,7 +298,8 @@ namespace Model
             foreach (int i in positionsToShuffle)
             {
                 result[i] = valuesLeft[rand.Next(left)];
-                valuesLeft.Remove(xi[i]);
+//                valuesLeft.Remove(xi[i]);
+                valuesLeft.Remove(result[i]);
                 left--;
             }
             

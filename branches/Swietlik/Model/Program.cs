@@ -21,7 +21,7 @@ namespace Model
 
             var fa = new FireflyAlgorithm();
             fa.SetTestData(A, B, n);
-            fa.imax = 1000;
+            fa.imax = 10000;
             fa.gamma = 1.0;
             fa.alfa = 3;
             fa.m = 10;
