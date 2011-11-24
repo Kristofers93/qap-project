@@ -38,8 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Algorithm.cs" />
     <Compile Include="FireflyAlgorithm.cs" />
     <Compile Include="IAlgorithm.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
