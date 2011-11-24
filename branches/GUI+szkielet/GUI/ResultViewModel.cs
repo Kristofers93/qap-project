@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using Model;
 using Structures;
 using System.Windows;
 
@@ -89,9 +90,12 @@ namespace GUI
             Cost = cost;
         }
 
-        public ResultViewModel(IParameters parameters, IntMatrix2D A, IntMatrix2D B)
+        public ResultViewModel(IAlgorithm algorithm)
         {
-            worker = new BackgroundWorker();
+            algorithm.runAlgorithm();
+            //TODO odbieranie i wyświetlanie wyników
+            
+            /*worker = new BackgroundWorker();
             this.parameters = parameters;
             if (parameters.GetType().Equals(typeof(Mrowkowy.Parameters)))
             {
@@ -109,7 +113,7 @@ namespace GUI
                 worker.DoWork += sWorker.DoWork;
             }
             worker.RunWorkerAsync();
-            Working = true;
+            Working = true;*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
