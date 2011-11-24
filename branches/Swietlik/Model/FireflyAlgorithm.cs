@@ -167,6 +167,8 @@ namespace Model
 
         private void PlujNaKonsole()
         {
+            Console.WriteLine("Minimalny koszt:\n (" + GetMinimalCost());
+
             Console.WriteLine("Najlepsze rozwiazanie:\n (");
             for (int i = 0; i < n; i++)
             {

@@ -11,11 +11,11 @@ namespace Model
 
         static void Main(string[] args)
         {
-            HashSet<int> l = new HashSet<int>(Enumerable.Range(0, 15));
-            foreach (var i in l)
-            {
-                Console.WriteLine(i);
-            }
+            //HashSet<int> l = new HashSet<int>(Enumerable.Range(0, 15));
+            //foreach (var i in l)
+            //{
+            //   Console.WriteLine(i);
+            //}
             
             int n = 19;
 
