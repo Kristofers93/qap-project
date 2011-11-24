@@ -1,2 +1,0 @@
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\obj\x86\Debug\Model.exe
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\obj\x86\Debug\Model.pdb
