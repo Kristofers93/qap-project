@@ -170,7 +170,7 @@ namespace Model
             Console.WriteLine("Najlepsze rozwiazanie:\n (");
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine(x[minimum][i] + ", ");
+                Console.Write(x[minimum][i] + ", ");
             }
             Console.WriteLine(")");
         }
@@ -255,14 +255,14 @@ namespace Model
             Console.WriteLine("Najlepsze rozwiazanie:\n (");
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine(x[min][i] + ", ");
+                Console.Write(x[min][i] + ", ");
             }
             Console.WriteLine(")");
         }
 
         private int[] PerformRandomFlight(int[] xi, double alfa)
         {
-            int n = xi.Length;
+            //int n = xi.Length;
             int[] result = new int[n];
             xi.CopyTo(result, 0);
             
@@ -293,7 +293,7 @@ namespace Model
             int left = nrOfElementsToShuffle;
             foreach (int i in positionsToShuffle)
             {
-                result[i] = valuesLeft[rand.Next(left) - 1];
+                result[i] = valuesLeft[rand.Next(left)];
                 valuesLeft.Remove(xi[i]);
                 left--;
             }
@@ -305,8 +305,8 @@ namespace Model
 
         private int[] Approach(double beta, int[] xi, int[] xj)
         {
-            var rand = new Random();
-            var n = xi.Length;
+            //var rand = new Random();
+            //var n = xi.Length;
             var result = new int[n]; //result
             HashSet<int> valuesLeft = new HashSet<int>(Enumerable.Range(0, n)); // {0, 1, ..., n-1} possible values
             var gaps = new List<int>(); //indFree  //indexes of gaps which still need to be filled
@@ -347,7 +347,7 @@ namespace Model
             foreach (var gap in gapsToRandomize)
             {
                 result[gap] = valuesLeftAsList.ElementAt(rand.Next(valuesLeftAsList.Count));
-                valuesLeft.Remove(result[gap]);
+                valuesLeftAsList.Remove(result[gap]);
             }
             if(valuesLeftAsList.Any()) throw new Exception("blad : zostaly jakies wartosci");
 
@@ -361,7 +361,7 @@ namespace Model
 
         private int Distance(int[] xi, int[] xj)
         {
-            var n = xi.Length;
+            //var n = xi.Length;
             var d = 0;
             for (var k = 0; k < n; k++)
             {
@@ -376,7 +376,7 @@ namespace Model
         private int Reward(int[] solut, int[,] A, int[,] B)
         {
             int sum = 0;
-            int n = A.GetLength(0);
+            //int n = A.GetLength(0);
 
             for (int i = 0; i < n; i++)
             {
