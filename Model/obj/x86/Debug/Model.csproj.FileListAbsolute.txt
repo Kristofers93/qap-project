@@ -1,5 +1,0 @@
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\bin\Debug\Model.exe
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\bin\Debug\Model.pdb
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\obj\x86\Debug\Model.exe
-D:\Dokumenty\Visual Studio\qap-solution-FA\Model\obj\x86\Debug\Model.pdb
