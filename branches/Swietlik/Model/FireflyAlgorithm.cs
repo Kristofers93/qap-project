@@ -319,7 +319,9 @@ namespace Model
                 if (xi[i] == xj[i])
                 {
                     result[i] = xi[i];
-                    valuesLeft.Remove(result[i]);
+//                    valuesLeft.Remove(result[i]);
+                    if (!valuesLeft.Remove(result[i]))
+                        throw new Exception("Blad - wartosci mialy sie nie powtarzac!");
                 }
                 else
                 {
@@ -334,7 +336,8 @@ namespace Model
                 if(valuesLeft.Contains(pickedValue))
                 {
                     result[tmp] = pickedValue;
-                    valuesLeft.Remove(result[tmp]);
+                    if(!valuesLeft.Remove(result[tmp]) )
+                        throw new Exception("Blad - wartosci mialy sie nie powtarzac!");
                 }
                 else
                 {
