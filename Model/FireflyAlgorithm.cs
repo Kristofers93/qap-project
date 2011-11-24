@@ -342,7 +342,8 @@ namespace Model
                 }
                 gaps.Remove(tmp);
             }
-            
+
+            if (gapsToRandomize.Count + 1 == valuesLeft.Count()) throw new Exception("Dokladnie o 1 wiecej wartosci!");
             if(gapsToRandomize.Count != valuesLeft.Count()) throw new Exception("Liczba pozostalych luk jest inna niz liczba pozostalych wartosci!");
             var valuesLeftAsList = valuesLeft.ToList();
             foreach (var gap in gapsToRandomize)
