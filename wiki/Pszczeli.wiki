@@ -40,3 +40,5 @@ Tyle na dzisiaj. Dziękuję za uwagę. Do zobaczenia wkrótce.
 
 Dobra, to ten algorytm wygląda obiecująco. Niech reszta z grupy też coś zrobi i zobaczy czy można to wykorzystać. Daj też linka skąd to wziąłeś.
 Zacznijcie też od zaimplementowania interfejsu.
+
+link: [http://msdn.microsoft.com/en-us/magazine/gg983491.aspx]
