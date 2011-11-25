@@ -25,3 +25,7 @@ int:
 - m - liczba mrówek (0,10000?)
 
 - n - liczba iteracji (0,10000?)
+
+= Uwagi =
+
+No na razie wiele to nie ma, ale idzie w dobrym kierunku bo coś już zaczęte. Przydałoby się, żeby w przeciągu tygodnia można to było doprowadzić do stanu możliwego do testowania.
