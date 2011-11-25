@@ -8,8 +8,8 @@
     <ProjectGuid>{83095CDD-771F-47A4-8DD0-8C272CCEFC3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model.Bee</RootNamespace>
-    <AssemblyName>Model.Bee</AssemblyName>
+    <RootNamespace>Pszczeli</RootNamespace>
+    <AssemblyName>Pszczeli</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,14 +43,9 @@
     <Compile Include="Bee.cs" />
     <Compile Include="BeeAlgorithm.cs" />
     <Compile Include="Hive.cs" />
+    <Compile Include="IAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{86B8B56B-CE9C-481B-A7FA-8AA06E8AA90C}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
