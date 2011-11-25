@@ -71,9 +71,8 @@ namespace GUI
                     string[] line = tr.ReadLine().Split(' ');
                     foreach (string s in line)
                     {
-                        try
-                        {
-                            int a = Int32.Parse(s);
+                        int a;
+                        if(Int32.TryParse(s, out a)){
                              if (A == null)
                             {
                                 A = new int[a,a];
@@ -98,9 +97,6 @@ namespace GUI
                                 }
                             }
 
-                        }catch
-                        {
-                            
                         }
 
                     }
