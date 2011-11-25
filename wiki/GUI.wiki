@@ -24,3 +24,5 @@ Tu dajcie wszystkie linki dotyczące GUI.
  * Wczytywanie danych raczej dobrze nie działa jeszcze, bo dość mocno się zwiesza przy tym. Może trzeba odpalić to w jakimś innym wątku. Poza tym przydałoby się abyście dodali już wszystkie parametry i niech ktoś się zajmie wykresami i zapisywaniem danych - to w osobnym okienku. W praniu zobaczymy jak to pójdzie.
 
  * Można dodać jakieś wodotryski, ale to potem, bo na razie interfejs graficznie wygląda ubogo, a mam wrażanie, że pani Kwiecień zwraca na to uwagę.
+
+* WAŻNE - zdecydujcie jak chcecie przekazywać parametry do algorytmów, czyli jak będzie wam najwygodniej. Czy przez konstruktor i czy przez ten słownik i z rzutowaniem?
