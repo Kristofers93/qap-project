@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IAlgorithm.cs" />
-    <Compile Include="Parameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
