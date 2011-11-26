@@ -26,9 +26,9 @@ Parametry jakie przyjmuje algorytm:
  # Liczba pszczół zwiadowców (*n* > 1)
  # Liczba wybranych miejsc (*m* ε <1, n>)
  # Liczba lepszych miejsc (*e* ε <1, m>)
- # Liczba pszczół wysyłanych do lepszych miejsc (*nep* < n)
- # Liczba pszczół wysłanych do pozostałych wybranych miejsc (*nsp* < nep)
- # Rozmiar sąsiedztwa (jeśli dobrze rozumiem jest to stopień zmniejszania się sąsiedztwa w każdej kolejnej iteracji) (*ngh* ε <0, 1>)
+ # Liczba pszczół wysyłanych do lepszych miejsc (int *nep*)
+ # Liczba pszczół wysłanych do pozostałych wybranych miejsc (int *nsp*)
+ # Rozmiar sąsiedztwa (% całego rozmiaru problemu) (*ngh* ε <0, 1>)
  # Maksymalna liczba iteracji (*imax*)
 
 Nazwy (takie najczęściej występują) parametrów podałem boldem w nawiasach wraz z przedziałami ich wartości.
@@ -42,3 +42,13 @@ Dobra, to ten algorytm wygląda obiecująco. Niech reszta z grupy też coś zrob
 Zacznijcie też od zaimplementowania interfejsu.
 
 link: [http://msdn.microsoft.com/en-us/magazine/gg983491.aspx]
+
+= Uwagi 2 =
+
+Trudno było coś zrobić z tą wersją z msdn, dlatego napisałem własną implementację na podstawie algorytmu przedstawionego w prezentacji (na górze strony).
+Pewnie nie jest doskonały, ale mniej więcej działa.
+Można go potestować na wpisanych danych.
+Jak już będzie gotowy interfejs to go dopiszę i postaram się o jakieś komentarze.
+Jak się komuś chce (i wie jak) to może przerobić ten z msdn. Mielibyśmy dwie różne wersje pszczół (tamto jest jakieś ABC czy SBC czy jak to tam zwał, a moje zwykłe BA)
+
+Teraz można zacząć zgłaszać swoje uwagi, jak się komuś nie podoba to mówić.
