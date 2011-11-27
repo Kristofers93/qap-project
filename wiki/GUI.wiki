@@ -22,6 +22,12 @@ Jeśli macie wiecej pomysłów to dopiszcie.
 
 Tu dajcie wszystkie linki dotyczące GUI.
 
+wideo instruktaż w jaki sposób stworzyć wykres:
+http://www.youtube.com/watch?v=bRnUAwUFIgY
+
+MS Chart samples:
+http://archive.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId=4418
+
 = Uwagi =
 
  * Wczytywanie danych raczej dobrze nie działa jeszcze, bo dość mocno się zwiesza przy tym. Może trzeba odpalić to w jakimś innym wątku. Poza tym przydałoby się abyście dodali już wszystkie parametry i niech ktoś się zajmie wykresami i zapisywaniem danych - to w osobnym okienku. W praniu zobaczymy jak to pójdzie.
