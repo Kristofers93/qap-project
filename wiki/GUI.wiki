@@ -29,8 +29,8 @@ Tu dajcie wszystkie linki dotyczące GUI.
 
 = Odpowiedź na uwagi =
 
-* W ktorym momencie wczytywanie sie zwiesza? u mnie nie widze jakichs specjalnych problemow poki co, przetestuje to. Postaram sie ogarnac wykresy
+ W ktorym momencie wczytywanie sie zwiesza? u mnie nie widze jakichs specjalnych problemow poki co, przetestuje to. Postaram sie ogarnac wykresy
 
-* Zgadzam sie że interfejs wygląda ubogo, jednakże mam prośbe - jeśli ktoś ma jakąś wizje w jaki sposób zmienić/polepszyć wygląd gui to niech napisze, narysuje w paincie, stworzy montaż słowno-muzyczny owa wizje opisujacy. Ja wiem że prosto stwierdzić 'brzydkie' jednakże żaden z nas nie jest artystą, dlatego z chęcią przyjmiemy wszelkie opinie i uwagi od bardziej uzdolnionych, a następnie wykonamy.
+ Zgadzam sie że interfejs wygląda ubogo, jednakże mam prośbe - jeśli ktoś ma jakąś wizje w jaki sposób zmienić/polepszyć wygląd gui to niech napisze, narysuje w paincie, stworzy montaż słowno-muzyczny owa wizje opisujacy. Ja wiem że prosto stwierdzić 'brzydkie' jednakże żaden z nas nie jest artystą, dlatego z chęcią przyjmiemy wszelkie opinie i uwagi od bardziej uzdolnionych, a następnie wykonamy.
 
-* Co do przekazywania parametrow - jeszcze nie wiem co bedzie lepsze, konstruktor wydaje sie byc hmm, nieco mniej elegancki i wyrafinowany, ale chyba prostszy. Ogarniemy to na dniach.
+ Co do przekazywania parametrow - jeszcze nie wiem co bedzie lepsze, konstruktor wydaje sie byc hmm, nieco mniej elegancki i wyrafinowany, ale chyba prostszy. Ogarniemy to na dniach.
