@@ -22,9 +22,19 @@ namespace Model.Bee
 
         Bee[] bees;
         int[] bestMemoryMatrix; // indices = locations, values = facilities
-        double bestMeasureOfQuality;
+        int bestMeasureOfQuality;
         int[] indexesOfInactiveBees; // contains indexes into the bees array
+        int[] costs; // contains best solution costs after each iteration
 
+        public int[] BestMemoryMatrix
+        {
+            get { return this.bestMemoryMatrix; }
+        }
+
+        public int[] Costs
+        {
+            get { return this.costs; }
+        }
 
         public Hive(int totalNumberBees, int numberScout, int maxNumberVisits, int maxNumberCycles,
             double probPersuasion, double probMistake, TestData data)
@@ -40,6 +50,8 @@ namespace Model.Bee
             this.probPersuasion = probPersuasion;
             this.probMistake = probMistake;
             this.data = data;
+
+            this.costs = new int[maxNumberCycles];
 
             this.bees = new Bee[totalNumberBees];
             this.bestMemoryMatrix = GenerateRandomMemoryMatrix(); // alternative initializations are possible
@@ -65,7 +77,7 @@ namespace Model.Bee
                 }
 
                 int[] randomMemoryMatrix = GenerateRandomMemoryMatrix();
-                double mq = MeasureOfQuality(randomMemoryMatrix);
+                int mq = MeasureOfQuality(randomMemoryMatrix);
                 int numberOfVisits = 0;
 
                 bees[i] = new Bee(currStatus, randomMemoryMatrix, mq, numberOfVisits); // instantiate current bee
@@ -78,7 +90,7 @@ namespace Model.Bee
                 }
             } // each bee
 
-        } // TravelingSalesmanHive ctor
+        } // Hive constructor
 
 
         public int[] GenerateRandomMemoryMatrix()
@@ -115,17 +127,14 @@ namespace Model.Bee
             return result;
         } // GenerateNeighborMemoryMatrix()
 
-        public double MeasureOfQuality(int[] memoryMatrix)
+        public int MeasureOfQuality(int[] memoryMatrix)
         {
-            double answer = 0.0;
+            int answer = 0;
             for (int i = 0; i < memoryMatrix.Length; i++)
             {
                 for (int j = i; j < memoryMatrix.Length; i++)
                 {
-                    int x = memoryMatrix[i];
-                    int y = memoryMatrix[j];
-                    double d = this.data.Cost(i,j,x,y);
-                    answer += d;
+                    answer += this.data.Cost(i, j, memoryMatrix[i], memoryMatrix[j]);
                 }
             }
             return answer;
@@ -147,6 +156,7 @@ namespace Model.Bee
                     else if (this.bees[i].status == 0) // inactive bee
                         ProcessInactiveBee(i);
                 } // for each bee
+                costs[cycle] = this.bestMeasureOfQuality; // update costs array after each iteration
                 ++cycle;
 
             } // main while processing loop
@@ -161,7 +171,7 @@ namespace Model.Bee
         private void ProcessActiveBee(int i)
         {
             int[] neighbor = GenerateNeighborMemoryMatrix(bees[i].memoryMatrix); // find a neighbor solution
-            double neighborQuality = MeasureOfQuality(neighbor); // get its quality
+            int neighborQuality = MeasureOfQuality(neighbor); // get its quality
             double prob = random.NextDouble(); // used to determine if bee makes a mistake; compare against probMistake which has some small value (~0.01)
             bool memoryWasUpdated = false; // used to determine if bee should perform a waggle dance when done
             bool numberOfVisitsOverLimit = false; // used to determine if bee will convert to inactive status
@@ -228,7 +238,7 @@ namespace Model.Bee
         private void ProcessScoutBee(int i)
         {
             int[] randomFoodSource = GenerateRandomMemoryMatrix(); // scout bee finds a random food source. . . 
-            double randomFoodSourceQuality = MeasureOfQuality(randomFoodSource); // and examines its quality
+            int randomFoodSourceQuality = MeasureOfQuality(randomFoodSource); // and examines its quality
             if (randomFoodSourceQuality < bees[i].measureOfQuality) // scout bee has found a better solution than its current one (< because smaller measure is better)
             {
                 Array.Copy(randomFoodSource, bees[i].memoryMatrix, randomFoodSource.Length); // unlike active bees, scout bees do not make mistakes

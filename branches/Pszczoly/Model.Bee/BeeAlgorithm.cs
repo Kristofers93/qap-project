@@ -16,6 +16,7 @@ namespace Model.Bee
         public double probMistake = 0.01; // probability an active bee will reject a better neighbor food source OR accept worse neighbor food source
         TestData data = null; // this is the problem-specific data we want to optimize
         List<int> minimalResult;
+        List<int> costs;
 
         public BeeAlgorithm(int totalNumberBees, int numberScout, int maxNumberVisits, int maxNumberCycles,
             double probPersuasion, double probMistake)
@@ -43,7 +44,8 @@ namespace Model.Bee
             {
                 Hive hive = new Hive(totalNumberBees, numberScout, maxNumberVisits, maxNumberCycles, probPersuasion, probMistake, data);
                 hive.Solve();
-                this.minimalResult = new List<int>(hive.getBestMemoryMatrix());
+                this.minimalResult = new List<int>(hive.BestMemoryMatrix);
+                this.costs = new List<int>(hive.Costs);
             }
             else throw new ArgumentNullException();
 
@@ -59,13 +61,15 @@ namespace Model.Bee
         //najmniejszy zwracany koszt
         public int GetMinimalCost()
         {
-            throw new NotImplementedException();
+            return this.costs[this.maxNumberCycles - 1];
         }
 
         //koszt dla pierwszych n(numberOfIterations) iteracji
         public List<int> GetCosts(int numberOfIterations)
         {
-            throw new NotImplementedException();
+            int[] result = new int[numberOfIterations];
+            this.costs.CopyTo(0, result, 0, numberOfIterations);
+            return new List<int>(result);
         }
 
         //zwraca liste parametrow
