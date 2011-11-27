@@ -25,7 +25,7 @@ Tu dajcie wszystkie linki dotyczące GUI.
 
  * Można dodać jakieś wodotryski, ale to potem, bo na razie interfejs graficznie wygląda ubogo, a mam wrażanie, że pani Kwiecień zwraca na to uwagę.
 
-* WAŻNE - zdecydujcie jak chcecie przekazywać parametry do algorytmów, czyli jak będzie wam najwygodniej. Czy przez konstruktor i czy przez ten słownik i z rzutowaniem?
+* WAŻNE - zdecydujcie jak chcecie przekazywać parametry do algorytmów, czyli jak będzie wam najwygodniej. Czy przez konstruktor i czy przez ten słownik i z rzutowaniem? *
 
 = Odpowiedź na uwagi =
 
