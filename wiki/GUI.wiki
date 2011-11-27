@@ -14,6 +14,9 @@ Gui powinno umożliwiać przede wszystkim :
  * dla każdego algorytmu rozmaite dane do wyboru gotowe jak i możliwość wprowadzenia ręcznie
  * przycisk startu
 
+Szczegóły techniczne:
+ * do tworzenia wykresów wykorzystywać będziemy Microsoft Chart Controls 
+
 Najlepiej zacznijcie jakoś modelować ten interfejs, zróbcie jakiś projekt.
 Jeśli macie wiecej pomysłów to dopiszcie.
 
