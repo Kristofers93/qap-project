@@ -52,3 +52,21 @@ Jak już będzie gotowy interfejs to go dopiszę i postaram się o jakieś komen
 Jak się komuś chce (i wie jak) to może przerobić ten z msdn. Mielibyśmy dwie różne wersje pszczół (tamto jest jakieś ABC czy SBC czy jak to tam zwał, a moje zwykłe BA)
 
 Teraz można zacząć zgłaszać swoje uwagi, jak się komuś nie podoba to mówić.
+
+= Uwagi 3 =
+
+Wcale nie było tak trudno, pozmieniałem to z msdn i nawet dobrze to wygląda:) Jest teraz w branchu "Pszczoly". Poprzedni branch ("pszczeli") można usunąć.
+
+Btw. Bee Algorithm to jest to samo co Simulated Bee Colony Algorithm
+
+Parametry jakie przyjmuje moja implementacja algorytmu:
+ * int totalNumberBees - max liczba pszczół
+ * int numberScout - liczba pszczół-zwiadowców (numberScout < totalNumberBees)
+ * int maxNumberVisits - jeśli pszczoła po maxNumberVisits wizytach w tym samym miejscu nie znajdzie lepszego sąsiedztwa to jej status zostaje zmieniony na nieaktywny
+ * int maxNumberCycles - liczba iteracji algorytmu
+ * double probPersuasion - prawdopodobieństwo że nieaktywna pszczoła zostanie przekonana tańcem innej pszczoły do lotu (oprócz tego żeby pszczoła poleciała, miejsce proponowane przez tańczącą pszczołę musi być lepsze niż to w którym była ostatnio) (0.0 <= probPersuasion <= 1.0)
+ * double probMistake - prawdopodobieństwo że pszczoła się pomyli, tzn. nie poleci do lepszego sąsiedztwa lub poleci do gorszego sąsiedztwa (0.0 <= probMistake <= 1.0)
+
+Pojedyncze rozwiązanie przechowuję jako tablicę intów, gdzie indeksy są lokacjami a wartości pól - fabrykami.
+
+Nie testowałem jeszcze tego algorytmu ale jak znajdę trochę czasu to to zrobię. (+ trzeba zaimplementować resztę metod z interfejsu, dobrze by było jakby koordynator na wiki opisał o co dokładnie w nich chodzi - np. co ma zwracać GetCost?)
