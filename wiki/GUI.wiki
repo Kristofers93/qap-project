@@ -22,11 +22,13 @@ Jeśli macie wiecej pomysłów to dopiszcie.
 
 Tu dajcie wszystkie linki dotyczące GUI.
 
+
 wideo instruktaż w jaki sposób stworzyć wykres:
 http://www.youtube.com/watch?v=bRnUAwUFIgY
-
 MS Chart samples:
 http://archive.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId=4418
+Przy czym ostrzegam że zarówno film na youtube jak i sample nie są poprawne :/ Działanie zgodnie z nimi nie daje poprawnego wykresu, mówiąc delikatnie microsoft ssie.
+
 
 = Uwagi =
 
@@ -42,4 +44,4 @@ http://archive.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId
 
  Zgadzam sie że interfejs wygląda ubogo, jednakże mam prośbe - jeśli ktoś ma jakąś wizje w jaki sposób zmienić/polepszyć wygląd gui to niech napisze, narysuje w paincie, stworzy montaż słowno-muzyczny owa wizje opisujacy. Ja wiem że prosto stwierdzić 'brzydkie' jednakże żaden z nas nie jest artystą, dlatego z chęcią przyjmiemy wszelkie opinie i uwagi od bardziej uzdolnionych, a następnie wykonamy.
 
- Co do przekazywania parametrow - jeszcze nie wiem co bedzie lepsze, konstruktor wydaje sie byc hmm, nieco mniej elegancki i wyrafinowany, ale chyba prostszy. Ogarniemy to na dniach.
+ Co do przekazywania parametrow - jeszcze nie wiem co bedzie lepsze, konstruktor wydaje sie byc hmm, nieco mniej elegancki i wyrafinowany, ale chyba prostszy. Wybieramy konstruktor.
