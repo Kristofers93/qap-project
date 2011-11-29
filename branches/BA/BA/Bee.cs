@@ -29,6 +29,7 @@ namespace BA
             n = Matrix.n;
         }
 
+        // losowanie permutacji (dla nbSize = n - losowo, dla nbSize malego - szukanie w sasiedztwie)
         public void FindSomeSite(int neighbourhoodSize)
         {
             for (int i = 0; i < neighbourhoodSize/2; i++)
@@ -43,6 +44,7 @@ namespace BA
             myValue = Reward(Matrix.A, Matrix.B);
         }
 
+        // liczenie funkcji celu
         private int Reward(int[,] A, int[,] B)
         {
             int sum = 0;
@@ -58,6 +60,7 @@ namespace BA
             return sum;
         }
 
+        // komparator przydatnosci pszczol
         public static int Compare(Bee b1, Bee b2)
         {
             return b1.Value - b2.Value;
