@@ -25,8 +25,10 @@ Tu dajcie wszystkie linki dotyczące GUI.
 
 wideo instruktaż w jaki sposób stworzyć wykres:
 http://www.youtube.com/watch?v=bRnUAwUFIgY
+
 MS Chart samples:
 http://archive.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId=4418
+
 Przy czym ostrzegam że zarówno film na youtube jak i sample nie są poprawne :/ Działanie zgodnie z nimi nie daje poprawnego wykresu, mówiąc delikatnie microsoft ssie.
 
 
