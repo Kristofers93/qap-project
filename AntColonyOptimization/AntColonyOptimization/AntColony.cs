@@ -15,6 +15,7 @@ namespace AntColonyOptimization
         private float _q; //pheromone deposit factor
         private float _q0; //pheromone concentration above which the ants operate greedily
         private float _t0; //pheromone concentration on start
+        private float _Q;
 
         public int[,] A;
         public int[,] B;
@@ -145,10 +146,10 @@ namespace AntColonyOptimization
                     int node = 0; //numer od ktorego zaczynamy przejscie mrowka
                     nodes[node] = true;
                     x[ant][0] = node;
-                    for (int i = 0; i < n - 1; i++)
+                    for (int i = 1; i < n; i++)
                     {//wybieramy kolejne wezly sciezki
                         bool greedy = true;
-                        int chosenNode =0;
+                        int chosenNode=-1;
                         for (int j = 0; j < n; j++)
                         { //sprawdzamy czy dla kazdego przejscia z danego wezla mamy zachowywac sie zachlannie czy normalnie
                             if (pheromones[node][j] < _q0)
@@ -159,25 +160,46 @@ namespace AntColonyOptimization
                         }
                         if (greedy)
                         {//zachowujemy sie zachlannie
-                            int attr = 0;
-                            for (int k = 0; k < n - i - 1; k++)
+                            float attr = 0;
+                            for (int k = i; k < n; k++)
                             {
-                                int tmpwezel =0;// wybierzWezel(0);
-                                int tmp =0;// Attractivnes(node, tmpwezel);
-                                if (tmp > attr)
+                                if (!nodes[k])
                                 {
-                                    attr = tmp;
-                                    chosenNode = tmpwezel;
+                                    float tmp = GreedyAttractivnes(node, k);
+                                    if (tmp > attr)
+                                    {
+                                        attr = tmp;
+                                        chosenNode = k;
+                                    }
                                 }
 
                             }
                         }
                         else
                         {//zachowujemy sie normalnie
-                            double choice = rand.NextDouble();
+                            float choice = (float)rand.NextDouble();
+                            float attr = 0;
+                            for (int k = i; k < n; k++)
+                            {
+                                if (!nodes[k])
+                                {
+                                    float tmp = AttractivnesProbability(node, k,nodes);
+                                    if (choice < tmp)
+                                    {
+                                        chosenNode = k;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        attr = tmp;
+                                        choice -= tmp;
+                                    }
+                                }
+                            }
                         }
                         //aktualizujemy wezly
                         node = chosenNode;
+                        nodes[chosenNode] = true;
                         x[ant][i] = node;
 
                     }
@@ -200,6 +222,28 @@ namespace AntColonyOptimization
             }
 
 
+        }
+
+        private float GreedyAttractivnes(int node1, int node2)
+        {
+            return (float)Math.Pow((double)pheromones[node1][node2],(double)_alpha)
+                    *(float)Math.Pow((double)_Q/(double)B[node1,node2],(double)_beta);
+        }
+
+        private float AttractivnesProbability(int node1, int node2,bool[] nodes)
+        {
+            float numerator = (float)Math.Pow((double)pheromones[node1][node2], (double)_alpha)
+                    * (float)Math.Pow((double)_Q / (double)B[node1, node2], (double)_beta);
+            float denominator = 0;
+            for (int i = 1; i<n; i++)
+            {
+                if (!nodes[i] && i!=node1)
+                {
+                    denominator += (float)Math.Pow((double)pheromones[node1][i], (double)_alpha)
+                    * (float)Math.Pow((double)_Q / (double)B[node1, i], (double)_beta);
+                }
+            }
+            return numerator / denominator;
         }
 
         private int Cost(int[] solution, int[,] A, int[,] B)
