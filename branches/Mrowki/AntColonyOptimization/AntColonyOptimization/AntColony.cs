@@ -26,6 +26,7 @@ namespace AntColonyOptimization
         public bool HasFinished { get; private set; }
 
         private readonly Random rand;
+        private int[] bestSolution; //najlepsze rozwiazanie
         private int[][] x; //i-ty wiersz zawiera tablice z permutacja dla i-tej mrowki
         private float[][] pheromones; //ilosc feromonow na poszczegolnych sciezkach
         private int minimum = 0;
@@ -47,6 +48,11 @@ namespace AntColonyOptimization
                     if (j!=i)
                         pheromones[i][j] = _t0;
                 }
+            }
+            bestSolution = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                bestSolution[i] = i;
             }
             //Console.WriteLine(n);
             for (int i = 0; i < _ants; i++)
@@ -91,7 +97,7 @@ namespace AntColonyOptimization
             List<int> list = new List<int>();
             for (int i=0; i<n; i++)
             {
-                list.Add(x[minimum][i]);
+                list.Add(bestSolution[i]);
             }
             return list;
         }
@@ -100,7 +106,7 @@ namespace AntColonyOptimization
         {
             if (!HasFinished)
                 throw new Exception("still counting...");
-            return Cost(x[minimum],A,B);
+            return Cost(bestSolution,A,B);
         }
 
         public List<int> GetCosts(int numberOfIterations)
@@ -146,15 +152,23 @@ namespace AntColonyOptimization
             Console.ReadKey();*/
 
             CurrentIteration = 0;
-
+            
             while (CurrentIteration++ < _maxAssigns)
             {
+                Console.WriteLine(CurrentIteration + ": " + Cost(x[minimum], A, B) + " " + Cost(bestSolution,A,B));
                 for (int i = 0; i < _ants; i++)
                 {
                     if (Cost(x[i], A, B) < Cost(x[minimum], A, B))
                     {
                         //Console.WriteLine("test1");
                         minimum = i;
+                        if (Cost(x[minimum], A, B) < Cost(bestSolution, A, B))
+                        {
+                            for (int p = 0; p < n; p++)
+                            {
+                                bestSolution[p] = x[minimum][p];
+                            }
+                        }
                     }
 
                 }
@@ -238,7 +252,6 @@ namespace AntColonyOptimization
                 }
             }
             HasFinished = true;
-            Console.WriteLine(Cost(x[minimum], A, B));
         }
 
         private void updatePheromone(int[] solution)
@@ -289,6 +302,8 @@ namespace AntColonyOptimization
             {
                 for (int j = 0; j < n; j++)
                 {
+                    //Console.WriteLine("#####" + solution[i] + solution[j]);
+                    //Console.ReadKey();
                     sum += A[i, j] * B[solution[i], solution[j]];
                 }
             }
