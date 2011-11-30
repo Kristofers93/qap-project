@@ -7,27 +7,27 @@ namespace AntColonyOptimization
 {
     class AntColony : IAlgorithm
     {
-        private int _ants; //number of ants
-        private int _maxAssigns; //max number of iterations
-        private float _alpha; //emphasis of pheromone
-        private float _beta; //emphasis of heuristic info (distance)
-        private float _rho; //pheromone evaporation parameter
-        private float _q; //pheromone deposit factor
-        private float _q0; //pheromone concentration above which the ants operate greedily
-        private float _t0; //pheromone concentration on start
-        private float _Q;
+        private int _ants; //liczba mrowek
+        private int _maxAssigns; //liczba iteracji
+        private float _alpha; //wspolczynnik do feromonow
+        private float _beta; //wspolczynnik do odleglosci
+        private float _rho; //wspolczynnik parowania feromonow
+        private float _q; //ilosc pozostawianego feromonu
+        private float _q0; //ilosc feromonu powyzej ktorego mrowki zachowuja sie zachlannie
+        private float _t0; //poczatkowa wartosc feromonu
+        private float _Q; // licznik we wspolczynniku odleglosci
 
-        public int[,] A;
-        public int[,] B;
-        public int n;
+        public int[,] A; ///macierz odleglosci
+        public int[,] B; //macierz kosztow
+        public int n; //wymiar macierzy
 
         public int CurrentIteration { get; private set; }
         public bool IsInitialized { get; private set; }
         public bool HasFinished { get; private set; }
 
         private readonly Random rand;
-        private int[][] x;
-        private float[][] pheromones;
+        private int[][] x; //i-ty wiersz zawiera tablice z permutacja dla i-tej mrowki
+        private float[][] pheromones; //ilosc feromonow na poszczegolnych sciezkach
         private int minimum = 0;
         public AntColony(int nr, int iter, float alpha, float beta, float ro, float q, float q0, float t0, float Q)
         {
@@ -48,7 +48,7 @@ namespace AntColonyOptimization
                         pheromones[i][j] = _t0;
                 }
             }
-            Console.WriteLine(n);
+            //Console.WriteLine(n);
             for (int i = 0; i < _ants; i++)
             {
                 x[i] = new int[n];
