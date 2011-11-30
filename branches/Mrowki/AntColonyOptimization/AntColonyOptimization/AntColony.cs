@@ -155,7 +155,9 @@ namespace AntColonyOptimization
             
             while (CurrentIteration++ < _maxAssigns)
             {
+                //aktualizacja dla najlepszej mrowki w iteracji
                 updatePheromone(x[minimum]);
+                //aktualizacja dla najlepszej drogi w ogole
                 //updatePheromone(bestSolution);
                 Console.WriteLine(CurrentIteration + ": " + Cost(x[minimum], A, B) + " " + Cost(bestSolution,A,B));
                 for (int i = 0; i < _ants; i++)
@@ -251,6 +253,8 @@ namespace AntColonyOptimization
                         x[ant][i] = node;
 
                     }
+                    //aktualizacja dla kazdej mrowki
+                    //updatePheromone(x[ant]);
                 }
             }
             HasFinished = true;
@@ -267,7 +271,7 @@ namespace AntColonyOptimization
             }
             for (int i = 0; i < n; i++)
             { //aktualizujemy feromony na najlepszej sciezce
-                pheromones[i][(i + 1) % n] += _q;
+                pheromones[solution[i]][solution[(i + 1) % n]] += _q;
             }
         }
 

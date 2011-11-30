@@ -9,7 +9,7 @@ namespace AntColonyOptimization
     {
         static void Main(string[] args)
         {
-            AntColony colony = new AntColony(130,1000, 1.2F, 1.2F, 0.7F, 1.4F, 122.0F, 1.8F, 1.0F);
+            AntColony colony = new AntColony(100,1000, 0.6F, 4.2F, 0.8F, 3.4F, 22.0F, 1.8F, 1.0F);
             colony.SetTestData(C, D, 26);
             colony.InitializeAlgorithm();            
             colony.runAlgorithm();
@@ -17,7 +17,7 @@ namespace AntColonyOptimization
             Console.ReadKey();
         }
 
-        //26, optimum 5426670, nasz najlepszy 5559145
+        //26, optimum 5426670, nasz najlepszy 5559145 (bez aktualizacji feromonow, z aktualizacja jakies 50tys wiecej)
         static int[,] C ={{53 ,66 ,66 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,53 ,53 ,66 ,53 ,53 ,53 ,53 ,85 ,73 ,73 ,73 ,73 ,53 ,53},
 {66 ,53 ,66 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,53 ,66 ,53 ,53 ,53 ,53 ,73 ,85 ,73 ,73 ,73 ,53 ,53},
 {66 ,66 ,53 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,66 ,53 ,53 ,53 ,53 ,73 ,73 ,85 ,73 ,73 ,53 ,53},
