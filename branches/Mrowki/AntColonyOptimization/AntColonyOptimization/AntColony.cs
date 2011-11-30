@@ -29,24 +29,34 @@ namespace AntColonyOptimization
         private int[][] x;
         private float[][] pheromones;
         private int minimum = 0;
-        public AntColony()
+        public AntColony(int nr, int iter, float alpha, float beta, float ro, float q, float q0, float t0, float Q)
         {
             rand = new Random();
+            _ants = nr; _maxAssigns = iter; _alpha = alpha; _beta = beta; _rho = ro; _q = q; _q0 = q0; _t0 = t0; _Q = Q;
         }
 
         public void InitializeAlgorithm()
         {
             x = new int[_ants][];
             pheromones = new float[n][];
+            for (int i = 0; i < n; i++)
+            {
+                pheromones[i] = new float[n];
+                for (int j = 0; j < n; j++)
+                {
+                    if (j!=i)
+                        pheromones[i][j] = _t0;
+                }
+            }
+            Console.WriteLine(n);
             for (int i = 0; i < _ants; i++)
             {
                 x[i] = new int[n];
-                pheromones[i] = new float[n];
                 for (int j = 0; j < n; j++)
                 {
                     int tmp = rand.Next(n);
                     bool used = true;
-                    pheromones[i][j] = _t0;
+                    
                     while (used)
                     {
                         bool again = false;
@@ -90,7 +100,7 @@ namespace AntColonyOptimization
         {
             if (!HasFinished)
                 throw new Exception("still counting...");
-            return minimum;
+            return Cost(x[minimum],A,B);
         }
 
         public List<int> GetCosts(int numberOfIterations)
@@ -125,6 +135,16 @@ namespace AntColonyOptimization
             if (!IsInitialized)
                 InitializeAlgorithm();
 
+         /*   for (int i = 0; i < _ants; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    Console.Write(x[i][j]);
+                }
+                Console.WriteLine("");
+            }
+            Console.ReadKey();*/
+
             CurrentIteration = 0;
 
             while (CurrentIteration++ < _maxAssigns)
@@ -133,6 +153,7 @@ namespace AntColonyOptimization
                 {
                     if (Cost(x[i], A, B) < Cost(x[minimum], A, B))
                     {
+                        //Console.WriteLine("test1");
                         minimum = i;
                     }
 
@@ -160,6 +181,7 @@ namespace AntColonyOptimization
                         }
                         if (greedy)
                         {//zachowujemy sie zachlannie
+                            //Console.WriteLine("greedy");
                             float attr = 0;
                             for (int k = i; k < n; k++)
                             {
@@ -177,13 +199,16 @@ namespace AntColonyOptimization
                         }
                         else
                         {//zachowujemy sie normalnie
+                           // Console.WriteLine("normal");
                             float choice = (float)rand.NextDouble();
                             float attr = 0;
-                            for (int k = i; k < n; k++)
+                            //Console.WriteLine("alamakota");
+                            for (int k = 1; k < n; k++)
                             {
                                 if (!nodes[k])
                                 {
                                     float tmp = AttractivnesProbability(node, k,nodes);
+                                    //Console.WriteLine("ALA " + tmp);
                                     if (choice < tmp)
                                     {
                                         chosenNode = k;
@@ -191,13 +216,20 @@ namespace AntColonyOptimization
                                     }
                                     else
                                     {
-                                        attr = tmp;
+                                        //Console.WriteLine(k);
+                                        if (tmp > attr)
+                                        {
+                                            attr = tmp;
+                                            chosenNode = k;
+                                        }
                                         choice -= tmp;
                                     }
                                 }
                             }
                         }
                         //aktualizujemy wezly
+                        //Console.WriteLine("chosenNode: " + chosenNode);
+                        //Console.ReadKey();
                         node = chosenNode;
                         nodes[chosenNode] = true;
                         x[ant][i] = node;
@@ -205,6 +237,8 @@ namespace AntColonyOptimization
                     }
                 }
             }
+            HasFinished = true;
+            Console.WriteLine(Cost(x[minimum], A, B));
         }
 
         private void updatePheromone(int[] solution)
@@ -227,22 +261,23 @@ namespace AntColonyOptimization
         private float GreedyAttractivnes(int node1, int node2)
         {
             return (float)Math.Pow((double)pheromones[node1][node2],(double)_alpha)
-                    *(float)Math.Pow((double)_Q/(double)B[node1,node2],(double)_beta);
+                    *(float)Math.Pow((double)_Q/(double)A[node1,node2],(double)_beta);
         }
 
         private float AttractivnesProbability(int node1, int node2,bool[] nodes)
         {
             float numerator = (float)Math.Pow((double)pheromones[node1][node2], (double)_alpha)
-                    * (float)Math.Pow((double)_Q / (double)B[node1, node2], (double)_beta);
+                    * (float)Math.Pow((double)_Q / (double)A[node1, node2], (double)_beta);
             float denominator = 0;
             for (int i = 1; i<n; i++)
             {
                 if (!nodes[i] && i!=node1)
                 {
                     denominator += (float)Math.Pow((double)pheromones[node1][i], (double)_alpha)
-                    * (float)Math.Pow((double)_Q / (double)B[node1, i], (double)_beta);
+                    * (float)Math.Pow((double)_Q / (double)A[node1, i], (double)_beta);
                 }
             }
+            //Console.WriteLine("licnzik " + numerator + " mianownik " + denominator);
             return numerator / denominator;
         }
 
