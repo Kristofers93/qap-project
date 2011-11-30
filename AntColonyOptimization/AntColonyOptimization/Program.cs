@@ -9,7 +9,7 @@ namespace AntColonyOptimization
     {
         static void Main(string[] args)
         {
-            AntColony colony = new AntColony(30, 30, 1.2F, 1.2F, 0.9F, 1.4F, 2.0F, 1.8F, 1.0F);
+            AntColony colony = new AntColony(60,1000, 1.2F, 1.2F, 0.8F, 3.4F, 2.0F, 1.8F, 1.0F);
             colony.SetTestData(A, B, 19);
             colony.InitializeAlgorithm();            
             colony.runAlgorithm();
