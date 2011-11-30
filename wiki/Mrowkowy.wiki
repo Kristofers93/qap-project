@@ -7,24 +7,24 @@ Dla algorytmu mrówkowego, czyli głównie dla Mikołaja, Bartka
 
 = Parametry =
 
-float: 
+        private int _ants; //liczba mrowek
 
-- alfa - współczynnik wpływu feromonów (0,)
+        private int _maxAssigns; //liczba iteracji
 
-- beta - współczynnik wpływu odległości (0,7)
+        private float _alpha; //współczynnik do feromonów (0,n)
 
-- q0 - stężenie feromonów, powyżej którego mrówki działają zachłannie <0,1>
+        private float _beta; //współczynnik do odległości (0,n)
 
-- ro - współczynnik parowania feromonów (0,1)
+        private float _rho; //współczynnik parowania feromonów (0,1)
 
-- Q - licznik we współczynniku odległości (1,100)
+        private float _q; //ilość pozostawianego feromonu (0,n)
 
+        private float _q0; //wartość feromonu powyżej której mrówki zachowują się zachłannie (0,n)
 
-int: 
+        private float _t0; //początkowa wartość feromonu (0,n)
 
-- m - liczba mrówek (0,10000?)
+        private float _Q; - licznik we współczynniku odległości (0,n)
 
-- n - liczba iteracji (0,10000?)
 
 = Uwagi =
 
