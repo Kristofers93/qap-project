@@ -15,7 +15,7 @@ namespace AntColonyOptimization
         private float _q; //pheromone deposit factor
         private float _q0; //pheromone concentration above which the ants operate greedily
         private float _t0; //pheromone concentration on start
-
+        private int n;
 
 
         public List<int> ReturnMinimalResult()
