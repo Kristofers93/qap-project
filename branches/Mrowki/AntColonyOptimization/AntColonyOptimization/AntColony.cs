@@ -155,6 +155,8 @@ namespace AntColonyOptimization
             
             while (CurrentIteration++ < _maxAssigns)
             {
+                updatePheromone(x[minimum]);
+                //updatePheromone(bestSolution);
                 Console.WriteLine(CurrentIteration + ": " + Cost(x[minimum], A, B) + " " + Cost(bestSolution,A,B));
                 for (int i = 0; i < _ants; i++)
                 {
@@ -267,8 +269,6 @@ namespace AntColonyOptimization
             { //aktualizujemy feromony na najlepszej sciezce
                 pheromones[i][(i + 1) % n] += _q;
             }
-
-
         }
 
         private float GreedyAttractivnes(int node1, int node2)
