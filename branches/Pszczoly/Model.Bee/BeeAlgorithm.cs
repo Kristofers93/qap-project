@@ -37,7 +37,7 @@ namespace Model.Bee
         }
 
 
-        public void RunAlgorithm()
+        public void runAlgorithm()
         {
 
             if (data != null)

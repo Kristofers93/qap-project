@@ -43,8 +43,8 @@ namespace Model.Bee
 
             this.totalNumberBees = totalNumberBees;
             this.numberScout = numberScout;
-            this.numberInactive = 0;
-            this.numberActive = this.totalNumberBees - this.numberScout;
+            this.numberInactive = this.totalNumberBees - this.numberScout;
+            this.numberActive = 0;
             this.maxNumberVisits = maxNumberVisits;
             this.maxNumberCycles = maxNumberCycles;
             this.probPersuasion = probPersuasion;
@@ -132,7 +132,7 @@ namespace Model.Bee
             int answer = 0;
             for (int i = 0; i < memoryMatrix.Length; i++)
             {
-                for (int j = i; j < memoryMatrix.Length; i++)
+                for (int j = i; j < memoryMatrix.Length; j++)
                 {
                     answer += this.data.Cost(i, j, memoryMatrix[i], memoryMatrix[j]);
                 }

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Model
 {
-    interface IAlgorithm
+    public interface IAlgorithm
     {
         //lista reprezentujaca najbardziej optymalne rozwiazanie
         List<int> ReturnMinimalResult();
