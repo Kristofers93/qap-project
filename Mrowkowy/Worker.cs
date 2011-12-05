@@ -31,7 +31,7 @@ namespace Mrowkowy
                 
                 if (i % parameters.reportEveryIterations == 0) vm.reportPartialResult(i + 1, cost);
             }
-            vm.reportFinalResult(new IntVector(A.size), cost);
+            vm.reportFinalResult(new IntVector(A.size), cost,"Mroweczki");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,17 +78,21 @@ namespace GUI
 
         public void reportPartialResult(int iteration, int cost)
         {
-            //TODO zapamiętywanie wyników i rysowanie z nich wykresów
+            //TODO zapamiętywanie wyników i rysowanie z nich wykresów 
+
             Progress = 100 * iteration / parameters.iterations;
             Cost = cost;
         }
 
-        public void reportFinalResult(IntVector vector, int cost)
+        public void reportFinalResult(IntVector vector, int cost, String algorithmName)
         {
             //TODO ładne wyświetlanie wyników
             Working = false;
             Vector = vector;
             Cost = cost;
+       
+            //----zapisywanie wynikow do pliku
+            saveResult(vector,algorithmName);
         }
 
         public ResultViewModel(IAlgorithm algorithm)
@@ -122,6 +127,43 @@ namespace GUI
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        private void saveResult(IntVector vector, String algorithmName)
+        {
+            //--------------defaultowa nazwa
+            String result = vector.ToString();
+
+            DateTime CurrTime = DateTime.Now;
+
+            var builderString = new StringBuilder();
+
+            builderString.Append(algorithmName);
+            builderString.Append(CurrTime.Hour);
+            builderString.Append(CurrTime.Minute);
+            builderString.Append(CurrTime.Second);
+
+            String fileName = builderString.ToString();
+            //-----------------------------okno zapisu
+            Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+
+            sfd.DefaultExt = ".rf"; // result  file
+            sfd.FileName = fileName;
+            sfd.Filter = "Result files (.rf)|*.rf";
+
+            // Show save file dialog box
+            Nullable<bool> resultDialog = sfd.ShowDialog();
+
+            // Process save file dialog box results
+            if (resultDialog == true)
+            {
+                // Save document
+                string filename = sfd.FileName;
+
+                StreamWriter sw = new StreamWriter(filename);
+
+                sw.Write(result);
+            }
         }
     }
 }
