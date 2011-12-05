@@ -8,6 +8,6 @@ namespace Structures
     public interface IResultViewModel
     {
         void reportPartialResult(int iteration, int cost);
-        void reportFinalResult(IntVector vector, int cost);
+        void reportFinalResult(IntVector vector, int cost, String algorithmName);
     }
 }
