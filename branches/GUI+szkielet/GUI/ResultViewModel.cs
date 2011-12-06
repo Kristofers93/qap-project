@@ -97,7 +97,7 @@ namespace GUI
 
         public ResultViewModel(IAlgorithm algorithm)
         {
-            algorithm.runAlgorithm();
+            //algorithm.runAlgorithm();
             //TODO odbieranie i wyświetlanie wyników
             
             /*worker = new BackgroundWorker();

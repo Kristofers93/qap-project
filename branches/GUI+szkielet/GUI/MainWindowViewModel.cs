@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows;
 using Microsoft.Win32;
 using Structures;
+using System.ComponentModel;
 
 namespace GUI
 {
@@ -127,14 +128,22 @@ namespace GUI
             if(algorithm==null)
             {
                 System.Windows.MessageBox.Show("Nie załadowano algorytmu");
-                return;
+               // return;
             }
 
-            algorithm.SetTestData(A, B, size);
+            //algorithm.SetTestData(A, B, size);
             //algorithm.SetParameters();
-            new Result(algorithm);
+            Chart sth = new Chart();
+            sth.Show();
+           // sth.ble();
+            //System.Threading.Thread.Sleep(2000);
+            //sth.Form1_add(15,15);
+           // new Result(algorithm).Show();
 
         }
+
+
+
 
         public ICommand LoadDataCommand
         {
