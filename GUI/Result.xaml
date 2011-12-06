@@ -1,7 +1,9 @@
 ﻿<Window x:Class="GUI.Result"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         Title="Wynik" Height="300" Width="300">
+    
     <StackPanel Name="LayoutRoot">
         <ProgressBar Height="20px" Value="{Binding Progress, Mode=OneWay}" Visibility="{Binding WorkingVisibility, Mode=OneWay}" />
         <StackPanel Orientation="Horizontal">
@@ -13,6 +15,7 @@
             <Label Content="Uzyskana permutacja:"/>
             <Label Content="{Binding Vector}"/>
         </StackPanel>
+
     </StackPanel>
 
 
