@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Model;
+using Structures;
 
 namespace GUI
 {
     public partial class Chart : Form
     {
+        private IntVector vector;
+        // Trzeba spowodowac aby w vector byly wyniki z obliczania algorytmu i wtedy mozna 
+        //wolac rysowanie i zapisywanie
+        private String algorithmName;
         public Chart()
         {
             InitializeComponent();
@@ -64,6 +71,48 @@ namespace GUI
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.label1.Text += ", Permutacja: " + finalPermutation;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            saveResult(vector, algorithmName);
+        }
+
+        private void saveResult(IntVector vector, String algorithmName)
+        {
+            //--------------defaultowa nazwa
+            String result = vector.ToString();
+
+            DateTime CurrTime = DateTime.Now;
+
+            var builderString = new StringBuilder();
+
+            builderString.Append(algorithmName);
+            builderString.Append(CurrTime.Hour);
+            builderString.Append(CurrTime.Minute);
+            builderString.Append(CurrTime.Second);
+
+            String fileName = builderString.ToString();
+            //-----------------------------okno zapisu
+            Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+
+            sfd.DefaultExt = ".rf"; // result  file
+            sfd.FileName = fileName;
+            sfd.Filter = "Result files (.rf)|*.rf";
+
+            // Show save file dialog box
+            Nullable<bool> resultDialog = sfd.ShowDialog();
+
+            // Process save file dialog box results
+            if (resultDialog == true)
+            {
+                // Save document
+                string filename = sfd.FileName;
+
+                StreamWriter sw = new StreamWriter(filename);
+
+                sw.Write(result);
+            }
         }
 
     }
