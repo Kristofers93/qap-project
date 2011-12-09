@@ -75,7 +75,7 @@ namespace GUI
                 RaisePropertyChanged("Vector");
             }
         }
-
+        //--------------------funkcje nie uzywane w wersji docelowej do usuniecia--------
         public void reportPartialResult(int iteration, int cost)
         {
             //TODO zapamiętywanie wyników i rysowanie z nich wykresów 
@@ -94,41 +94,7 @@ namespace GUI
             //----zapisywanie wynikow do pliku
             saveResult(vector,algorithmName);
         }
-
-        public ResultViewModel(IAlgorithm algorithm)
-        {
-            //algorithm.runAlgorithm();
-            //TODO odbieranie i wyświetlanie wyników
-            
-            /*worker = new BackgroundWorker();
-            this.parameters = parameters;
-            if (parameters.GetType().Equals(typeof(Mrowkowy.Parameters)))
-            {
-                Mrowkowy.Worker mWorker = new Mrowkowy.Worker(this, parameters, A, B);
-                worker.DoWork += mWorker.DoWork;
-            }
-            else if (parameters.GetType().Equals(typeof(Pszczeli.Parameters)))
-            {
-                Pszczeli.Worker pWorker = new Pszczeli.Worker(this, parameters, A, B);
-                worker.DoWork += pWorker.DoWork;
-            }
-            else if (parameters.GetType().Equals(typeof(Swietlikowy.Parameters)))
-            {
-                Swietlikowy.Worker sWorker = new Swietlikowy.Worker(this, parameters, A, B);
-                worker.DoWork += sWorker.DoWork;
-            }
-            worker.RunWorkerAsync();
-            Working = true;*/
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void RaisePropertyChanged(string propName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
-
+        //------ ! funkcja saveResult zrealizowana w module Chart.cs !
         private void saveResult(IntVector vector, String algorithmName)
         {
             //--------------defaultowa nazwa
@@ -165,5 +131,42 @@ namespace GUI
                 sw.Write(result);
             }
         }
+        //---------------------------koniec funkcji nie uzywanych
+        //---zakomentowana czesc raczej do wyrzucenia
+        public ResultViewModel(IAlgorithm algorithm)
+        {
+            //algorithm.runAlgorithm();
+            //TODO odbieranie i wyświetlanie wyników
+            
+            /*worker = new BackgroundWorker();
+            this.parameters = parameters;
+            if (parameters.GetType().Equals(typeof(Mrowkowy.Parameters)))
+            {
+                Mrowkowy.Worker mWorker = new Mrowkowy.Worker(this, parameters, A, B);
+                worker.DoWork += mWorker.DoWork;
+            }
+            else if (parameters.GetType().Equals(typeof(Pszczeli.Parameters)))
+            {
+                Pszczeli.Worker pWorker = new Pszczeli.Worker(this, parameters, A, B);
+                worker.DoWork += pWorker.DoWork;
+            }
+            else if (parameters.GetType().Equals(typeof(Swietlikowy.Parameters)))
+            {
+                Swietlikowy.Worker sWorker = new Swietlikowy.Worker(this, parameters, A, B);
+                worker.DoWork += sWorker.DoWork;
+            }
+            worker.RunWorkerAsync();
+            Working = true;*/
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void RaisePropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        
     }
 }
