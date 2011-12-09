@@ -29,14 +29,14 @@ namespace GUI
         {
             //typ wykresu
             chart1.Series["Series1"].ChartType = SeriesChartType.Line;
-
+            //blok testowy
             //testowo wrzucone randomowe wartosci, trzeba bedzie przekazac dane fcji rysujacej
             Random random = new Random();
             for (int pointIndex = 0; pointIndex < 10; pointIndex++)
             {
                 chart1.Series["Series1"].Points.AddXY(pointIndex, random.Next(45, 95));
             } 
-
+            //----koniec bloku testowego
             BackgroundWorker bw = new BackgroundWorker(); 
             bw.WorkerReportsProgress = true;
             
