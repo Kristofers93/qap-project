@@ -18,6 +18,16 @@ namespace Model.Bee
         List<int> minimalResult;
         List<int> costs;
 
+        public BeeAlgorithm()
+        {
+            this.totalNumberBees = 1000;
+            this.numberScout = 200;
+            this.maxNumberVisits = 50;
+            this.maxNumberCycles = 1000;
+            this.probPersuasion = 0.9F;
+            this.probMistake = 0.01F;
+        }
+
         public BeeAlgorithm(int totalNumberBees, int numberScout, int maxNumberVisits, int maxNumberCycles,
             double probPersuasion, double probMistake)
         {
