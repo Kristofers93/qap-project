@@ -1,31 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Win32;
 using Model;
-using Structures;
-using System.ComponentModel;
+using Mrowkowy;
 
 namespace GUI
 {
-    class MainWindowViewModel
+    internal class MainWindowViewModel
     {
-
-        private Mrowkowy.Parameters mrowkowyParameters = new Mrowkowy.Parameters();
-        private Pszczeli.Parameters pszczeliParameters = new Pszczeli.Parameters();
-        private Swietlikowy.Parameters swietlikowyParameters = new Swietlikowy.Parameters();
-
         private int[,] A;
         private int[,] B;
-        int size = 0;
+        private Parameters mrowkowyParameters = new Parameters();
+        private Pszczeli.Parameters pszczeliParameters = new Pszczeli.Parameters();
+        private int size;
+        private Swietlikowy.Parameters swietlikowyParameters = new Swietlikowy.Parameters();
 
         public int SelectedTab { get; set; }
 
-        public Mrowkowy.Parameters MrowkowyParameters
+        public Parameters MrowkowyParameters
         {
             get { return mrowkowyParameters; }
             set { mrowkowyParameters = value; }
@@ -43,25 +37,36 @@ namespace GUI
             set { swietlikowyParameters = value; }
         }
 
+
+        public ICommand LoadDataCommand
+        {
+            get { return new RelayCommand(LoadData); }
+        }
+
+        public ICommand RunCommand
+        {
+            get { return new RelayCommand(Run); }
+        }
+
         public void LoadData()
         {
             // Configure open file dialog box
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            var dlg = new OpenFileDialog();
             //dlg.FileName = "Dane testowe"; // Default file name
             dlg.DefaultExt = ".dat"; // Default file extension
             dlg.Filter = "Dane wejściowe|*.dat"; // Filter files by extension
 
             // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
 
             // Process open file dialog box results
             if (result == true)
             {
                 // Open document
                 string filename = dlg.FileName;
-                
+
                 // create reader & open file
-                StreamReader tr = new StreamReader(filename);
+                var tr = new StreamReader(filename);
 
                 // read a line of text
                 A = null;
@@ -74,8 +79,9 @@ namespace GUI
                     foreach (string s in line)
                     {
                         int a;
-                        if(Int32.TryParse(s, out a)){
-                             if (A == null)
+                        if (Int32.TryParse(s, out a))
+                        {
+                            if (A == null)
                             {
                                 A = new int[a,a];
                                 B = new int[a,a];
@@ -98,33 +104,29 @@ namespace GUI
                                     }
                                 }
                             }
-
                         }
-
                     }
                 }
                 // close the stream
                 tr.Close();
-                
             }
-
-           
         }
 
         public void Run()
         {
-            if(A==null)
+            if (A == null)
             {
-                System.Windows.MessageBox.Show("Załaduj najpierw dane");
+                MessageBox.Show("Załaduj najpierw dane");
                 return;
             }
-            Model.IAlgorithm algorithm = null; //TODO
-             switch (SelectedTab)
+            IAlgorithm algorithm = null; //TODO
+            switch (SelectedTab)
             {
                 case 0:
-                    var p = mrowkowyParameters;
-                     algorithm = new Mrowkowy.AntColony(p.insects,p.iterations,p.alpha,p.beta,p.rho,p.q,p.q0,p.t0,p.Q);
-                    System.Windows.MessageBox.Show("Wykres zawiera przykładowe dane z powodu braku implementacji przekazywania częściowych danych w algorytmie!");
+                    Parameters p = mrowkowyParameters;
+                    algorithm = new AntColony(p.insects, p.iterations, p.alpha, p.beta, p.rho, p.q, p.q0, p.t0, p.Q);
+                    MessageBox.Show(
+                        "Wykres zawiera przykładowe dane z powodu braku implementacji przekazywania częściowych danych w algorytmie!");
                     break;
                 case 1:
                     //algorithm = new Pszczeli();
@@ -132,32 +134,17 @@ namespace GUI
                 case 2:
                     //algorithm = new Swietlikowy();
                     break;
-            }          
-            if(algorithm==null)
+            }
+            if (algorithm == null)
             {
-                System.Windows.MessageBox.Show("Nie załadowano algorytmu. Integratorze, do dzieła!");
+                MessageBox.Show("Nie załadowano algorytmu. Integratorze, do dzieła!");
                 return;
             }
 
-            algorithm.SetTestData((int[,])A.Clone(), (int[,])B.Clone(), size);
+            algorithm.SetTestData((int[,]) A.Clone(), (int[,]) B.Clone(), size);
             //algorithm.SetParameters();
-            Chart sth = new Chart(algorithm);
+            var sth = new Chart(algorithm);
             sth.Show();
-
         }
-
-
-
-
-        public ICommand LoadDataCommand
-        {
-            get { return new RelayCommand(LoadData); }
-        }
-
-        public ICommand RunCommand
-        {
-            get { return new RelayCommand(Run); }
-        }
-
     }
 }
