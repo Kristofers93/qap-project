@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Input;
 using System.Windows;
 using Microsoft.Win32;
+using Model;
 using Structures;
 using System.ComponentModel;
 
@@ -112,11 +113,18 @@ namespace GUI
 
         public void Run()
         {
+            if(A==null)
+            {
+                System.Windows.MessageBox.Show("Załaduj najpierw dane");
+                return;
+            }
             Model.IAlgorithm algorithm = null; //TODO
              switch (SelectedTab)
             {
                 case 0:
-                    //algorithm = new Mrowkowy();
+                    var p = mrowkowyParameters;
+                     algorithm = new Mrowkowy.AntColony(p.insects,p.iterations,p.alpha,p.beta,p.rho,p.q,p.q0,p.t0,p.Q);
+                    System.Windows.MessageBox.Show("Wykres zawiera przykładowe dane z powodu braku implementacji przekazywania częściowych danych w algorytmie!");
                     break;
                 case 1:
                     //algorithm = new Pszczeli();
@@ -127,18 +135,14 @@ namespace GUI
             }          
             if(algorithm==null)
             {
-                System.Windows.MessageBox.Show("Nie załadowano algorytmu");
-               // return;
+                System.Windows.MessageBox.Show("Nie załadowano algorytmu. Integratorze, do dzieła!");
+                return;
             }
 
-            //algorithm.SetTestData(A, B, size);
+            algorithm.SetTestData((int[,])A.Clone(), (int[,])B.Clone(), size);
             //algorithm.SetParameters();
-            Chart sth = new Chart();
+            Chart sth = new Chart(algorithm);
             sth.Show();
-           // sth.ble();
-            //System.Threading.Thread.Sleep(2000);
-            //sth.Form1_add(15,15);
-           // new Result(algorithm).Show();
 
         }
 

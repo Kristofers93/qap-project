@@ -10,13 +10,27 @@ namespace Mrowkowy
         public int insects { get; set; }
         public int iterations { get; set; }
         public int reportEveryIterations { get; set; }
-        //TODO Dopisać parametry charakterystyczne dla algorytmu
+        public float alpha { get; set; }
+        public float beta { get; set; }
+        public float rho { get; set; }
+        public float q { get; set; }
+        public float q0 { get; set; }
+        public float t0 { get; set; }
+        public float Q { get; set; }
+        
 
         public Parameters(){
             //Tu można zmieniać i dopisać domyślne parametry dla danego algorytmu
-            insects = 1000;
+            insects = 100;
             iterations = 1000;
             reportEveryIterations = 10;
+            alpha = 0.6F;
+            beta = 4.2F;
+            rho = 0.8F;
+            q = 3.4F;
+            q0 = 22.0F;
+            t0 = 1.8F;
+            Q = 1.0F;
         }
 
         public Parameters Clone(){
