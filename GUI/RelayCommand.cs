@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace GUI
 {
     public class RelayCommand : ICommand
     {
-        Action _action;
+        private readonly Action _action;
 
         public RelayCommand(Action execute)
         {
             _action = execute;
         }
+
+        #region ICommand Members
 
         public bool CanExecute(object parameter)
         {
@@ -26,5 +25,7 @@ namespace GUI
         {
             _action();
         }
+
+        #endregion
     }
 }
