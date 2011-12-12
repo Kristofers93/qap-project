@@ -10,9 +10,11 @@ namespace Pszczeli
         public int insects { get; set; }
         public int iterations { get; set; }
         public int reportEveryIterations { get; set; }
-        public int sites { get; set; }
-        public int beesRecruitedForBestSites { get; set; }
-        //TODO Dopisać pozostałe parametry charakterystyczne dla algorytmu
+        public int m { get; set; }
+        public int e { get; set; }
+        public int nep { get; set; }
+        public int nsp { get; set; }
+        public float ngh { get; set; }
 
         public Parameters()
         {
@@ -20,8 +22,6 @@ namespace Pszczeli
             insects = 1000;
             iterations = 1000;
             reportEveryIterations = 10;
-            sites = 100;
-            beesRecruitedForBestSites = 500;
         }
 
         public Parameters Clone()

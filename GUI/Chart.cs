@@ -15,15 +15,17 @@ namespace GUI
 {
     public partial class Chart : Form
     {
-        private IntVector vector;
+        private IAlgorithm algorithm;
         // Trzeba spowodowac aby w vector byly wyniki z obliczania algorytmu i wtedy mozna 
         //wolac rysowanie i zapisywanie
         private String algorithmName;
-        public Chart()
+        public Chart(Model.IAlgorithm algorithm)
         {
+            this.algorithm = algorithm;
             InitializeComponent();
         }
 
+        private BackgroundWorker bw;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -37,9 +39,10 @@ namespace GUI
                 chart1.Series["Series1"].Points.AddXY(pointIndex, random.Next(45, 95));
             } 
             //----koniec bloku testowego
-            BackgroundWorker bw = new BackgroundWorker(); 
+            bw = new BackgroundWorker(); 
             bw.WorkerReportsProgress = true;
-            
+            bw.WorkerSupportsCancellation = true;
+
             bw.DoWork += new DoWorkEventHandler(bw_DoWork); 
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
@@ -48,40 +51,69 @@ namespace GUI
    
             
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bw.CancelAsync();
+        }
+
         string finalPermutation;
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            for (int i = 1; (i <= 10); i++)
+             algorithm.runAlgorithm();
+
+            for (int i = 1; (i <= 10); i++) //TODO Pętla w której będą odbierane cząstkowe wyniki
             {
 
-                // Perform a time consuming operation and report progress.
-                System.Threading.Thread.Sleep(500);
+                // TODO Tu będzie oczekiwanie na pojawienie się kolejnych danych cząstkowych
+               
+                if ((worker.CancellationPending == true))
+                {
+                    e.Cancel = true;
+                    return;
+                }else
+                {
+                    // TODO Tu będzie przykazywanie danych cząstkowych do rysowania wykresu
 
-                worker.ReportProgress((i));
+                    worker.ReportProgress(algorithm.GetMinimalCost());
+                }
+               
 
             }
-            finalPermutation = "1, 2, 3";
+            finalPermutation = string.Join(", " , algorithm.ReturnMinimalResult());
         }
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.chart1.Series["Series1"].Points.AddXY(e.ProgressPercentage, 15);
-            this.label1.Text = "Najniższy uzyskany koszt: " + e.ProgressPercentage.ToString();
+            try
+            {
+                chart1.Series["Series1"].Points.AddXY(15, e.ProgressPercentage);
+                label1.Text = "Najniższy uzyskany koszt: " + e.ProgressPercentage.ToString();
+            }catch (Exception)
+            {
+                
+            }
         }
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.label1.Text += ", Permutacja: " + finalPermutation;
+            try
+            {
+                label1.Text += ", permutacja: " + finalPermutation;
+            }catch (Exception)
+            {
+                
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            saveResult(vector, algorithmName);
+            saveResult(algorithmName);
         }
 
-        private void saveResult(IntVector vector, String algorithmName)
+        private void saveResult(String algorithmName)
         {
             //--------------defaultowa nazwa
-            String result = vector.ToString();
+            String result = finalPermutation;
 
             DateTime CurrTime = DateTime.Now;
 

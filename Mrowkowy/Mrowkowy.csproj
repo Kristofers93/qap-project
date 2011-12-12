@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AntColony.cs" />
     <Compile Include="Worker.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{B8A36A77-2D7B-48D0-B121-DD04DE23C322}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Structures\Structures.csproj">
       <Project>{18AD82B9-A30A-4647-89D0-01FBEB3843E3}</Project>
       <Name>Structures</Name>

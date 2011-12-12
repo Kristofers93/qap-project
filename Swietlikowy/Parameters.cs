@@ -10,7 +10,9 @@ namespace Swietlikowy
         public int insects { get; set; }
         public int iterations { get; set; }
         public int reportEveryIterations { get; set; }
-        //TODO Dopisać parametry charakterystyczne dla algorytmu
+        public float beta0 { get; set; }
+        public float gamma { get; set; }
+        public float alfa { get; set; }
 
         public Parameters()
         {
