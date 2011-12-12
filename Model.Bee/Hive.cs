@@ -132,7 +132,7 @@ namespace Model.Bee
             int answer = 0;
             for (int i = 0; i < memoryMatrix.Length; i++)
             {
-                for (int j = i; j < memoryMatrix.Length; j++)
+                for (int j = 0; j < memoryMatrix.Length; j++)
                 {
                     answer += this.data.Cost(i, j, memoryMatrix[i], memoryMatrix[j]);
                 }

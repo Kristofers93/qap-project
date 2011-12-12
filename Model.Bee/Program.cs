@@ -9,8 +9,8 @@ namespace Model.Bee
     {
         static void Main(string[] args)
         {
-            BeeAlgorithm algorithm = new BeeAlgorithm(10000, 100, 50, 1000, 0.9F, 0.01F);
-            algorithm.SetTestData(A, B, 19);
+            BeeAlgorithm algorithm = new BeeAlgorithm();
+            algorithm.SetTestData(C, D, 26);
             algorithm.runAlgorithm();
             Console.WriteLine(algorithm.GetMinimalCost());
             List<int> x = algorithm.ReturnMinimalResult();
@@ -20,7 +20,7 @@ namespace Model.Bee
             Console.ReadKey();
         }
 
-        //26, optimum 5426670
+        //26, optimum 5'426'670, pszczoly 5'518'745
         static int[,] C ={{53 ,66 ,66 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,53 ,53 ,66 ,53 ,53 ,53 ,53 ,85 ,73 ,73 ,73 ,73 ,53 ,53},
 {66 ,53 ,66 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,53 ,66 ,53 ,53 ,53 ,53 ,73 ,85 ,73 ,73 ,73 ,53 ,53},
 {66 ,66 ,53 ,66 ,66 ,53 ,53 ,53 ,53 ,53 ,53 ,53 ,73 ,53 ,66 ,53 ,53 ,53 ,53 ,73 ,73 ,85 ,73 ,73 ,53 ,53},
@@ -76,7 +76,7 @@ namespace Model.Bee
 {37,1,1,2,400,6,10,2,177,1,5,15,3,8,19,6,0,1,7,78,529,4,101,0,1,2}};
 
 
-        //19
+        //19, optimum 17'212'548, pszczoly 21'566'488
         static int[,] A = {{ 0,  12,  36  ,28  ,52  ,44 ,110, 126  ,94,  63 ,130, 102,  65,  98 ,132, 132 ,126, 120 ,126},
                     { 12,   0,  24 , 75  ,82  ,75 ,108  ,70 ,124  ,86  ,93 ,106  ,58 ,124 ,161 ,161  ,70  ,64,  70},
                      {36,  24,   0,  47,  71 , 47, 110,  73, 126 , 71 , 95, 110 , 46 ,127 ,163 ,163 , 73 , 67,  73},
