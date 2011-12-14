@@ -26,6 +26,7 @@ namespace AntColonyOptimization
         public bool HasFinished { get; private set; }
 
         private readonly Random _rand;
+        private int[] _costs; //tablica kosztów po wszystkich iteracjach
         private int[] _bestSolution; //najlepsze rozwiazanie
         private int[][] _x; //i-ty wiersz zawiera tablice z permutacja dla i-tej mrowki
         private float[][] _pheromones; //ilosc feromonow na poszczegolnych sciezkach
@@ -57,6 +58,13 @@ namespace AntColonyOptimization
                         _pheromones[i][j] = _t0;
                 }
             }
+
+            _costs = new int[_maxAssigns];
+            for (int i = 0; i < _maxAssigns; i++ )
+            {
+                _costs[i] = 0;
+            }
+
             _bestSolution = new int[N];
             for (int i = 0; i < N; i++)
             {
@@ -74,7 +82,7 @@ namespace AntColonyOptimization
                     while (used)
                     {
                         bool again = false;
-
+                        
                         for (int k = 0; k < j; k++)
                         {
                             if (_x[i][k] == tmp)
@@ -119,7 +127,11 @@ namespace AntColonyOptimization
 
         public List<int> GetCosts(int numberOfIterations)
         {
-            throw new NotImplementedException();
+            if (!HasFinished)
+                throw new Exception("still counting...");
+            var result = new int[numberOfIterations];
+            this._costs.CopyTo(result, numberOfIterations);
+            return new List<int>(result);
         }
 
         public List<string> GetParameterNames()
@@ -174,7 +186,6 @@ namespace AntColonyOptimization
                 {
                     if (Cost(_x[i], A, B) < Cost(_x[_minimum], A, B))
                     {
-                        //Console.WriteLine("test1");
                         _minimum = i;
                         if (Cost(_x[_minimum], A, B) < Cost(_bestSolution, A, B))
                         {
@@ -184,11 +195,11 @@ namespace AntColonyOptimization
                             }
                         }
                     }
-
                 }
+
                 for (int ant = 0; ant < _ants; ant++)
                 {
-                    bool[] nodes = new bool[N];
+                    var nodes = new bool[N];
                     for (int i = 0; i < N; i++)
                         nodes[i] = false;
 
@@ -266,7 +277,9 @@ namespace AntColonyOptimization
                     //aktualizacja dla kazdej mrowki
                     
                     UpdatePheromone(_x[ant]);
+                    
                 }
+                _costs[CurrentIteration] = Cost(_x[_minimum], A, B);
             }
             HasFinished = true;
         }
