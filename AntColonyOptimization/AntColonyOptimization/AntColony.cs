@@ -130,7 +130,10 @@ namespace AntColonyOptimization
             if (!HasFinished)
                 throw new Exception("still counting...");
             var result = new int[numberOfIterations];
-            this._costs.CopyTo(result, numberOfIterations);
+            for (int i = 0; i < numberOfIterations; i++)
+            {
+                result[i] = _costs[i];
+            }
             return new List<int>(result);
         }
 
@@ -181,6 +184,7 @@ namespace AntColonyOptimization
                 UpdatePheromone(_x[_minimum]);
                 //aktualizacja dla najlepszej drogi w ogole
                 UpdatePheromone(_bestSolution);
+                _costs[CurrentIteration - 1] = Cost(_x[_minimum], A, B);
                 Console.WriteLine(CurrentIteration + ": " + Cost(_x[_minimum], A, B) + " " + Cost(_bestSolution,A,B));
                 for (int i = 0; i < _ants; i++)
                 {
@@ -279,7 +283,7 @@ namespace AntColonyOptimization
                     UpdatePheromone(_x[ant]);
                     
                 }
-                _costs[CurrentIteration] = Cost(_x[_minimum], A, B);
+                
             }
             HasFinished = true;
         }
