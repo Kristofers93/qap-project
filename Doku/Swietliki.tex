@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage[none]{hyphenat}
+%\usepackage[T1]{fontenc}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{program}
+%\usepackage{enumerate}
+%\usepackage{verbatim}
+
+\begin{document}
+
+%\chapter{Algorytm Świetlika (FA)} TODO chapter?
+
+\section{Algorytm świetlika w przestrzeni ciągłej}
+\subsection{Oznaczenia} 
+\begin{description}
+ \item[$m$] -- liczba świetlików
+ \item[$I_0$] -- jasność w źródle (maksymalna)
+ \item[$\gamma$] -- współczynnik absorpcji światła przez otoczenie
+ \item[$\alpha$] -- wielkość losowego kroku
+ 
+ % TODO świetliki reprezentują rozwiązania
+ \end{description}
+ \subsection{Atrakcyjność świetlików}
+ Każdy świetlik ma określoną \emph{atrakcyjność} zależną od możliwej jasności maksymalnej $I_0$, współczynnika absporpcji światła $\gamma$ i odległości, w jakiej znajduje się obeserwator $d$ i przedstawiona jest wzorem
+ \begin{equation}
+ A(I_0,\gamma, d) = I_0 e^{-\gamma d^2}
+ \end{equation}
+ Dla praktycznych zastosowań używa się przybliżonego wzoru:
+ \begin{equation}
+  A(I_0,\gamma, d) = \frac{I_0}{1+\gamma d^2}
+ \end{equation}
+ \subsection{Poruszanie się świetlików}
+ W każdym z ruchów świetlik chce zbliżyć się do najjaśniejszego(najatrakcyjniejszego) świetlika w jego otoczeniu. Najjaśniejszy świetlik porusza się losowo. \\
+ Ruch składa się z dwóch etapów:
+ \begin{description}
+  \item[krok $\alpha$] -- \emph{eksploracja} -- losowe błądzenie
+  \item[krok $\beta$] -- \emph{eksploatacja} -- zbliżenie się do najlepszego rozwiązania
+ \end{description}
+ Przyciąganie świetlika $x^i$ przez $x^k$:
+\begin{equation}
+ x^i := x^i + A\left(I_0, \gamma, dist\left(x^i, x^k\right)\right)\left(x^i - x^k \right) + \alpha \left(Rand() - \frac{1}{2}\right) 
+\end{equation}
+oznaczenie: $d_{ik} = dist(x^i, x^k)$
+\begin{equation}
+ = x^i + I_0 e^{- \gamma d_{ik}^2 } \left(x^k - x^i\right) + \alpha \left( Rand() - \frac{1}{2}\right) = 
+\end{equation}
+przyjmując oznaczenie: $\beta = I_0 e^{- \gamma d_{ik}^2 }$ otrzymujemy formę ostateczną:
+\begin{equation} \label{eq:wzor_odl}
+ x^i := (1 - \beta)x^i + \beta x^k + \alpha \left( Rand() - \frac{1}{2} \right)
+\end{equation}
+gdzie:
+\begin{description}
+ \item[$\gamma \in \langle 0, +\infty) $ -- współczynnik absorpcji] -- zdefiniowany przez użytkownika
+ \item[$I_0 \in \langle 0, +\infty)$ -- jasność świetlika w źródle] -- może być zdefiniowany przez użytkownika, zwykle przyjmuje się wartość $I_0 = 1$
+ \item[$\alpha$ -- maksymalny losowy krok] -- zdefiniowany przez użytkownika
+ \item[Rand()] -- zwraca wektor $\in [0,1)^n$ o rozkładzie równomiernym
+\end{description}
+
+ \section{Dyskretyzacja FA}
+  W dyskretnym przypadku QAP przestrzenią poszukiwań staje się przestrzeń możliwych permutacji zbioru n-elementowego $\mathbb{S}_n$.
+  
+  \subsection{Inicjalizacja}
+  Na początku świetliki rozrzucone są rownomiernie po przestrzeni poszukiwań. Losujemy więc $m$ permutacji (świetlików)  $\in \mathbb{S}_n$.
+  \subsection{Funkcja odległości}
+  W tym miejscu należało zdefiniować metrykę odległości (różnicy) pomiędzy dwiema permutacjami. Wybraliśmy odległość Hamminga (szczególny przypadek tzw odległości redakcyjnej). W tej metryce odległość dwóch pomiędzy dwiema permutacjami równa jest liczbie pozycji, na których one się różnią. \\
+  Wzór \eqref{eq:wzor_odl} można podzielić i obliczać dwuetapowo:
+  
+\begin{tabular}{p{30pt} p{200pt} p{1000pt}}
+(1) &  $x_i := x_i + \beta(x_k - x_i) $ & ($\beta$-step) \\
+(2) & $x_i := x_i + \alpha \left( Rand() - \frac{1}{2} \right)$  & ($\alpha$-step) \\
+\end{tabular}
+
+\subsubsection{\textsc{$\beta$-step}}
+Zadaniem kroku $\beta$ w każdej $i$-tej iteracji jest przybliżenie danego świetlika do najlepszego rozwiązania.
+Dla rozwiązania ciągłego (powyższy wzór $(1)$) wsp. $\beta$ określał jak bardzo świetlik $i$ przybliży się do świetlika $k$ (jaką część odległości między nimi pokona w danym kroku). Dla problemu dyskretnego przybliżanie się rozwiązania $i$ do rozwiązania $k$ równoważne jest z zamienianiem pozycji permutacji występującyh w $i$ na te, które występują w $k$. \\
+Oznaczmy te permutacje (rozwiązania, świetliki) odpowiednio przez $\pi_i$ i $\pi_k$, a permutację powstałą w wyniku kroku $\beta$ jako $\pi_{i\rightarrow k}$. $\beta$ oznaczać będzie prawdopodobieństwo przybliżenia się do $\pi_k$. Po znormalizowaniu:
+\begin{equation}
+\beta = \frac{1}{1 + \gamma d_{\pi_1 \pi_2}}
+\end{equation}
+
+%\emph{emph} \strong{strong} \texttt{texttt} \textbf{textbf} \textsl{textsl}
+\centering{\large{\textsc{konstrukcja $\pi_{i\rightarrow k}$}} \normalsize{:} }
+\flushleft
+Inicjalizacja :
+ elementy wspólne $\pi_i$ i $\pi_k$ zostają na swoich miejscach, 
+ na pozycjach gdzie się różnią pozostają luki. 
+\begin{tabbing}
+\textbf{foreach} \= losowa\_luka \textbf{in} $\pi_{i\rightarrow k}$:\\ 
+\> \textbf{if} \= $Rand() \leqslant \beta$: \\
+\> \> \textbf{if} \= element z $\pi_2$ już $\in \pi_{i\rightarrow k}$: \\
+\> \> \> \textsc{skip} \\
+\> \> \textbf{else}:\= \\
+\> \> \>  użyj tego elementu z $\pi_2$ \\
+\> \textbf{else}: \= \\
+\> \> użyj elementu z $\pi_1$
+
+\end{tabbing}
+Pozostałe luki wypełnia się losowo pozostałymi wartościami.
+
+\subsubsection{\textsc{$\alpha$-step}}
+
+\begin{description}
+ \item $\alpha$ -- maksymalny dozwolony krok permutacji $\in \{ 1, \dots , n \}$
+\end{description}
+Losowy krok (eksploracja) w przypadku dyskretnym polega na wybraniu $\alpha \cdot Rand()$ elementów i przetasowanie ich.
+
+\subsection{Wybór rozwiązania}
+Po zmianie położenia każdego z świetlików wybierany jest rozwiązanie z najoptymalnijeszą funkcją celu i rozpoczynana jest kolejna iteracja.
+
+
+
+ 
+\end{document}
