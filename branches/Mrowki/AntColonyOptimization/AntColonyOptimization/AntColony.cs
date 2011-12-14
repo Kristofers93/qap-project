@@ -19,48 +19,56 @@ namespace AntColonyOptimization
 
         public int[,] A; ///macierz odleglosci
         public int[,] B; //macierz kosztow
-        public int n; //wymiar macierzy
+        public int N; //wymiar macierzy
 
         public int CurrentIteration { get; private set; }
         public bool IsInitialized { get; private set; }
         public bool HasFinished { get; private set; }
 
-        private readonly Random rand;
-        private int[] bestSolution; //najlepsze rozwiazanie
-        private int[][] x; //i-ty wiersz zawiera tablice z permutacja dla i-tej mrowki
-        private float[][] pheromones; //ilosc feromonow na poszczegolnych sciezkach
-        private int minimum = 0;
+        private readonly Random _rand;
+        private int[] _bestSolution; //najlepsze rozwiazanie
+        private int[][] _x; //i-ty wiersz zawiera tablice z permutacja dla i-tej mrowki
+        private float[][] _pheromones; //ilosc feromonow na poszczegolnych sciezkach
+        private int _minimum = 0;
         public AntColony(int nr, int iter, float alpha, float beta, float ro, float q, float q0, float t0, float Q)
         {
-            rand = new Random();
-            _ants = nr; _maxAssigns = iter; _alpha = alpha; _beta = beta; _rho = ro; _q = q; _q0 = q0; _t0 = t0; _Q = Q;
+            _rand = new Random();
+            _ants = nr; 
+            _maxAssigns = iter; 
+            _alpha = alpha; 
+            _beta = beta; 
+            _rho = ro; 
+            _q = q; 
+            _q0 = q0; 
+            _t0 = t0; 
+            _Q = Q;
         }
 
         public void InitializeAlgorithm()
         {
-            x = new int[_ants][];
-            pheromones = new float[n][];
-            for (int i = 0; i < n; i++)
+            _x = new int[_ants][];
+            _pheromones = new float[N][];
+            for (int i = 0; i < N; i++)
             {
-                pheromones[i] = new float[n];
-                for (int j = 0; j < n; j++)
+                _pheromones[i] = new float[N];
+                for (int j = 0; j < N; j++)
                 {
                     if (j!=i)
-                        pheromones[i][j] = _t0;
+                        _pheromones[i][j] = _t0;
                 }
             }
-            bestSolution = new int[n];
-            for (int i = 0; i < n; i++)
+            _bestSolution = new int[N];
+            for (int i = 0; i < N; i++)
             {
-                bestSolution[i] = i;
+                _bestSolution[i] = i;
             }
             //Console.WriteLine(n);
             for (int i = 0; i < _ants; i++)
             {
-                x[i] = new int[n];
-                for (int j = 0; j < n; j++)
+                _x[i] = new int[N];
+                for (int j = 0; j < N; j++)
                 {
-                    int tmp = rand.Next(n);
+                    int tmp = _rand.Next(N);
                     bool used = true;
                     
                     while (used)
@@ -69,21 +77,21 @@ namespace AntColonyOptimization
 
                         for (int k = 0; k < j; k++)
                         {
-                            if (x[i][k] == tmp)
+                            if (_x[i][k] == tmp)
                             {
                                 again = true;
                             }
                         }
                         if (again)
                         {
-                            tmp = rand.Next(n);
+                            tmp = _rand.Next(N);
                         }
                         else
                         {
                             used = false;
                         }
                     }
-                    x[i][j] = tmp;
+                    _x[i][j] = tmp;
                 }
             }
             IsInitialized = true;
@@ -94,10 +102,10 @@ namespace AntColonyOptimization
         {
             if (!HasFinished)
                 throw new Exception("still counting...");
-            List<int> list = new List<int>();
-            for (int i=0; i<n; i++)
+            var list = new List<int>();
+            for (int i=0; i<N; i++)
             {
-                list.Add(bestSolution[i]);
+                list.Add(_bestSolution[i]);
             }
             return list;
         }
@@ -106,7 +114,7 @@ namespace AntColonyOptimization
         {
             if (!HasFinished)
                 throw new Exception("still counting...");
-            return Cost(bestSolution,A,B);
+            return Cost(_bestSolution,A,B);
         }
 
         public List<int> GetCosts(int numberOfIterations)
@@ -133,15 +141,16 @@ namespace AntColonyOptimization
         {
             this.A = A;
             this.B = B;
-            this.n = numberOfInstances;
+            this.N = numberOfInstances;
         }
 
         public void runAlgorithm()
         {
             if (!IsInitialized)
                 InitializeAlgorithm();
-
-         /*   for (int i = 0; i < _ants; i++)
+            
+            /*
+            for (int i = 0; i < _ants; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
@@ -149,28 +158,29 @@ namespace AntColonyOptimization
                 }
                 Console.WriteLine("");
             }
-            Console.ReadKey();*/
+            Console.ReadKey();
+             */
 
             CurrentIteration = 0;
             
             while (CurrentIteration++ < _maxAssigns)
             {
                 //aktualizacja dla najlepszej mrowki w iteracji
-                updatePheromone(x[minimum]);
+                UpdatePheromone(_x[_minimum]);
                 //aktualizacja dla najlepszej drogi w ogole
-                //updatePheromone(bestSolution);
-                Console.WriteLine(CurrentIteration + ": " + Cost(x[minimum], A, B) + " " + Cost(bestSolution,A,B));
+                UpdatePheromone(_bestSolution);
+                Console.WriteLine(CurrentIteration + ": " + Cost(_x[_minimum], A, B) + " " + Cost(_bestSolution,A,B));
                 for (int i = 0; i < _ants; i++)
                 {
-                    if (Cost(x[i], A, B) < Cost(x[minimum], A, B))
+                    if (Cost(_x[i], A, B) < Cost(_x[_minimum], A, B))
                     {
                         //Console.WriteLine("test1");
-                        minimum = i;
-                        if (Cost(x[minimum], A, B) < Cost(bestSolution, A, B))
+                        _minimum = i;
+                        if (Cost(_x[_minimum], A, B) < Cost(_bestSolution, A, B))
                         {
-                            for (int p = 0; p < n; p++)
+                            for (int p = 0; p < N; p++)
                             {
-                                bestSolution[p] = x[minimum][p];
+                                _bestSolution[p] = _x[_minimum][p];
                             }
                         }
                     }
@@ -178,20 +188,20 @@ namespace AntColonyOptimization
                 }
                 for (int ant = 0; ant < _ants; ant++)
                 {
-                    bool[] nodes = new bool[n];
-                    for (int i = 0; i < n; i++)
+                    bool[] nodes = new bool[N];
+                    for (int i = 0; i < N; i++)
                         nodes[i] = false;
 
                     int node = 0; //numer od ktorego zaczynamy przejscie mrowka
                     nodes[node] = true;
-                    x[ant][0] = node;
-                    for (int i = 1; i < n; i++)
+                    _x[ant][0] = node;
+                    for (int i = 1; i < N; i++)
                     {//wybieramy kolejne wezly sciezki
                         bool greedy = true;
-                        int chosenNode=-1;
-                        for (int j = 0; j < n; j++)
+                        int chosenNode = 0;
+                        for (int j = 0; j < N; j++)
                         { //sprawdzamy czy dla kazdego przejscia z danego wezla mamy zachowywac sie zachlannie czy normalnie
-                            if (pheromones[node][j] < _q0)
+                            if (_pheromones[node][j] < _q0)
                             {
                                 greedy = false;
                                 break;
@@ -201,7 +211,7 @@ namespace AntColonyOptimization
                         {//zachowujemy sie zachlannie
                             //Console.WriteLine("greedy");
                             float attr = 0;
-                            for (int k = i; k < n; k++)
+                            for (int k = i; k < N; k++)
                             {
                                 if (!nodes[k])
                                 {
@@ -217,11 +227,11 @@ namespace AntColonyOptimization
                         }
                         else
                         {//zachowujemy sie normalnie
-                           // Console.WriteLine("normal");
-                            float choice = (float)rand.NextDouble();
+                            //Console.WriteLine("normal");
+                            float choice = (float)_rand.NextDouble();
                             float attr = 0;
                             //Console.WriteLine("alamakota");
-                            for (int k = 1; k < n; k++)
+                            for (int k = 1; k < N; k++)
                             {
                                 if (!nodes[k])
                                 {
@@ -250,47 +260,48 @@ namespace AntColonyOptimization
                         //Console.ReadKey();
                         node = chosenNode;
                         nodes[chosenNode] = true;
-                        x[ant][i] = node;
+                        _x[ant][i] = node;
 
                     }
                     //aktualizacja dla kazdej mrowki
-                    //updatePheromone(x[ant]);
+                    
+                    UpdatePheromone(_x[ant]);
                 }
             }
             HasFinished = true;
         }
 
-        private void updatePheromone(int[] solution)
+        private void UpdatePheromone(int[] solution)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < N; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < N; j++)
                 {   //feromony paruja
-                    pheromones[i][j] *= _rho;
+                    _pheromones[i][j] *= _rho;
                 }
             }
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < N; i++)
             { //aktualizujemy feromony na najlepszej sciezce
-                pheromones[solution[i]][solution[(i + 1) % n]] += _q;
+                _pheromones[solution[i]][solution[(i + 1) % N]] += _q;
             }
         }
 
         private float GreedyAttractivnes(int node1, int node2)
         {
-            return (float)Math.Pow((double)pheromones[node1][node2],(double)_alpha)
+            return (float)Math.Pow((double)_pheromones[node1][node2],(double)_alpha)
                     *(float)Math.Pow((double)_Q/(double)A[node1,node2],(double)_beta);
         }
 
-        private float AttractivnesProbability(int node1, int node2,bool[] nodes)
+        private float AttractivnesProbability(int node1, int node2, bool[] nodes)
         {
-            float numerator = (float)Math.Pow((double)pheromones[node1][node2], (double)_alpha)
+            float numerator = (float)Math.Pow((double)_pheromones[node1][node2], (double)_alpha)
                     * (float)Math.Pow((double)_Q / (double)A[node1, node2], (double)_beta);
             float denominator = 0;
-            for (int i = 1; i<n; i++)
+            for (int i = 1; i<N; i++)
             {
                 if (!nodes[i] && i!=node1)
                 {
-                    denominator += (float)Math.Pow((double)pheromones[node1][i], (double)_alpha)
+                    denominator += (float)Math.Pow((double)_pheromones[node1][i], (double)_alpha)
                     * (float)Math.Pow((double)_Q / (double)A[node1, i], (double)_beta);
                 }
             }
@@ -301,10 +312,9 @@ namespace AntColonyOptimization
         private int Cost(int[] solution, int[,] A, int[,] B)
         {//wyliczanie kosztu rozwiazania
             int sum = 0;
-
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < N; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < N; j++)
                 {
                     //Console.WriteLine("#####" + solution[i] + solution[j]);
                     //Console.ReadKey();
