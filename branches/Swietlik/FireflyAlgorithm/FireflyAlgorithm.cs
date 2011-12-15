@@ -25,6 +25,8 @@ namespace Model
         private readonly Random rand;    //Sys.Security.Cryptography!
         private int[][] x;
         private int minimum = 0;
+        private int bestEver;
+
         public FireflyAlgorithm()
         {
             rand = new Random();
@@ -85,7 +87,7 @@ namespace Model
         {
             if(!HasFinished)
                 throw new Exception("I'm not finished yet!");
-            return minimum;
+            return Reward(x[bestEver],A,B);
         }
 
         //koszt dla danej iteracji
@@ -132,9 +134,15 @@ namespace Model
                 // aktualnie najlepsze rozwiazanie
                 for (int i = 0; i < m; i++)
                 {
+                    //
+                    //Console.WriteLine("reward x["+i+"]: " + Reward(x[i],A,B));
+                    //
                     if (Reward(x[i], A, B) < Reward(x[minimum], A, B))
                     {
                         minimum = i;
+                        //
+                        //Console.WriteLine("reward x["+i+"]: " + Reward(x[i],A,B));
+                        //
                     }
                 }
 
@@ -155,7 +163,13 @@ namespace Model
                 }
 
                 // aktualnie najlepsze rozw porusza sie losowo
-
+                int rewbest = Reward(x[bestEver], A, B);
+                int rewmin = Reward(x[minimum], A, B);
+                if(rewmin<rewbest)
+                {
+                    //Console.WriteLine("bestever: "+rewbest);
+                    bestEver = minimum;
+                }
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);
                 if(CurrentIteration % 100 == 0) Console.Write(".");
             }
@@ -171,10 +185,10 @@ namespace Model
         {
             Console.WriteLine("Minimalny koszt:\n " + GetMinimalCost());
 
-            Console.WriteLine("Najlepsze rozwiazanie:\n (");
+            Console.Write("Najlepsze rozwiazanie:\n (");
             for (int i = 0; i < n; i++)
             {
-                Console.Write(x[minimum][i] + ", ");
+                Console.Write(x[bestEver][i] + ", ");
             }
             Console.WriteLine(")");
         }
