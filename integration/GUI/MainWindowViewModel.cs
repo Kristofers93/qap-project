@@ -13,6 +13,7 @@ namespace GUI
         private int[,] B;
         private int size;
 
+        //do przechowywania danych o algorytmie świetlikowym
         private FireflyAlgorithm fireflyAlgorithm = new FireflyAlgorithm()
         {
             M = 10,
@@ -52,7 +53,12 @@ namespace GUI
             get { return _antColony; }
             set { _antColony = value; }
         }
-
+        int _iterationGap=10;
+        public int iterationGap
+        {
+            get { return _iterationGap; }
+            set { _iterationGap = value; }
+        }
         public int SelectedTab { get; set; }
 
         
@@ -139,12 +145,16 @@ namespace GUI
                 MessageBox.Show("Załaduj najpierw dane");
                 return;
             }
-            IAlgorithm algorithm = null; //TODO
+            IAlgorithm algorithm = null;
+            string name="Algorytm";
+            int iterations=0;
             switch (SelectedTab)
             {
                 case 0:
                     algorithm = new AntColony(_antColony.Ants,_antColony.MaxAssigns,_antColony.Alpha,_antColony.Beta,_antColony.Rho,_antColony.q,_antColony.Q0,_antColony.T0,_antColony.Q);
-                
+                    name = "Algorytm mrówkowy";
+                    iterations=_antColony.MaxAssigns;
+                    
                     break;
                 case 1:
                     algorithm = new BeesAlgorithm()
@@ -157,6 +167,8 @@ namespace GUI
                         Nb=beeAlgorithm.Nb,
                         Nep=beeAlgorithm.Nep
                     };
+                    name = "Algorytm pszczeli";
+                    iterations= BeeAlgorithm.Imax;
                     break;
                 case 2:
                     algorithm=new FireflyAlgorithm()
@@ -166,6 +178,8 @@ namespace GUI
                             Gamma = FireflyAlgorithm.Gamma,
                             Alfa = FireflyAlgorithm.Alfa
                         };
+                    name = "Algorytm świetlikowy";
+                    iterations=FireflyAlgorithm.Imax;
                     break;
             }
 
@@ -176,7 +190,7 @@ namespace GUI
             }
 
             algorithm.SetTestData((int[,]) A.Clone(), (int[,]) B.Clone(), size);
-            var sth = new Chart(algorithm);
+            var sth = new Chart(algorithm,iterations,name,this.iterationGap);
             sth.Show();
         }
     }

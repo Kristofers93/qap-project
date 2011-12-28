@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Model;
+using System.ComponentModel;
 namespace Model
 {
     public class FireflyAlgorithm : IAlgorithm
@@ -16,6 +17,8 @@ namespace Model
         private int[,] A;        /*nxn, przeplyw miedzy osrodkami*/
         private int[,] B;        /*nxn, odleglosc miedzy osrodkami*/
         private int n;           /*liczba osrodkow*/
+        private BackgroundWorker _backgroundWorker;
+        
 
         //gettery settery
         public int Imax { get { return imax; } set { imax = value; } }
@@ -29,6 +32,8 @@ namespace Model
         private readonly Random rand;    //Sys.Security.Cryptography!
         private int[][] x;
         private int minimum = 0;
+        private int bestEver = 0;
+
         public FireflyAlgorithm()
         {
             rand = new Random();
@@ -81,7 +86,7 @@ namespace Model
         {
             if(!HasFinished)
                 throw new Exception("I'm not finished yet!");
-            return x[minimum].ToList<int>();
+            return x[bestEver].ToList<int>();
         }
 
         //najmniejszy zwracany koszt
@@ -89,7 +94,7 @@ namespace Model
         {
             if(!HasFinished)
                 throw new Exception("I'm not finished yet!");
-            return Reward(x[minimum],A,B);
+            return Reward(x[bestEver], A, B);
         }
 
         //koszt dla danej iteracji
@@ -138,6 +143,7 @@ namespace Model
                     }
                 }
 
+                
                 // zblizanie swietlikow do mocniej swiecacych
                 for (int i = 0; i < m; i++)
                 {
@@ -154,126 +160,36 @@ namespace Model
                     }
                 }
 
+                int rewbest= Reward(x[bestEver], A, B);
+                int rewmin = Reward(x[minimum], A, B);
+
+	            if(rewmin<rewbest)
+                {
+	                   
+                    bestEver = minimum;
+                }
+
+                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Reward(x[bestEver], A, B));
                 // aktualnie najlepsze rozw porusza sie losowo
 
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);
                 if(CurrentIteration % 100 == 0) Console.Write(".");
+                
             }
             HasFinished = true;
-            //Console.WriteLine();
-            //PlujNaKonsole();
            
 
         }
 
-        /*
-        private void PlujNaKonsole()
-        {
-            Console.WriteLine("Minimalny koszt:\n " + GetMinimalCost());
-
-            Console.WriteLine("Najlepsze rozwiazanie:\n (");
-            for (int i = 0; i < n; i++)
-            {
-                Console.Write(x[minimum][i] + ", ");
-            }
-            Console.WriteLine(")");
-        }
-        */
-        // imax - liczba iteracji, m - liczba swietlikow, bet0 - max atrakcynosc, gamma - wspolcz. absorpcji, 
-        // alfa - random step weight
-        // void - wypiszmy wynik na ekran
-        /*
-        private void TmpRun(int imax, int m, double beta0, double gamma, int alfa, int[,] A, int[,] B)
-        {
-            int n = A.GetLength(0); //wymiar macierzy, dlugosc permutacji
-            Random rand = new Random();
-            int currentIter = 0;
-            int min = 0;
-            int[][] x = new int[m][]; //
-
-
-            // losowanie wejsciowych permutacji
-            for (int i = 0; i < m; i++)
-            {
-                x[i] = new int[n];
-                for (int j = 0; j < n; j++)
-                {
-                    int tmp;
-                    bool used = true;
-                    
-                    tmp = rand.Next(n);
-                    while (used)
-                    {
-                        bool again = false;
-                        for (int k = 0; k < j; k++)
-                        {
-                            if (x[i][k] == tmp)
-                            {
-                                again = true;
-                            }
-                        }
-                        if (again)
-                        {
-                            tmp = rand.Next(n);
-                        }
-                        else
-                        {
-                            used = false;
-                        }
-                    }
-                    x[i][j] = tmp;
-                }
-            }
-
-            while (currentIter++ < imax)
-            {
-                // aktualnie najlepsze rozwiazanie
-                for (int i = 0; i < m; i++)
-                {
-                    if (Reward(x[i], A, B) < Reward(x[min], A, B))
-                    {
-                        min = i;
-                    }
-                }
-
-                // zblizanie swietlikow do mocniej swiecacych
-                for (int i = 0; i < m; i++)
-                {
-                    for (int j = 0; j < m; j++)
-                    {
-                        if (Reward(x[i], A, B) < Reward(x[j], A, B))
-                        {
-                            int dist = Distance(x[i], x[j]);
-                            double beta = Attractiveness(gamma, dist);
-                            //zbliz swietlika xi do xj
-                            x[i] = Approach(beta, x[i], x[j]);
-                            x[i] = PerformRandomFlight(x[i], alfa);
-                        }
-                    }
-                }
-
-                // aktualnie najlepsze rozw porusza sie losowo
-
-                x[min] = PerformRandomFlight(x[min], alfa);
-            }
-
-            Console.WriteLine("Najlepsze rozwiazanie:\n (");
-            for (int i = 0; i < n; i++)
-            {
-                Console.Write(x[min][i] + ", ");
-            }
-            Console.WriteLine(")");
-        }
-        */
+     
         private int[] PerformRandomFlight(int[] xi, double alfa)
         {
-            //int n = xi.Length;
+            
             int[] result = new int[n];
             xi.CopyTo(result, 0);
             
             if(alfa < 0 || alfa >= n ) throw new Exception("Zla alfa");
             var rand = new Random();
-//            var indexesLeft = Enumerable.Range(0, n).ToList(); // {0, 1, ..., n-1}
             
             int nrOfElementsToShuffle = (int) (alfa*rand.NextDouble());
 
@@ -398,6 +314,11 @@ namespace Model
             }
 
             return sum;
+        }
+
+        public void addBackgroundWorker(BackgroundWorker worker)
+        {
+            this._backgroundWorker = worker;
         }
     }
 }

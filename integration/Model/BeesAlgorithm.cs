@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.ComponentModel;
 namespace Model
 {
     public class BeesAlgorithm : IAlgorithm
@@ -15,6 +15,7 @@ namespace Model
         private int nsp;                    // liczba pszczol dla wybranych miesc
         private double ngh;                 // rozmiar sasiedztwa
         private int imax;                   // maksymalna liczba iteracji
+        private BackgroundWorker _backgroundWorker;
 
         public int Nb {
             get { return nb; }
@@ -134,7 +135,9 @@ namespace Model
                     SaveBestResult();
                 }
 
-                //Console.WriteLine(minimalCost);
+                //jeśli został przypisany background worker to notyfikuje go
+                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(minimalCost);
+                
             }
 
             finished = true;
@@ -220,6 +223,11 @@ namespace Model
             selsit = m - e;
             Init();
             ReleaseTheBees();
+        }
+
+        public void addBackgroundWorker(BackgroundWorker worker)
+        {
+            this._backgroundWorker = worker;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.ComponentModel;
 namespace Model
 {
     public class AntColony : IAlgorithm
@@ -16,11 +16,14 @@ namespace Model
         private float _q0; //ilosc feromonu powyzej ktorego mrowki zachowuja sie zachlannie
         private float _t0; //poczatkowa wartosc feromonu
         private float _Q; // licznik we wspolczynniku odleglosci
+        private BackgroundWorker _backgroundWorker;
 
         public int Ants {
             set { _ants = value; }
             get { return _ants; }
         }
+
+        
 
         public int MaxAssigns
         {
@@ -186,8 +189,8 @@ namespace Model
 
         public int GetCurrentCost()
         {
-            
-            return 0;
+
+            return Cost(_x[_minimum], A, B);
         }
 
      
@@ -321,9 +324,9 @@ namespace Model
                     //aktualizacja dla kazdej mrowki
                     
                     UpdatePheromone(_x[ant]);
-                    
+                   
                 }
-                
+                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Cost(_x[_minimum], A, B));
             }
             HasFinished = true;
         }
@@ -390,6 +393,10 @@ namespace Model
         public Dictionary<string, double> GetParameterValues()
         {
             throw new NotImplementedException();
+        }
+
+        public void addBackgroundWorker(BackgroundWorker worker) {
+            this._backgroundWorker = worker;
         }
     }
 }
