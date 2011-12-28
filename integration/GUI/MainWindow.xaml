@@ -6,7 +6,7 @@
     <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom" Command="{Binding RunCommand, Mode=OneWay}" />
     <StackPanel>
       <TabControl SelectedIndex="{Binding SelectedTab}">
-        <TabItem Header="Mrówkowy">
+        <TabItem Header="Algorytm mrówkowy">
           <StackPanel Name="antColony">
             <Grid>
               <Grid.ColumnDefinitions>
@@ -50,7 +50,7 @@
             </Grid>
           </StackPanel>
         </TabItem>
-        <TabItem Header="Pszczeli">
+        <TabItem Header="Algorytm pszczeli">
           <StackPanel Name="BeeAlgorithm">
             <Grid>
               <Grid.ColumnDefinitions>
@@ -89,7 +89,7 @@
             </Grid>
           </StackPanel>
         </TabItem>
-        <TabItem Header="Świetlikowy">
+        <TabItem Header="Algorytm świetlikowy">
                     <StackPanel Name="FireflyAlgorithm">
             <Grid>
               <Grid.ColumnDefinitions>
@@ -118,7 +118,41 @@
             </Grid>
           </StackPanel>
         </TabItem>
-      </TabControl>
+                <TabItem Header="Algorytm pszczeli SBC">
+                    <StackPanel Name="BeeAlgorithmSBC">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Content="Liczba iteracji" Grid.Column="0" Grid.Row="0" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding BeeAlgorithmSBC.MaxNumberCycles}" />
+                            <Label Content="Liczba pszczół" Grid.Column="0" Grid.Row="1" />
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding BeeAlgorithmSBC.TotalNumberBees }" />
+                            <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2" />
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding iterationGap}" />
+                            <Label Content="Liczba zwiadowców" Grid.Column="0" Grid.Row="4" />
+                            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding BeeAlgorithmSBC.NumberScout}" />
+                            <Label Content="Ilość wizyt" Grid.Column="0" Grid.Row="5" />
+                            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding BeeAlgorithmSBC.MaxNumberVisits}" />
+                            <Label Content="Prawdopodobieństwo przekonania nieaktywnej pszczoły" Grid.Column="0" Grid.Row="6" />
+                            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding BeeAlgorithmSBC.ProbPersuasion}" />
+                            <Label Content="Prawdopodobieństwo pomyłki" Grid.Column="0" Grid.Row="7" />
+                            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding BeeAlgorithmSBC.ProbMistake}" />
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
     </StackPanel>
   </DockPanel>
 </Window>
