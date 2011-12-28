@@ -31,7 +31,7 @@
                             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding antColony.Ants}" />
               <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2" />
               <TextBox Grid.Column="1" Grid.Row="2"
-                       Text="{Binding MrowkowyParameters.reportEveryIterations}" />
+                       Text="{Binding iterationGap}" />
               <Label Content="Współczynnik do feromonów" Grid.Column="0" Grid.Row="3" />
                             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding antColony.Alpha}" />
               <Label Content="Współczynnik do odległości" Grid.Column="0" Grid.Row="4" />
@@ -73,7 +73,7 @@
                             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding BeeAlgorithm.Nb}" />
               <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2" />
               <TextBox Grid.Column="1" Grid.Row="2"
-                       Text="{Binding PszczeliParameters.reportEveryIterations}" />
+                       Text="{Binding iterationGap}" />
               <Label Content="Liczba wybranych miejsc" Grid.Column="0" Grid.Row="3" />
                             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding BeeAlgorithm.M}" />
               <Label Content="Liczba lepszych miejsc" Grid.Column="0" Grid.Row="4" />
@@ -110,7 +110,7 @@
                             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding FireflyAlgorithm.M}" />
               <Label Content="Raportowanie co ile iteracji" Grid.Column="0" Grid.Row="2" />
               <TextBox Grid.Column="1" Grid.Row="2"
-                       Text="{Binding SwietlikowyParameters.reportEveryIterations}" />
+                       Text="{Binding iterationGap}" />
               <Label Content="Współczynnik absorbcji" Grid.Column="0" Grid.Row="4" />
                             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding FireflyAlgorithm.Gamma}" />
               <Label Content="Waga losowego ruchu świetlika" Grid.Column="0" Grid.Row="5" />

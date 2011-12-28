@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.ComponentModel;
 namespace Model
 {
     public interface IAlgorithm
     {
+        void addBackgroundWorker(BackgroundWorker worker);
+
         //lista reprezentujaca najbardziej optymalne rozwiazanie
         List<int> ReturnMinimalResult();
 

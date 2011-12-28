@@ -15,13 +15,18 @@ namespace GUI
         // Trzeba spowodowac aby w vector byly wyniki z obliczania algorytmu i wtedy mozna 
         //wolac rysowanie i zapisywanie
         private String algorithmName = "Algorytm";
-
+        private int iterationNumber;
         private BackgroundWorker bw;
         private string finalPermutation;
+        private int curIter=0;
+        private int iterGap;
 
-        public Chart(IAlgorithm algorithm)
+        public Chart(IAlgorithm algorithm, int iterations, String name,int itergap)
         {
             this.algorithm = algorithm;
+            this.algorithmName = name;
+            this.iterationNumber = iterations;
+            this.iterGap = itergap;
             InitializeComponent();
         }
 
@@ -29,14 +34,7 @@ namespace GUI
         {
             //typ wykresu
             chart1.Series["Series1"].ChartType = SeriesChartType.Line;
-            //blok testowy
-            //testowo wrzucone randomowe wartosci, trzeba bedzie przekazac dane fcji rysujacej
-            var random = new Random();
-            for (int pointIndex = 0; pointIndex < 10; pointIndex++)
-            {
-                chart1.Series["Series1"].Points.AddXY(pointIndex, random.Next(45, 95));
-            }
-            //----koniec bloku testowego
+            
             bw = new BackgroundWorker();
             bw.WorkerReportsProgress = true;
             bw.WorkerSupportsCancellation = true;
@@ -45,6 +43,8 @@ namespace GUI
             bw.ProgressChanged += bw_ProgressChanged;
             bw.RunWorkerCompleted += bw_RunWorkerCompleted;
 
+            //dodajemy do algorytmu by mógł notyfikować o zmianach
+            algorithm.addBackgroundWorker(bw);
             bw.RunWorkerAsync();
         }
 
@@ -55,45 +55,42 @@ namespace GUI
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
+            //tu tylko puszczamy algorytm
             var worker = sender as BackgroundWorker;
             algorithm.RunAlgorithm();
-
-            for (int i = 1; (i <= 10); i++) //TODO Pętla w której będą odbierane cząstkowe wyniki
+            if (worker.CancellationPending)
             {
-                // TODO Tu będzie oczekiwanie na pojawienie się kolejnych danych cząstkowych
-
-                if (worker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-                else
-                {
-                    // TODO Tu będzie przykazywanie danych cząstkowych do rysowania wykresu
-
-                    worker.ReportProgress(algorithm.GetMinimalCost());
-                }
+                e.Cancel = true;
+                return;
             }
+            else
+            {
+                worker.ReportProgress(algorithm.GetMinimalCost());
+             }
+          
             finalPermutation = string.Join(", ", algorithm.ReturnMinimalResult());
         }
 
+        //algorytm notyfikuje o minimalnym koszcie po każdej iteracji
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
             {
-                chart1.Series["Series1"].Points.AddXY(15, e.ProgressPercentage);
-                label1.Text = "Najniższy uzyskany koszt: " + e.ProgressPercentage.ToString();
+                chart1.Series["Series1"].Points.AddXY(this.curIter, e.ProgressPercentage);
+                label1.Text = "Aktualny koszt w iteracji: " + this.curIter + " : " + e.ProgressPercentage.ToString();
+                curIter++;
             }
             catch (Exception)
             {
             }
         }
 
+        //po zakończeniu pracy algorytmu
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
-                label1.Text += ", permutacja: " + finalPermutation;
+                label1.Text = "wynik : " + algorithm.GetMinimalCost().ToString() + ", permutacja: " + finalPermutation;
             }
             catch (Exception)
             {
@@ -140,6 +137,11 @@ namespace GUI
 
                 sw.Write(result);
             }
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
