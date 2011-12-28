@@ -33,6 +33,7 @@ namespace Model
         private int[][] x;
         private int minimum = 0;
         private int bestEver = 0;
+        private int[] bestEverSolution;
 
         public FireflyAlgorithm()
         {
@@ -43,6 +44,7 @@ namespace Model
         
         public void InitializeAlgorithm()
         {
+            bestEverSolution = new int[n];
             x = new int[m][];
 
             /*losowanie wejsciowych permutacji*/
@@ -86,7 +88,7 @@ namespace Model
         {
             if(!HasFinished)
                 throw new Exception("I'm not finished yet!");
-            return x[bestEver].ToList<int>();
+            return bestEverSolution.ToList<int>();
         }
 
         //najmniejszy zwracany koszt
@@ -94,7 +96,7 @@ namespace Model
         {
             if(!HasFinished)
                 throw new Exception("I'm not finished yet!");
-            return Reward(x[bestEver], A, B);
+            return bestEver;
         }
 
         //koszt dla danej iteracji
@@ -160,16 +162,20 @@ namespace Model
                     }
                 }
 
-                int rewbest= Reward(x[bestEver], A, B);
                 int rewmin = Reward(x[minimum], A, B);
 
-	            if(rewmin<rewbest)
-                {
-	                   
-                    bestEver = minimum;
+                if (bestEver == 0) {
+                    bestEverSolution = x[minimum]; 
+                    bestEver = rewmin;
                 }
 
-                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Reward(x[bestEver], A, B));
+                if (rewmin < bestEver)
+                {
+                    bestEverSolution = x[minimum];   
+                    bestEver = rewmin;
+                }
+
+                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(bestEver);
                 // aktualnie najlepsze rozw porusza sie losowo
 
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);

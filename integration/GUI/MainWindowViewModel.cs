@@ -53,7 +53,7 @@ namespace GUI
             get { return _antColony; }
             set { _antColony = value; }
         }
-        int _iterationGap=10;
+        int _iterationGap=1;
         public int iterationGap
         {
             get { return _iterationGap; }

@@ -76,7 +76,7 @@ namespace GUI
         {
             try
             {
-                chart1.Series["Series1"].Points.AddXY(this.curIter, e.ProgressPercentage);
+                if((this.curIter % this.iterGap )==0) chart1.Series["Series1"].Points.AddXY(this.curIter, e.ProgressPercentage);
                 label1.Text = "Aktualny koszt w iteracji: " + this.curIter + " : " + e.ProgressPercentage.ToString();
                 curIter++;
             }
@@ -90,6 +90,7 @@ namespace GUI
         {
             try
             {
+                chart1.Series["Series1"].Points.AddXY(this.curIter, algorithm.GetMinimalCost());
                 label1.Text = "wynik : " + algorithm.GetMinimalCost().ToString() + ", permutacja: " + finalPermutation;
             }
             catch (Exception)
