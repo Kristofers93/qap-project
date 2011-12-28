@@ -172,12 +172,8 @@ namespace Model
         {
             if (!HasFinished)
                 throw new Exception("still counting...");
-            var list = new List<int>();
-            for (int i=0; i<N; i++)
-            {
-                list.Add(_bestSolution[i]);
-            }
-            return list;
+            
+            return _bestSolution.ToList<int>();
         }
 
         public int GetMinimalCost()
@@ -326,7 +322,9 @@ namespace Model
                     UpdatePheromone(_x[ant]);
                    
                 }
-                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Cost(_x[_minimum], A, B));
+
+                //raportowanie do wykresu
+                if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Cost(_bestSolution, A, B));
             }
             HasFinished = true;
         }
