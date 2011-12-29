@@ -21,13 +21,14 @@ namespace GUI
         private int curIter=0;
         private int iterGap;
 
-        public Chart(IAlgorithm algorithm, int iterations, String name,int itergap)
+        public Chart(IAlgorithm algorithm, int iterations, String name,int itergap, String filename)
         {
             this.algorithm = algorithm;
             this.algorithmName = name;
             this.iterationNumber = iterations;
             this.iterGap = itergap;
             InitializeComponent();
+            this.Text = "Wykres dla danych pobranych z pliku " + filename;
         }
 
         private void Form1_Load(object sender, EventArgs e)
