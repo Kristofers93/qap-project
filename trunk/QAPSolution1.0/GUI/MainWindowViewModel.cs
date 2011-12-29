@@ -12,6 +12,7 @@ namespace GUI
         private int[,] A;
         private int[,] B;
         private int size;
+        private string filename;
 
         //do przechowywania danych o algorytmie świetlikowym
         private FireflyAlgorithm fireflyAlgorithm = new FireflyAlgorithm()
@@ -100,7 +101,7 @@ namespace GUI
             if (result == true)
             {
                 // Open document
-                string filename = dlg.FileName;
+                filename = dlg.FileName;
 
                 // create reader & open file
                 var tr = new StreamReader(filename);
@@ -210,7 +211,7 @@ namespace GUI
 
             //ładowanie algorytmu
             algorithm.SetTestData((int[,]) A.Clone(), (int[,]) B.Clone(), size);
-            var sth = new Chart(algorithm,iterations,name,this.iterationGap);
+            var sth = new Chart(algorithm,iterations,name,this.iterationGap,filename);
             sth.Show();
         }
     }
