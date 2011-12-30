@@ -4,7 +4,8 @@
     <Button Name="loadData" Content="Wczytaj dane" DockPanel.Dock="Top"
             Command="{Binding LoadDataCommand, Mode=OneWay}" />
     <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom" Command="{Binding RunCommand, Mode=OneWay}" />
-    <StackPanel>
+        <Label DockPanel.Dock="Bottom" Name="Filename" Content="{Binding Filename}" />
+        <StackPanel>
       <TabControl SelectedIndex="{Binding SelectedTab}">
         <TabItem Header="Algorytm mrówkowy">
           <StackPanel Name="antColony">

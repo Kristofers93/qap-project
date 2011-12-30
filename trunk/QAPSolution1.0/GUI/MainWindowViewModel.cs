@@ -4,15 +4,16 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Model;
-
+using System.ComponentModel;
 namespace GUI
 {
-    internal class MainWindowViewModel
+    internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private int[,] A;
         private int[,] B;
         private int size;
-        private string filename;
+        private string filename="brak wczytanego pliku";
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //do przechowywania danych o algorytmie świetlikowym
         private FireflyAlgorithm fireflyAlgorithm = new FireflyAlgorithm()
@@ -71,6 +72,18 @@ namespace GUI
             get { return _iterationGap; }
             set { _iterationGap = value; }
         }
+
+        public string Filename {
+            get { return filename; }
+            set
+            {
+                 if (value != this.filename)
+                {
+                    this.filename = value;
+                    RaisePropertyChanged("Filename");
+                }
+            }
+        }
         public int SelectedTab { get; set; }
 
         
@@ -101,7 +114,7 @@ namespace GUI
             if (result == true)
             {
                 // Open document
-                filename = dlg.FileName;
+                Filename = dlg.FileName;
 
                 // create reader & open file
                 var tr = new StreamReader(filename);
@@ -208,11 +221,18 @@ namespace GUI
                 MessageBox.Show("Nie załadowano algorytmu.");
                 return;
             }
-
+             
             //ładowanie algorytmu
             algorithm.SetTestData((int[,]) A.Clone(), (int[,]) B.Clone(), size);
             var sth = new Chart(algorithm,iterations,name,this.iterationGap,filename);
             sth.Show();
+        }
+
+        public virtual void RaisePropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+
         }
     }
 }
