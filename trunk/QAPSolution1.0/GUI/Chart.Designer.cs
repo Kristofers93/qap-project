@@ -62,6 +62,8 @@ namespace GUI
             // 
             // label1
             // 
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Font = new System.Drawing.Font(this.label1.Font.FontFamily, 10);
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 6);
             this.label1.Name = "label1";
