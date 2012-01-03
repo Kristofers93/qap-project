@@ -34,8 +34,9 @@ namespace GUI
         private void Form1_Load(object sender, EventArgs e)
         {
             //typ wykresu
-            chart1.Series["Series1"].ChartType = SeriesChartType.Line;
-            
+            chart1.Series["Koszt"].ChartType = SeriesChartType.Line;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.IsStartedFromZero=false;
             bw = new BackgroundWorker();
             bw.WorkerReportsProgress = true;
             bw.WorkerSupportsCancellation = true;
@@ -77,7 +78,7 @@ namespace GUI
         {
             try
             {
-                if((this.curIter % this.iterGap )==0) chart1.Series["Series1"].Points.AddXY(this.curIter, e.ProgressPercentage);
+                if ((this.curIter % this.iterGap) == 0) chart1.Series["Koszt"].Points.AddXY(this.curIter, e.ProgressPercentage);
                 label1.Text = "Aktualny koszt w iteracji: " + this.curIter + " : " + e.ProgressPercentage.ToString();
                 curIter++;
             }
@@ -91,7 +92,7 @@ namespace GUI
         {
             try
             {
-                chart1.Series["Series1"].Points.AddXY(this.curIter, algorithm.GetMinimalCost());
+                chart1.Series["Koszt"].Points.AddXY(this.curIter, algorithm.GetMinimalCost());
                 label1.Text = "wynik : " + algorithm.GetMinimalCost().ToString() + ", permutacja: " + finalPermutation;
             }
             catch (Exception)
