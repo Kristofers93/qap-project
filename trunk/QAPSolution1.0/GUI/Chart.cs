@@ -51,7 +51,7 @@ namespace GUI
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bw.CancelAsync();
+            algorithm.CancelAlgorithm();
         }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)

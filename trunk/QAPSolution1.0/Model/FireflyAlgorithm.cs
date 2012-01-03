@@ -176,6 +176,7 @@ namespace Model
                 }
 
                 if (_backgroundWorker != null) _backgroundWorker.ReportProgress(bestEver);
+                if (cancel) break;
                 // aktualnie najlepsze rozw porusza sie losowo
 
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);
@@ -325,6 +326,12 @@ namespace Model
         public void addBackgroundWorker(BackgroundWorker worker)
         {
             this._backgroundWorker = worker;
+        }
+
+        private bool cancel;
+        public void CancelAlgorithm()
+        {
+            cancel = true;
         }
     }
 }

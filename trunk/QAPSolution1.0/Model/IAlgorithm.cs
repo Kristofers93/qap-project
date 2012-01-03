@@ -29,5 +29,8 @@ namespace Model
 
         //uruchomienie obliczen
         void RunAlgorithm();
+
+        //kasowanie obliczeń
+        void CancelAlgorithm();
     }
 }

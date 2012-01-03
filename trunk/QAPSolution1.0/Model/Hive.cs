@@ -161,6 +161,7 @@ namespace Model
                 costs[cycle] = this.bestMeasureOfQuality; // update costs array after each iteration
                 ++cycle;
                 //updating chart - optional
+                if (cancel) break;
                 if (_backgroundWorker != null) _backgroundWorker.ReportProgress(this.bestMeasureOfQuality);
             } // main while processing loop
 
@@ -284,6 +285,11 @@ namespace Model
             return this.bestMemoryMatrix;
         }
 
+        private bool cancel;
+        public void CancelAlgorithm()
+        {
+            cancel = true;
+        }
     } // class Hive
 
 
