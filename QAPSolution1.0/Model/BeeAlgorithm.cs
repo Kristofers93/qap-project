@@ -8,7 +8,7 @@ namespace Model
 {
     public class BeeAlgorithm : IAlgorithm
     {
-
+        Hive hive;
         int totalNumberBees;
         int numberScout;
         int maxNumberVisits; // max number of times bee will visit a given food source without finding a better neighbor
@@ -90,7 +90,7 @@ namespace Model
 
             if (data != null)
             {
-                Hive hive = new Hive(this._backgroundWorker,totalNumberBees, numberScout, maxNumberVisits, maxNumberCycles, probPersuasion, probMistake, data);
+                hive = new Hive(this._backgroundWorker,totalNumberBees, numberScout, maxNumberVisits, maxNumberCycles, probPersuasion, probMistake, data);
                 hive.Solve();
                 this.minimalResult = new List<int>(hive.BestMemoryMatrix);
                 this.costs = new List<int>(hive.Costs);
@@ -140,6 +140,12 @@ namespace Model
 
         public int GetCurrentCost() {
             return 0;
+        }
+
+        
+        public void CancelAlgorithm()
+        {
+            hive.CancelAlgorithm();
         }
     }
 }

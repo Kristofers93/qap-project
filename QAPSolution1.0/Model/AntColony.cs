@@ -324,6 +324,7 @@ namespace Model
                 }
 
                 //raportowanie do wykresu
+                if (cancel) break;
                 if (_backgroundWorker != null) _backgroundWorker.ReportProgress(Cost(_bestSolution, A, B));
             }
             HasFinished = true;
@@ -395,6 +396,12 @@ namespace Model
 
         public void addBackgroundWorker(BackgroundWorker worker) {
             this._backgroundWorker = worker;
+        }
+
+        private bool cancel;
+        public void CancelAlgorithm()
+        {
+            cancel = true;
         }
     }
 }

@@ -137,7 +137,7 @@ namespace Model
 
                 //jeśli został przypisany background worker to notyfikuje go
                 if (_backgroundWorker != null) _backgroundWorker.ReportProgress(minimalCost);
-                
+                if (cancel) break;
             }
 
             finished = true;
@@ -228,6 +228,12 @@ namespace Model
         public void addBackgroundWorker(BackgroundWorker worker)
         {
             this._backgroundWorker = worker;
+        }
+
+        private bool cancel;
+        public void CancelAlgorithm()
+        {
+            cancel = true;
         }
     }
 }
