@@ -38,6 +38,6 @@ namespace AntColonyOptimization
 
 
         //uruchomienie obliczen
-        void runAlgorithm();
+        void RunAlgorithm();
     }
 }
