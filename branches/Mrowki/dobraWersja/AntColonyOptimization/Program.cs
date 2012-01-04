@@ -10,9 +10,9 @@ namespace AntColonyOptimization
         private static void Main(string[] args)
         {
             AntColony colony = new AntColony(100, 100, 0.6F, 4.2F, 0.8F, 3.4F, 22.0F, 1.8F, 1.0F);
-            colony.SetTestData(A, B, 19);
+            colony.SetTestData(C, D, 26);
             colony.InitializeAlgorithm();
-            colony.runAlgorithm();
+            colony.RunAlgorithm();
             Console.WriteLine(colony.GetMinimalCost());
             /*
             List<int> costs = colony.GetCosts(40);
