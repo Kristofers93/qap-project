@@ -91,12 +91,12 @@ Jeżeli wartość feromonów przekroczy pewien ustalony poziom, wówczas mrówki
 W każdej iteracji feromony aktualizowane są według wzoru
 
 \begin{equation}
-    \tau_{ij} (t+1) = (1- \rho) \cdot \tau_{ij}(t) + \sum_{k=1}^{m}\Delta \tau_{ij}^{k}.
+    \tau_{ij} (t+1) = (1- \rho) \cdot \tau_{ij}(t) +\Delta \tau_{ij}.
 	\label{eqn:parowanie}
 \end{equation}
 gdzie
 \begin{description}
-\item $\Delta \tau_{ij}^{k} = \begin{cases} q$, jeśli i jest przypisane do j w mrówce k
+\item $\Delta \tau_{ij} = \begin{cases} q$, jeśli i jest przypisane do j w najlepszej mrówce
 					      $\\0$ w przeciwnym wypadku$\end{cases}$
 \end{description}
 czyli najpierw następuje parowanie (mnożenie całej macierzy przez współczynnik $(1- \rho$)), a następnie dodawanie feromonu na odpowiedniej najlepszej ścieżce, jaką udało się znaleźć w aktualnej iteracji.
@@ -113,11 +113,25 @@ W aplikacji na zakładce "Algorytm mrówkowy" znajdują się następujące możl
 \item Raportowanie co ile iteracji -- co ile iteracji aktualny wynik ma się pojawiać na wykresie
 \item Współczynnik do feromonów -- współczynnik wpływu feromonów na prawdopodobieństwo wyboru drogi - parametr $\alpha$ we wzorze \eqref{eqn:prawd_normal}
 \item Współczynnik do odległości -- współczynnik wpływu odległości na prawdopodobieństwo wyboru drogi - parametr $\beta$ we wzorze \eqref{eqn:prawd_normal}
-\item Współczynnik parowania feromonów -- współczynnik $\rho$ we wzorze \eqref{eqn:parowanie}
+\item Współczynnik parowania feromonów -- współczynnik $\rho$ we wzorze \eqref{eqn:parowanie} z zakresu od 0 (brak parowania) do 1 (całkowite parowanie)
 \item Ilość pozostawionego feromonu -- ilość feromonu, który zostawia po każdej iteracji mrówka, która znalazła najlepsze w danej iteracji rozwiązanie
 \item Ilość feromonu powyżej którego mrówki zachowują się zachłannie -- ilość feromonu na ścieżkach, która powoduje, że mrówki wybierają kolejne węzły z prawdopodobieństwem \eqref{eqn:prawd_zachl}
 \item Początkowa wartość feromonu -- wartość, jaką jest inicjalizowana macierz feromonów $\tau_{ij}$
 \item Licznik we współczynniku odległości -- licznik Q we współczynniku $\eta$
 \end{itemize}
 
-\end{document}
+%\subsection{Testy algorytmu}
+%Poniżej przedstawiono kilka przykładowych wywołań algorytmu dla różnych przykładowych danych testowych.
+%\resizebox{14cm}{!}{
+%      % wstawienie obrazka
+%      \includegraphics{wykres11.png}
+%}
+%\resizebox{14cm}{!}{
+%      % wstawienie obrazka
+%      \includegraphics{wykres12.png}
+%}
+%\resizebox{14cm}{!}{
+%      % wstawienie obrazka
+%      \includegraphics{wykres13.png}
+%}
+%\end{document}
