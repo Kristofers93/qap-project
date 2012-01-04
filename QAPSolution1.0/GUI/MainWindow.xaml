@@ -1,10 +1,14 @@
 ﻿<Window x:Class="GUI.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="qap-project" Height="500" Width="525" Icon="GUIIcon.ico">
   <DockPanel Name="LayoutRoot">
-    <Button Name="loadData" Content="Wczytaj dane" DockPanel.Dock="Top"
+    <Button Name="loadData" Content="Wczytaj dane" DockPanel.Dock="Top" Width="200"
             Command="{Binding LoadDataCommand, Mode=OneWay}" />
-    <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom" Command="{Binding RunCommand, Mode=OneWay}" />
-        <Label DockPanel.Dock="Bottom" Name="Filename" Content="{Binding Filename}" FontSize="15" FontFamily="Arial" FontStyle="Oblique" />
+       
+        <Button Name="run" Content="Uruchom" DockPanel.Dock="Bottom" Command="{Binding RunCommand, Mode=OneWay}" Width="200" />
+        <Button Name="help" Content="Pomoc" DockPanel.Dock="Top" Width="200"
+            Command="{Binding HelpCommand, Mode=OneWay}" />
+        <Label  HorizontalContentAlignment="Center"  Name="Filename" DockPanel.Dock="Bottom" Content="{Binding Filename}" FontSize="15" FontFamily="Arial" FontStyle="Oblique" Height="29" Width="373" />
+
         <StackPanel>
       <TabControl SelectedIndex="{Binding SelectedTab}">
         <TabItem Header="Algorytm mrówkowy">
@@ -154,6 +158,6 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-    </StackPanel>
+            </StackPanel>
   </DockPanel>
 </Window>

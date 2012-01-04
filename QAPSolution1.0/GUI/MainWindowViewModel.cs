@@ -86,7 +86,10 @@ namespace GUI
         }
         public int SelectedTab { get; set; }
 
-        
+        public ICommand HelpCommand
+        {
+            get { return new RelayCommand(help); }
+        }
    
 
         public ICommand LoadDataCommand
@@ -99,6 +102,10 @@ namespace GUI
             get { return new RelayCommand(Run); }
         }
 
+        public void help() {
+            HelpForm form=new HelpForm();
+            form.Show();
+        }
         public void LoadData()
         {
             // Configure open file dialog box
