@@ -136,9 +136,14 @@ namespace GUI
                 // Save document
                 string filename = sfd.FileName;
 
-                var sw = new StreamWriter(filename);
+                //var sw = new StreamWriter(filename);
 
-                sw.Write(result);
+                //sw.Write(result);
+                System.IO.StreamWriter file = new System.IO.StreamWriter(filename);
+                file.WriteLine(result);
+
+                file.Close();
+               
             }
         }
 
