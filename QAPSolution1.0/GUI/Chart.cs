@@ -20,7 +20,8 @@ namespace GUI
         private string finalPermutation;
         private int curIter=0;
         private int iterGap;
-
+        private int min;
+        private int minIter=0;
         public Chart(IAlgorithm algorithm, int iterations, String name,int itergap, String filename)
         {
             this.algorithm = algorithm;
@@ -78,6 +79,8 @@ namespace GUI
         {
             try
             {
+                if (this.curIter == 0) min = e.ProgressPercentage;
+                if (e.ProgressPercentage < min) { min = e.ProgressPercentage; minIter = this.curIter; }
                 if ((this.curIter % this.iterGap) == 0) chart1.Series["Koszt"].Points.AddXY(this.curIter, e.ProgressPercentage);
                 label1.Text = "Aktualny koszt w iteracji: " + this.curIter + " : " + e.ProgressPercentage.ToString();
                 curIter++;
@@ -93,7 +96,7 @@ namespace GUI
             try
             {
                 chart1.Series["Koszt"].Points.AddXY(this.curIter, algorithm.GetMinimalCost());
-                label1.Text = "wynik : " + algorithm.GetMinimalCost().ToString() + ", permutacja: " + finalPermutation;
+                label1.Text = "wynik : " + algorithm.GetMinimalCost().ToString() +", w iteracji " + minIter + ", permutacja: " + finalPermutation;
             }
             catch (Exception)
             {
