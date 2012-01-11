@@ -180,7 +180,7 @@ namespace Model
                 // aktualnie najlepsze rozw porusza sie losowo
 
                 x[minimum] = PerformRandomFlight(x[minimum], alfa);
-                if(CurrentIteration % 100 == 0) Console.Write(".");
+                //if(CurrentIteration % 100 == 0) Console.Write(".");
                 
             }
             HasFinished = true;
