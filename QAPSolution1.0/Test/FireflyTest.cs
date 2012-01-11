@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,8 @@ namespace Test
             int bestAlfa;
             double bestGamma;
             result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
-            Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}",gamma, alfa, result );
+            //Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}",gamma, alfa, result );
+            Console.WriteLine(gamma.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + " " + alfa + " " + result); 
             bestResult = result;
             bestAlfa = alfa;
             bestGamma = gamma;
@@ -57,7 +59,8 @@ namespace Test
                 for (gamma = 0.1; gamma <= 10; gamma += 0.1)
                 {
                     result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
-                    Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}", gamma, alfa, result);
+                    //Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}", gamma, alfa, result);
+                    Console.WriteLine(gamma.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + " " + alfa + " " + result);
                     if (result < bestResult)
                     {
                         bestResult = result;
@@ -67,8 +70,7 @@ namespace Test
                 }
             }
 
-            Console.WriteLine("Koniec testu, best result: {0} dla alfa = {1}, gamma = {2}",
-                bestResult, bestAlfa, bestGamma);
+            //Console.WriteLine("Koniec testu, best result: {0} dla alfa = {1}, gamma = {2}",bestResult, bestAlfa, bestGamma);
         }
 
         public void LoadData(string filename)
