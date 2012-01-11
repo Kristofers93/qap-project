@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\begin{document}
+\section{Algorytm pszczeli}
+Idea algorytmu została oparta na poszukiwaniu pożywienia przez kolonie pszczół. Pszczoły w procesie
+poszukiwania pożywienia wykształciły różne techniki(np. ”taniec pszczół”
+- ang. waggle dance) usprawniające komunikację z pozostałymi pszczołami
+na temat lokalizacji źródeł pożywienia jak i techniki określania najlepszych
+dostępnych miejsc pokarmu.
+
+\subsection{Taniec pszczeli}
+
+Kiedy pszczoła, zwana skautem, lokalizuje bogate źródło pożywienia, pobiera małą próbkę pożywienia i wraca do ula, aby powiadomić pozostałe
+pszczoły o dostępnym dobrej, jakości nektarze. Wykonuje wówczas tak zwany taniec pszczeli. Taniec pszczół przekazuje trzy podstawowe informacje o znalezionym pożywieniu:
+\begin{itemize}
+\item odległość od ula do źródła,
+\item kierunek(kąt pomiędzy słońcem a źródłem pożywienia),
+\item jakość nektaru, która znajduje się w danym źródle\\
+\end{itemize}
+
+\subsection{Podział pszczół}
+\begin{itemize}
+\item Skauci - pszczoły, które nie mają żadnych informacji gdzie może znajdować się pokarm, poszukują jedzenia w sposób losowy.
+\item Rekruci - pszczoły, które obserwują ”taniec pszczół” wykonywany przez inne pszczoły i wybierają odpowiednie źródło pokarmu na podstawie informacji przekazanych przez taniec.\\
+\end{itemize}
+
+
+\subsection{Parametry algorytmu}
+
+
+\begin{itemize}\itemsep2pt
+ \item[$n$] -- liczba pszczół
+ \item[$m$] -- liczba wybranych miejsc spośród \emph{n}  odwiedzonych
+ \item[$e$] -- liczba najlepszych miejsc sprośród \emph{m}  wybranych
+ \item[$nep$] -- liczba pszczół rekrutowanych do \emph{e}  najlepszych miejsc 
+ \item[$nsp$] -- liczba pszczół rekrutowana do \emph{m-e}  gorszych miejsc
+ \item[$ngh$] -- rozmiar sąsiedztwa\\ 
+\end{itemize}
+
+\subsection{Schemat działania algorytmu} 
+\begin{description}
+ \item[Krok 1] Algorytm inicjalizuje całą (\emph{n}) populację losowymi wartościami.
+ \item[Krok 2] Algorytm oblicza funkcję celu.
+ \item[Krok 3] Algorytm oblicza rozmiar sąsiedztwa równy \begin{math}
+                                                       rozmiar\_problemu \cdot ngh
+                                                      \end{math}
+ \item[Krok 4] Tworzenie nowej populacji:
+\begin{description}
+ \item [Krok 4.1] Algorytm wybiera \emph{m} miejsc do szukania w sąsiedztwie
+ \item [Krok 4.3] Pszczoły (\emph{nsp})  zostają rekrutowane do wybranych miejsc (więcej pszczół (\emph{nep}) do \emph{e} najlepszych miejsc)
+ \item [Krok 4.4] Algorytm wybiera dla każdego przesukiwanego miejsca najlepszą pszczołę na podstawie funkcji celu.
+ \item [Krok 4.5] Algorytm przydziela pozostałe (\emph{n-m}) pszczoły do szukania w nowych losowych miejscach.\\
+\end{description}
+
+
+\end{description}
+
+
+\subsection{Wybór rozwiązania}
+W każdej iteracji cała populacja pszczół jest sortowana po wartości funkcji celu. Wybierane jest rozwiązanie z minimalnym kosztem i rozpoczyna się kolejna iteracja.
+
+
+
+
+
+\end{document}
