@@ -12,7 +12,7 @@ namespace Test
             FireflyTest faTest = new FireflyTest();
             faTest.RunTest("D:\\Dokumenty\\Visual Studio\\integration\\QAPSolution1.0\\TestInstances\\bur26a.dat");
 
-            Console.ReadKey();
+            Console.Read();
         }
     }
 }

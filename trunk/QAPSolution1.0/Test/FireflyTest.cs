@@ -21,8 +21,54 @@ namespace Test
             int liczbaIter = 400;
             double gamma = 1.0;
             int alfa = 2;
-            int result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
+            int result;
+            int bestResult;
+            int bestAlfa;
+            double bestGamma;
+            result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
             Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}",gamma, alfa, result );
+            bestResult = result;
+            bestAlfa = alfa;
+            bestGamma = gamma;
+//            for (alfa = 3; alfa <= size; alfa++)
+//            {
+//                result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
+//                Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}", gamma, alfa, result);
+//                if(result < bestResult)
+//                {
+//                    bestResult = result;
+//                    bestAlfa = alfa;
+//                }
+//            }
+//            alfa = bestAlfa;
+//            for (gamma = 0.1; gamma <= 10; gamma+=0.1)
+//            {
+//                result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
+//                Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}", gamma, alfa, result);
+//                if (result < bestResult)
+//                {
+//                    bestResult = result;
+//                    bestGamma = gamma;
+//                }
+//            }
+
+            for (alfa = 2; alfa <= size; alfa++)
+            {
+                for (gamma = 0.1; gamma <= 10; gamma += 0.1)
+                {
+                    result = RunTest(liczbaSw, liczbaIter, gamma, alfa);
+                    Console.WriteLine("gamma: {0}, alfa: {1}, result: {2}", gamma, alfa, result);
+                    if (result < bestResult)
+                    {
+                        bestResult = result;
+                        bestAlfa = alfa;
+                        bestGamma = gamma;
+                    }
+                }
+            }
+
+            Console.WriteLine("Koniec testu, best result: {0} dla alfa = {1}, gamma = {2}",
+                bestResult, bestAlfa, bestGamma);
         }
 
         public void LoadData(string filename)
