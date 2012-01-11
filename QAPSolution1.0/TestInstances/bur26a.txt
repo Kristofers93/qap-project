@@ -1,0 +1,8 @@
+Koniec testu, best result: 5624613 dla alfa = 17, gamma = 1
+Koniec testu, best result: 5616527 dla alfa = 3, gamma = 1
+Koniec testu, best result: 5637662 dla alfa = 9, gamma = 1
+.Koniec testu, best result: 5626051 dla alfa = 6, gamma = 1
+Koniec testu, best result: 5621035 dla alfa = 15, gamma = 1
+Koniec testu, best result: 5568660 dla alfa = 12, gamma = 4
+Koniec testu, best result: 5593672 dla alfa = 17, gamma = 0,5
+Koniec testu, best result: 5550989 dla alfa = 2, gamma = 6,79999999999999
