@@ -1499,5 +1499,5 @@
 9.8 16 30
 9.9 16 32
 10.0 16 26
-Koniec testu, best result: 18 dla alfa = 12, gamma = 1
+best result: 18 dla alfa = 12, gamma = 1
 (solution 16)
