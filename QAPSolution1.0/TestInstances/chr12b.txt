@@ -1100,3 +1100,4 @@
 9.9 12 22374
 10.0 12 27436
 Koniec testu, best result: 12680 dla alfa = 10, gamma = 8,99999999999998
+(solution 9742)

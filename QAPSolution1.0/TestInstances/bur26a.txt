@@ -6,3 +6,5 @@ Koniec testu, best result: 5621035 dla alfa = 15, gamma = 1
 Koniec testu, best result: 5568660 dla alfa = 12, gamma = 4
 Koniec testu, best result: 5593672 dla alfa = 17, gamma = 0,5
 Koniec testu, best result: 5550989 dla alfa = 2, gamma = 6,79999999999999
+
+(solution 5426670)
