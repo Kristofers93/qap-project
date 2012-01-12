@@ -1179,5 +1179,5 @@
 9.0 60 109804
 9.5 60 109878
 10.0 60 109979
-Koniec testu, best result: 109561 dla alfa = 59, gamma = 5,5
+best result: 109561 dla alfa = 59, gamma = 5,5
 (solution 107218)
