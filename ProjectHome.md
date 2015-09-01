@@ -1,0 +1,1 @@
+This solution of quadratic assigment problem is purely for educational purposes. It is based on some real life situations, but mostly it is about learning nature-based algorithms (ant, bee, firefly algorithms).
